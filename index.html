@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ric Lee | Digital Consultancy</title>
+  <meta
+    name="description"
+    content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, and Volkswagen Audi Group coding."
+  />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-soft: #111111;
+      --panel: rgba(255,255,255,0.04);
+      --panel-2: rgba(255,255,255,0.03);
+      --card: #151515;
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.14);
+      --text: #f5f5f5;
+      --muted: #a1a1aa;
+      --muted-2: #d4d4d8;
+      --accent: #84cc16;
+      --accent-soft: rgba(132, 204, 22, 0.14);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --radius-lg: 30px;
+      --max: 1220px;
+      --input-bg: rgba(255,255,255,0.03);
+      --placeholder-bg: linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 100%);
+    }
+
+    body.light-mode {
+      --bg: #f5f5f5;
+      --bg-soft: #ffffff;
+      --panel: rgba(0,0,0,0.03);
+      --panel-2: rgba(0,0,0,0.02);
+      --card: #ffffff;
+      --line: rgba(0,0,0,0.08);
+      --line-strong: rgba(79, 70, 229, 0.20);
+      --text: #111111;
+      --muted: #5f6470;
+      --muted-2: #3d4450;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.10);
+      --shadow: 0 18px 50px rgba(0,0,0,0.08);
+      --input-bg: rgba(0,0,0,0.025);
+      --placeholder-bg: linear-gradient(135deg, #e9ecef 0%, #dfe4ea 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, var(--accent-soft), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      border-bottom: 1px solid var(--accent-soft);
+    }
+
+    .nav {
+      min-height: 88px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 26px;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .brand-logo-wrap {
+      width: 156px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-wrap img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.08;
+      text-align: left;
+      padding-left: 4px;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .brand-text span {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--line-strong);
+      background: var(--panel);
+      color: var(--text);
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 0 16px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-1px);
+      border-color: var(--accent);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      transition: 0.2s ease;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+
+    body:not(.light-mode) .btn-primary {
+      color: #111111;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual-panel,
+    .card,
+    .foundation-card,
+    .info-box,
+    .form-card {
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 610px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    .hero-copy p,
+    .section-head p,
+    .card p,
+    .foundation-card p,
+    .info-box p,
+    .info-box li {
+      color: var(--muted);
+    }
+
+    .hero-copy p {
+      max-width: 680px;
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-points span {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--muted-2);
+      font-size: 0.92rem;
+    }
+
+    .hero-visual-panel {
+      padding: 22px;
+      min-height: 610px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .hero-visual-panel h3 {
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 600;
+      padding: 4px 4px 0;
+    }
+
+    .hero-visuals,
+    .grid-4,
+    .grid-3,
+    .grid-2,
+    .foundation-grid,
+    .form-grid,
+    .enquiry-layout,
+    .info-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    .hero-visuals,
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .foundation-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+
+    .enquiry-layout {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .info-stack {
+      gap: 18px;
+    }
+
+    .visual-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.25s ease;
+    }
+
+    .visual-card:hover,
+    .card:hover,
+    .foundation-card:hover,
+    .info-box:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .visual-image {
+      height: 145px;
+      background: var(--placeholder-bg);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .visual-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.35s ease;
+    }
+
+    .visual-card:hover .visual-image img {
+      transform: scale(1.03);
+    }
+
+    .visual-card span {
+      padding: 14px 16px 16px;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-note {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 18px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    section {
+      padding: 30px 0 88px;
+    }
+
+    .section-head {
+      max-width: 780px;
+      margin-bottom: 30px;
+    }
+
+    .card,
+    .foundation-card,
+    .info-box {
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: 0.25s ease;
+    }
+
+    .card h3,
+    .foundation-card h3,
+    .info-box h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card ul,
+    .foundation-card ul,
+    .info-box ul {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .card li,
+    .foundation-card li,
+    .info-box li {
+      position: relative;
+      color: var(--muted-2);
+      padding-left: 16px;
+    }
+
+    .card li::before,
+    .foundation-card li::before,
+    .info-box li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .foundation-badge {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      color: var(--accent);
+      background: var(--accent-soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .foundation-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .foundation-meta span {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .form-card {
+      padding: 30px;
+    }
+
+    .form-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field,
+    .field-full {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--input-bg);
+      color: var(--text);
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--muted);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-section-title {
+      grid-column: 1 / -1;
+      padding-top: 8px;
+      margin-top: 4px;
+      border-top: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .submit-row {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .submit-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .sch-footer {
+      width: 100%;
+      padding: 18px 20px 16px;
+      border-top: 1px solid var(--line);
+      margin-top: 20px;
+    }
+
+    .sch-footer-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .sch-powered {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 4px;
+    }
+
+    .sch-footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .sch-footer-brand a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sch-logo {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .sch-logo-lightmode {
+      display: none;
+    }
+
+    .sch-footer-subtitle {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .sch-footer-copy {
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.2;
+      margin: 4px 0 0;
+    }
+
+    body.light-mode .sch-logo-darkmode {
+      display: none;
+    }
+
+    body.light-mode .sch-logo-lightmode {
+      display: block;
+    }
+
+    @media (max-width: 1100px) {
+      .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-grid,
+      .foundation-grid,
+      .enquiry-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-right {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .grid-3,
+      .grid-2,
+      .form-grid,
+      .hero-visuals {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual-panel {
+        min-height: auto;
+      }
+
+      .hero-copy {
+        padding: 32px 24px;
+      }
+
+      .brand {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 18px;
+      }
+
+      .brand-logo-wrap {
+        width: 138px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .nav {
+        padding: 14px 0 18px;
+      }
+
+      .nav-right {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .nav-links {
+        gap: 16px;
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .hero-copy,
+      .hero-visual-panel,
+      .card,
+      .foundation-card,
+      .form-card,
+      .info-box {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .sch-logo {
+        height: 28px;
+      }
+
+      .sch-powered,
+      .sch-footer-subtitle,
+      .sch-footer-copy {
+        font-size: 8px;
+        letter-spacing: 0.08em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="brand-logo-wrap">
+          <img
+            id="headerLogo"
+            src="images/ric-lee-logo-light.png.png"
+            alt="Ric Lee logo"
+          />
+        </div>
+        <div class="brand-text">
+          <strong>RIC LEE</strong>
+          <span>Digital Consultancy</span>
+        </div>
+      </a>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#foundation">Foundation</a>
+          <a href="#process">Process</a>
+          <a href="#enquiry">Enquiry</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle" type="button">Light mode</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Digital Work • Design • Coding</span>
+          <h1>Simple, skilled digital services built properly.</h1>
+          <p>
+            This site is focused on what I do directly: web development, digital design,
+            print-on-demand concepts, software and automation work, and Volkswagen Audi Group
+            coding. Clean output, practical skills, and digital work that can actually move.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#enquiry" class="btn btn-primary">Start an enquiry</a>
+            <a href="#foundation" class="btn btn-secondary">View foundation</a>
+          </div>
+
+          <div class="hero-points">
+            <span>Web Development</span>
+            <span>Digital Design</span>
+            <span>Print-on-Demand</span>
+            <span>Software Development</span>
+            <span>Automation</span>
+            <span>VAG Coding</span>
+          </div>
+        </div>
+
+        <div class="hero-visual-panel">
+          <h3>Core service areas</h3>
+
+          <div class="hero-visuals">
+            <div class="visual-card">
+              <div class="visual-image">
+                <img src="images/web_dev_hero.png" alt="Web development in progress screenshot" />
+              </div>
+              <span>Web Development</span>
+            </div>
+
+            <div class="visual-card">
+              <div class="visual-image">
+                <img src="images/mug_hero.png" alt="Branded mug mockup for digital design and print-on-demand" />
+              </div>
+              <span>Digital Design &amp; Print-on-Demand</span>
+            </div>
+
+            <div class="visual-card">
+              <div class="visual-image">
+                <img src="images/coding_hero.png" alt="Coding screenshot for software development and automation" />
+              </div>
+              <span>Software Development &amp; Automation</span>
+            </div>
+
+            <div class="visual-card">
+              <div class="visual-image">
+                <img src="images/vag_coding.png.png" alt="VCDS diagnostic screenshot for Volkswagen Audi Group coding" />
+              </div>
+              <span>Volkswagen Audi Group Coding</span>
+            </div>
+          </div>
+
+          <div class="hero-note">
+            Keep this page simple and skill-led. Save deeper technical breakdowns,
+            reports, and Source Code framework detail for the separate landing page.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Services</span>
+          <h2>Four focused services. Clearer direction.</h2>
+          <p>
+            This page is now streamlined around the core work: coding, design, automation,
+            and specialist digital vehicle services.
+          </p>
+        </div>
+
+        <div class="grid-4">
+          <article class="card">
+            <h3>Web Development</h3>
+            <p>
+              Clean, modern websites and landing pages designed to present your business
+              properly and give you a stronger digital presence.
+            </p>
+            <ul>
+              <li>Business websites</li>
+              <li>Landing pages</li>
+              <li>Layout and structure</li>
+              <li>Visual polish</li>
+              <li>Conversion-focused builds</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Digital Design &amp; Print-on-Demand</h3>
+            <p>
+              Digital design work for branding, product visuals, and print-on-demand concepts
+              that can be launched quickly across clothing, accessories, and branded items.
+            </p>
+            <ul>
+              <li>Brand boards and design concepts</li>
+              <li>Print-on-demand product ideas</li>
+              <li>Mockups and presentation assets</li>
+              <li>Digital graphics</li>
+              <li>Visual identity support</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Software Development &amp; Automation</h3>
+            <p>
+              Coding-based digital solutions built to improve workflow, reduce manual effort,
+              and create more useful systems.
+            </p>
+            <ul>
+              <li>Custom tools</li>
+              <li>Automation workflows</li>
+              <li>Dashboards and control panels</li>
+              <li>Software structure and logic</li>
+              <li>Digital system builds</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Volkswagen Audi Group Coding</h3>
+            <p>
+              Specialist software-based support for Volkswagen Audi Group vehicles,
+              focused on coding, diagnostics, and configuration.
+            </p>
+            <ul>
+              <li>Vehicle coding</li>
+              <li>Diagnostics and fault finding</li>
+              <li>Module configuration</li>
+              <li>Digital adjustments</li>
+              <li>Software-based support</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="foundation">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Foundation</span>
+          <h2>Skills backed by qualification and practical work.</h2>
+          <p>
+            The site is grounded in both formal digital training and hands-on technical work.
+            Kept clean here on purpose — no clutter, no admin-heavy certificate data.
+          </p>
+        </div>
+
+        <div class="foundation-grid">
+          <article class="foundation-card">
+            <span class="foundation-badge">Qualification</span>
+            <h3>Gateway Qualifications Level 2 Diploma in Digital and IT Skills</h3>
+            <p>
+              A broad digital foundation covering core areas relevant to modern online work,
+              development, software use, and technical problem-solving.
+            </p>
+            <ul>
+              <li>Computer Programming</li>
+              <li>Cybersecurity</li>
+              <li>Digital Graphics</li>
+              <li>Digital Skills Project</li>
+              <li>Data Management and Analytics</li>
+              <li>IT Technical Support</li>
+              <li>Networking</li>
+              <li>Spreadsheet Software</li>
+            </ul>
+            <div class="foundation-meta">
+              <span>Gateway Qualifications</span>
+              <span>Digital &amp; IT Skills</span>
+              <span>Computer Programming Included</span>
+            </div>
+          </article>
+
+          <article class="foundation-card">
+            <span class="foundation-badge">Practical Experience</span>
+            <h3>Automotive coding and diagnostics</h3>
+            <p>
+              Alongside digital qualification work, I also apply software-based skills in the
+              automotive space through Volkswagen Audi Group coding and diagnostics.
+            </p>
+            <ul>
+              <li>VAG coding support</li>
+              <li>Diagnostics and configuration</li>
+              <li>Module-level digital adjustments</li>
+              <li>Technical software familiarity</li>
+              <li>Hands-on digital problem solving</li>
+            </ul>
+            <div class="foundation-meta">
+              <span>VCDS / coding aligned</span>
+              <span>Software-led work</span>
+              <span>Technical foundation</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Process</span>
+          <h2>Simple process. Proper output.</h2>
+          <p>
+            Keep it direct: define the need, capture the detail, build the right thing,
+            then refine if needed.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card">
+            <h3>Define the objective</h3>
+            <p>You explain what you need, what is not working, or what you want built.</p>
+          </article>
+
+          <article class="card">
+            <h3>Capture the detail</h3>
+            <p>The enquiry form gathers the right information so the work can be assessed properly.</p>
+          </article>
+
+          <article class="card">
+            <h3>Build the solution</h3>
+            <p>Website, design asset, print concept, automation, or coding support — built to suit the brief.</p>
+          </article>
+
+          <article class="card">
+            <h3>Refine if needed</h3>
+            <p>Once the first version is complete, it can be improved, extended, or tightened properly.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="enquiry" class="enquiry-wrap">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Project Enquiry</span>
+          <h2>Start with a proper intake.</h2>
+          <p>
+            Use the form below to provide your details, requirements, and objectives.
+            This keeps the process clean and gives a stronger starting point.
+          </p>
+        </div>
+
+        <div class="enquiry-layout">
+          <aside>
+            <div class="info-stack">
+              <div class="info-box">
+                <h3>Best fit enquiries</h3>
+                <ul>
+                  <li>Website and landing page work</li>
+                  <li>Digital design and POD concepts</li>
+                  <li>Software and automation builds</li>
+                  <li>Volkswagen Audi Group coding</li>
+                </ul>
+              </div>
+
+              <div class="info-box">
+                <h3>Current contact route</h3>
+                <p>
+                  Telegram is currently the main enquiry route, but clients can now leave a phone number and preferred contact method too.
+                </p>
+              </div>
+            </div>
+          </aside>
+
+          <div class="form-card">
+            <form action="#" method="post">
+              <div class="form-grid">
+                <div class="form-section-title">Contact details</div>
+
+                <div class="field">
+                  <label for="fullName">Full name</label>
+                  <input id="fullName" name="fullName" type="text" placeholder="Your full name" />
+                </div>
+
+                <div class="field">
+                  <label for="companyName">Business / brand name</label>
+                  <input id="companyName" name="companyName" type="text" placeholder="Business or brand name" />
+                </div>
+
+                <div class="field">
+                  <label for="telegram">Telegram</label>
+                  <input id="telegram" name="telegram" type="text" placeholder="@username" />
+                </div>
+
+                <div class="field">
+                  <label for="email">Email address</label>
+                  <input id="email" name="email" type="email" placeholder="Optional email address" />
+                </div>
+
+                <div class="field">
+                  <label for="phone">Phone number</label>
+                  <input id="phone" name="phone" type="tel" placeholder="Client phone number" />
+                </div>
+
+                <div class="field">
+                  <label for="preferredContact">Preferred contact</label>
+                  <select id="preferredContact" name="preferredContact">
+                    <option value="">Select contact method</option>
+                    <option>Telegram</option>
+                    <option>Phone</option>
+                    <option>Email</option>
+                    <option>WhatsApp</option>
+                  </select>
+                </div>
+
+                <div class="form-section-title">Service request</div>
+
+                <div class="field">
+                  <label for="subject">Subject</label>
+                  <select id="subject" name="subject">
+                    <option value="">Select subject</option>
+                    <option>Website / Web Page Development</option>
+                    <option>Digital Design</option>
+                    <option>Print-on-Demand Design</option>
+                    <option>Software Development</option>
+                    <option>Automation / Dashboard</option>
+                    <option>Volkswagen Audi Group Coding</option>
+                    <option>Volkswagen Audi Group Diagnostics</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="priority">Priority level</label>
+                  <select id="priority" name="priority">
+                    <option value="">Select priority</option>
+                    <option>Standard</option>
+                    <option>Urgent</option>
+                    <option>Time-Sensitive</option>
+                  </select>
+                </div>
+
+                <div class="field-full">
+                  <label for="requirement">What do you need help with?</label>
+                  <textarea id="requirement" name="requirement" placeholder="Describe the project, service, or support you need."></textarea>
+                </div>
+
+                <div class="field-full">
+                  <label for="objective">Main objective</label>
+                  <textarea id="objective" name="objective" placeholder="What result are you looking for?"></textarea>
+                </div>
+
+                <div class="submit-row">
+                  <button class="btn btn-primary" type="submit">Submit enquiry</button>
+                  <span class="submit-note">You can wire this to Formspree, Netlify Forms, or your own backend later.</span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<footer class="sch-footer">
+  <div class="sch-footer-inner">
+
+    <div class="sch-footer-brand">
+      <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer">
+        <img
+          class="sch-logo sch-logo-darkmode"
+          src="images/sch_logo_dark.png.png"
+          alt="Source Code Holdings logo"
+        />
+        <img
+          class="sch-logo sch-logo-lightmode"
+          src="images/sch_logo_light.png.png"
+          alt="Source Code Holdings logo"
+        />
+      </a>
+
+      <p class="sch-footer-subtitle">Origin Layer • IP Framework</p>
+    </div>
+
+    <p class="sch-footer-copy">
+      Ric Lee Digital Consultancy, all rights reserved 2026
+    </p>
+
+    <!-- MOVED TO BOTTOM -->
+    <p class="sch-powered">A Source Code Holdings company</p>
+
+  </div>
+</footer>
+
+  <script>
+    const body = document.body;
+    const themeToggle = document.getElementById("themeToggle");
+    const headerLogo = document.getElementById("headerLogo");
+
+    function updateThemeUI() {
+      const isLight = body.classList.contains("light-mode");
+      themeToggle.textContent = isLight ? "Dark mode" : "Light mode";
+      headerLogo.src = isLight
+        ? "images/ric-lee-logo-dark.png.png"
+        : "images/ric-lee-logo-light.png.png";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("light-mode");
+      localStorage.setItem("riclee-theme", body.classList.contains("light-mode") ? "light" : "dark");
+      updateThemeUI();
+    });
+
+    if (localStorage.getItem("riclee-theme") === "light") {
+      body.classList.add("light-mode");
+    }
+
+    updateThemeUI();
+  </script>
+</body>
+</html>
