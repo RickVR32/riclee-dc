@@ -28,6 +28,12 @@
       --max: 1220px;
       --input-bg: rgba(255,255,255,0.03);
       --placeholder-bg: linear-gradient(135deg, #1b1b1b 0%, #2a2a2a 100%);
+      --success-bg: rgba(34, 197, 94, 0.12);
+      --success-line: rgba(34, 197, 94, 0.35);
+      --success-text: #bbf7d0;
+      --error-bg: rgba(239, 68, 68, 0.12);
+      --error-line: rgba(239, 68, 68, 0.35);
+      --error-text: #fecaca;
     }
 
     body.light-mode {
@@ -46,6 +52,12 @@
       --shadow: 0 18px 50px rgba(0,0,0,0.08);
       --input-bg: rgba(0,0,0,0.025);
       --placeholder-bg: linear-gradient(135deg, #e9ecef 0%, #dfe4ea 100%);
+      --success-bg: rgba(34, 197, 94, 0.10);
+      --success-line: rgba(34, 197, 94, 0.28);
+      --success-text: #166534;
+      --error-bg: rgba(239, 68, 68, 0.10);
+      --error-line: rgba(239, 68, 68, 0.26);
+      --error-text: #991b1b;
     }
 
     * {
@@ -568,6 +580,31 @@
       border-color: var(--accent);
     }
 
+    .form-status {
+      grid-column: 1 / -1;
+      display: none;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+    }
+
+    .form-status.is-visible {
+      display: block;
+    }
+
+    .form-status.is-success {
+      background: var(--success-bg);
+      border-color: var(--success-line);
+      color: var(--success-text);
+    }
+
+    .form-status.is-error {
+      background: var(--error-bg);
+      border-color: var(--error-line);
+      color: var(--error-text);
+    }
+
     .submit-row {
       grid-column: 1 / -1;
       display: flex;
@@ -1054,15 +1091,22 @@
               <div class="info-box">
                 <h3>Current route</h3>
                 <p>
-                  Enquiries from this form can be sent straight to your Telegram via your site backend.
+                  Enquiries from this form are sent through your live site backend straight to Telegram.
                 </p>
               </div>
             </div>
           </aside>
 
           <div class="form-card">
-            <form action="api/enquiry.php" method="POST">
+            <form action="/api/enquiry.php" method="POST">
               <div class="form-grid">
+                <div
+                  id="formStatus"
+                  class="form-status"
+                  role="status"
+                  aria-live="polite"
+                ></div>
+
                 <div class="field">
                   <label for="name">Name</label>
                   <input id="name" name="name" type="text" placeholder="Your name" required />
@@ -1075,23 +1119,23 @@
 
                 <div class="field">
                   <label for="service">Service</label>
-                  <select id="service" name="service">
-                    <option>Web Development</option>
-                    <option>Design / POD</option>
-                    <option>Software / Automation</option>
-                    <option>CAD Design</option>
-                    <option>3D Printing</option>
-                    <option>VAG Coding</option>
-                    <option>Other</option>
+                  <select id="service" name="service" required>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Design / POD">Design / POD</option>
+                    <option value="Software / Automation">Software / Automation</option>
+                    <option value="CAD Design">CAD Design</option>
+                    <option value="3D Printing">3D Printing</option>
+                    <option value="VAG Coding">VAG Coding</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
 
                 <div class="field">
                   <label for="priority">Priority</label>
-                  <select id="priority" name="priority">
-                    <option>Standard</option>
-                    <option>Urgent</option>
-                    <option>Time-Sensitive</option>
+                  <select id="priority" name="priority" required>
+                    <option value="Standard">Standard</option>
+                    <option value="Urgent">Urgent</option>
+                    <option value="Time-Sensitive">Time-Sensitive</option>
                   </select>
                 </div>
 
@@ -1107,7 +1151,7 @@
 
                 <div class="submit-row">
                   <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                  <span class="submit-note">Direct → Telegram alert</span>
+                  <span class="submit-note">Live site → PHP → Telegram</span>
                 </div>
               </div>
             </form>
@@ -1142,6 +1186,7 @@
     const body = document.body;
     const themeToggle = document.getElementById("themeToggle");
     const headerLogo = document.getElementById("headerLogo");
+    const formStatus = document.getElementById("formStatus");
 
     function updateThemeUI() {
       const isLight = body.classList.contains("light-mode");
@@ -1159,6 +1204,27 @@
 
     if (localStorage.getItem("riclee-theme") === "light") {
       body.classList.add("light-mode");
+    }
+
+    function showFormStatus(type, message) {
+      if (!formStatus) return;
+      formStatus.className = "form-status is-visible " + (type === "success" ? "is-success" : "is-error");
+      formStatus.textContent = message;
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const enquiryStatus = params.get("enquiry");
+
+    if (window.location.hash === "#enquiry") {
+      if (enquiryStatus === "success") {
+        showFormStatus("success", "Enquiry sent successfully. Telegram alert delivered.");
+      } else if (enquiryStatus === "error") {
+        showFormStatus("error", "Something went wrong sending your enquiry. Please try again.");
+      } else if (enquiryStatus === "spam") {
+        showFormStatus("error", "Submission blocked.");
+      } else if (enquiryStatus === "missing") {
+        showFormStatus("error", "Please complete all required fields.");
+      }
     }
 
     updateThemeUI();
