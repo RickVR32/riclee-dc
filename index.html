@@ -6,7 +6,7 @@
   <title>Ric Lee | Digital Consultancy</title>
   <meta
     name="description"
-    content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, and Volkswagen Audi Group coding."
+    content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, CAD design, 3D printing, and Volkswagen Audi Group coding."
   />
   <style>
     :root {
@@ -347,8 +347,11 @@
       gap: 22px;
     }
 
-    .hero-visuals,
     .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-visuals {
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -379,7 +382,7 @@
       border: 1px solid var(--line);
       border-radius: 20px;
       overflow: hidden;
-      min-height: 210px;
+      min-height: 198px;
       display: flex;
       flex-direction: column;
       transition: 0.25s ease;
@@ -395,7 +398,7 @@
     }
 
     .visual-image {
-      height: 145px;
+      height: 132px;
       background: var(--placeholder-bg);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
@@ -565,17 +568,6 @@
       border-color: var(--accent);
     }
 
-    .form-section-title {
-      grid-column: 1 / -1;
-      padding-top: 8px;
-      margin-top: 4px;
-      border-top: 1px solid var(--line);
-      color: var(--accent);
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
     .submit-row {
       grid-column: 1 / -1;
       display: flex;
@@ -590,9 +582,19 @@
       font-size: 0.94rem;
     }
 
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+      height: 0;
+      width: 0;
+      overflow: hidden;
+    }
+
     .sch-footer {
       width: 100%;
-      padding: 18px 20px 16px;
+      padding: 24px 20px 20px;
       border-top: 1px solid var(--line);
       margin-top: 20px;
     }
@@ -604,15 +606,7 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 6px;
-    }
-
-    .sch-powered {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 0 4px;
+      gap: 12px;
     }
 
     .sch-footer-brand {
@@ -620,7 +614,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
     }
 
     .sch-footer-brand a {
@@ -640,22 +633,13 @@
       display: none;
     }
 
-    .sch-footer-subtitle {
-      font-size: 9px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
-      line-height: 1.2;
-      margin: 0;
-    }
-
     .sch-footer-copy {
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      text-transform: none;
       color: var(--muted);
-      line-height: 1.2;
-      margin: 4px 0 0;
+      line-height: 1.4;
+      margin: 0;
     }
 
     body.light-mode .sch-logo-darkmode {
@@ -752,11 +736,8 @@
         height: 28px;
       }
 
-      .sch-powered,
-      .sch-footer-subtitle,
       .sch-footer-copy {
-        font-size: 8px;
-        letter-spacing: 0.08em;
+        font-size: 0.82rem;
       }
     }
   </style>
@@ -797,9 +778,10 @@
           <span class="eyebrow">Digital Work • Design • Coding</span>
           <h1>Simple, skilled digital services built properly.</h1>
           <p>
-            This site is focused on what I do directly: web development, digital design,
-            print-on-demand concepts, software and automation work, and Volkswagen Audi Group
-            coding. Clean output, practical skills, and digital work that can actually move.
+            This site is focused on practical digital and technical work done directly: web development,
+            digital design, print-on-demand concepts, software and automation, CAD design, 3D printing,
+            and Volkswagen Audi Group coding. Clean output, functional thinking, and real-world work
+            built properly.
           </p>
 
           <div class="hero-actions">
@@ -813,6 +795,8 @@
             <span>Print-on-Demand</span>
             <span>Software Development</span>
             <span>Automation</span>
+            <span>CAD Design</span>
+            <span>3D Printing</span>
             <span>VAG Coding</span>
           </div>
         </div>
@@ -844,6 +828,20 @@
 
             <div class="visual-card">
               <div class="visual-image">
+                <img src="images/cad_hero.png" alt="CAD design workspace showing technical part modelling" />
+              </div>
+              <span>CAD Design</span>
+            </div>
+
+            <div class="visual-card">
+              <div class="visual-image">
+                <img src="images/3d_print_hero.png" alt="3D printer creating a prototype part" />
+              </div>
+              <span>3D Printing</span>
+            </div>
+
+            <div class="visual-card">
+              <div class="visual-image">
                 <img src="images/vag_coding.png.png" alt="VCDS diagnostic screenshot for Volkswagen Audi Group coding" />
               </div>
               <span>Volkswagen Audi Group Coding</span>
@@ -851,8 +849,8 @@
           </div>
 
           <div class="hero-note">
-            Keep this page simple and skill-led. Save deeper technical breakdowns,
-            reports, and Source Code framework detail for the separate landing page.
+            From digital builds to physical prototyping, the work shown here covers the main service areas:
+            design, development, automation, CAD, 3D printing, and specialist VAG coding support.
           </div>
         </div>
       </div>
@@ -1034,8 +1032,8 @@
           <span class="eyebrow">Project Enquiry</span>
           <h2>Start with a proper intake.</h2>
           <p>
-            Use the form below to provide your details, requirements, and objectives.
-            This keeps the process clean and gives a stronger starting point.
+            Use the form below to provide your details and project requirements.
+            This version is cleaner, faster, and wired directly to Telegram.
           </p>
         </div>
 
@@ -1048,81 +1046,49 @@
                   <li>Website and landing page work</li>
                   <li>Digital design and POD concepts</li>
                   <li>Software and automation builds</li>
+                  <li>CAD and 3D printing work</li>
                   <li>Volkswagen Audi Group coding</li>
                 </ul>
               </div>
 
               <div class="info-box">
-                <h3>Current contact route</h3>
+                <h3>Current route</h3>
                 <p>
-                  Telegram is currently the main enquiry route, but clients can now leave a phone number and preferred contact method too.
+                  Enquiries from this form can be sent straight to your Telegram via your site backend.
                 </p>
               </div>
             </div>
           </aside>
 
           <div class="form-card">
-            <form action="#" method="post">
+            <form action="api/enquiry.php" method="POST">
               <div class="form-grid">
-                <div class="form-section-title">Contact details</div>
-
                 <div class="field">
-                  <label for="fullName">Full name</label>
-                  <input id="fullName" name="fullName" type="text" placeholder="Your full name" />
+                  <label for="name">Name</label>
+                  <input id="name" name="name" type="text" placeholder="Your name" required />
                 </div>
 
                 <div class="field">
-                  <label for="companyName">Business / brand name</label>
-                  <input id="companyName" name="companyName" type="text" placeholder="Business or brand name" />
+                  <label for="contact">Contact</label>
+                  <input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required />
                 </div>
 
                 <div class="field">
-                  <label for="telegram">Telegram</label>
-                  <input id="telegram" name="telegram" type="text" placeholder="@username" />
-                </div>
-
-                <div class="field">
-                  <label for="email">Email address</label>
-                  <input id="email" name="email" type="email" placeholder="Optional email address" />
-                </div>
-
-                <div class="field">
-                  <label for="phone">Phone number</label>
-                  <input id="phone" name="phone" type="tel" placeholder="Client phone number" />
-                </div>
-
-                <div class="field">
-                  <label for="preferredContact">Preferred contact</label>
-                  <select id="preferredContact" name="preferredContact">
-                    <option value="">Select contact method</option>
-                    <option>Telegram</option>
-                    <option>Phone</option>
-                    <option>Email</option>
-                    <option>WhatsApp</option>
-                  </select>
-                </div>
-
-                <div class="form-section-title">Service request</div>
-
-                <div class="field">
-                  <label for="subject">Subject</label>
-                  <select id="subject" name="subject">
-                    <option value="">Select subject</option>
-                    <option>Website / Web Page Development</option>
-                    <option>Digital Design</option>
-                    <option>Print-on-Demand Design</option>
-                    <option>Software Development</option>
-                    <option>Automation / Dashboard</option>
-                    <option>Volkswagen Audi Group Coding</option>
-                    <option>Volkswagen Audi Group Diagnostics</option>
+                  <label for="service">Service</label>
+                  <select id="service" name="service">
+                    <option>Web Development</option>
+                    <option>Design / POD</option>
+                    <option>Software / Automation</option>
+                    <option>CAD Design</option>
+                    <option>3D Printing</option>
+                    <option>VAG Coding</option>
                     <option>Other</option>
                   </select>
                 </div>
 
                 <div class="field">
-                  <label for="priority">Priority level</label>
+                  <label for="priority">Priority</label>
                   <select id="priority" name="priority">
-                    <option value="">Select priority</option>
                     <option>Standard</option>
                     <option>Urgent</option>
                     <option>Time-Sensitive</option>
@@ -1130,18 +1096,18 @@
                 </div>
 
                 <div class="field-full">
-                  <label for="requirement">What do you need help with?</label>
-                  <textarea id="requirement" name="requirement" placeholder="Describe the project, service, or support you need."></textarea>
+                  <label for="message">Project details</label>
+                  <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
                 </div>
 
-                <div class="field-full">
-                  <label for="objective">Main objective</label>
-                  <textarea id="objective" name="objective" placeholder="What result are you looking for?"></textarea>
+                <div class="hp-field" aria-hidden="true">
+                  <label for="website">Website</label>
+                  <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
                 </div>
 
                 <div class="submit-row">
                   <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                  <span class="submit-note">You can wire this to Formspree, Netlify Forms, or your own backend later.</span>
+                  <span class="submit-note">Direct → Telegram alert</span>
                 </div>
               </div>
             </form>
@@ -1151,35 +1117,26 @@
     </section>
   </main>
 
-<footer class="sch-footer">
-  <div class="sch-footer-inner">
+  <footer class="sch-footer">
+    <div class="sch-footer-inner">
+      <div class="sch-footer-brand">
+        <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer">
+          <img
+            class="sch-logo sch-logo-darkmode"
+            src="images/sch_logo_dark.png.png"
+            alt="Source Code Holdings logo"
+          />
+          <img
+            class="sch-logo sch-logo-lightmode"
+            src="images/sch_logo_light.png.png"
+            alt="Source Code Holdings logo"
+          />
+        </a>
+      </div>
 
-    <div class="sch-footer-brand">
-      <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer">
-        <img
-          class="sch-logo sch-logo-darkmode"
-          src="images/sch_logo_dark.png.png"
-          alt="Source Code Holdings logo"
-        />
-        <img
-          class="sch-logo sch-logo-lightmode"
-          src="images/sch_logo_light.png.png"
-          alt="Source Code Holdings logo"
-        />
-      </a>
-
-      <p class="sch-footer-subtitle">Origin Layer • IP Framework</p>
+      <p class="sch-footer-copy">© 2026 Source Code Holdings™. All rights reserved.</p>
     </div>
-
-    <p class="sch-footer-copy">
-      Ric Lee Digital Consultancy, all rights reserved 2026
-    </p>
-
-    <!-- MOVED TO BOTTOM -->
-    <p class="sch-powered">A Source Code Holdings company</p>
-
-  </div>
-</footer>
+  </footer>
 
   <script>
     const body = document.body;
