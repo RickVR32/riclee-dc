@@ -1063,103 +1063,63 @@
       </div>
     </section>
 
-    <section id="enquiry" class="enquiry-wrap">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Project Enquiry</span>
-          <h2>Start with a proper intake.</h2>
-          <p>
-            Use the form below to provide your details and project requirements.
-            This version is cleaner, faster, and wired directly to Telegram.
-          </p>
-        </div>
+   <form action="https://formspree.io/f/https://formspree.io/f/mreorpre" method="POST">
+  <div class="form-grid">
+    <div
+      id="formStatus"
+      class="form-status"
+      role="status"
+      aria-live="polite"
+    ></div>
 
-        <div class="enquiry-layout">
-          <aside>
-            <div class="info-stack">
-              <div class="info-box">
-                <h3>Best fit enquiries</h3>
-                <ul>
-                  <li>Website and landing page work</li>
-                  <li>Digital design and POD concepts</li>
-                  <li>Software and automation builds</li>
-                  <li>CAD and 3D printing work</li>
-                  <li>Volkswagen Audi Group coding</li>
-                </ul>
-              </div>
+    <div class="field">
+      <label for="name">Name</label>
+      <input id="name" name="name" type="text" placeholder="Your name" required />
+    </div>
 
-              <div class="info-box">
-                <h3>Current route</h3>
-                <p>
-                  Enquiries from this form are sent through your live site backend straight to Telegram.
-                </p>
-              </div>
-            </div>
-          </aside>
+    <div class="field">
+      <label for="contact">Contact</label>
+      <input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required />
+    </div>
 
-          <div class="form-card">
-            <form action="/api/enquiry.php" method="POST">
-              <div class="form-grid">
-                <div
-                  id="formStatus"
-                  class="form-status"
-                  role="status"
-                  aria-live="polite"
-                ></div>
+    <div class="field">
+      <label for="service">Service</label>
+      <select id="service" name="service" required>
+        <option value="Web Development">Web Development</option>
+        <option value="Design / POD">Design / POD</option>
+        <option value="Software / Automation">Software / Automation</option>
+        <option value="CAD Design">CAD Design</option>
+        <option value="3D Printing">3D Printing</option>
+        <option value="VAG Coding">VAG Coding</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
 
-                <div class="field">
-                  <label for="name">Name</label>
-                  <input id="name" name="name" type="text" placeholder="Your name" required />
-                </div>
+    <div class="field">
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority" required>
+        <option value="Standard">Standard</option>
+        <option value="Urgent">Urgent</option>
+        <option value="Time-Sensitive">Time-Sensitive</option>
+      </select>
+    </div>
 
-                <div class="field">
-                  <label for="contact">Contact</label>
-                  <input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required />
-                </div>
+    <div class="field-full">
+      <label for="message">Project details</label>
+      <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
+    </div>
 
-                <div class="field">
-                  <label for="service">Service</label>
-                  <select id="service" name="service" required>
-                    <option value="Web Development">Web Development</option>
-                    <option value="Design / POD">Design / POD</option>
-                    <option value="Software / Automation">Software / Automation</option>
-                    <option value="CAD Design">CAD Design</option>
-                    <option value="3D Printing">3D Printing</option>
-                    <option value="VAG Coding">VAG Coding</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
+    <div class="hp-field" aria-hidden="true">
+      <label for="website">Website</label>
+      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
 
-                <div class="field">
-                  <label for="priority">Priority</label>
-                  <select id="priority" name="priority" required>
-                    <option value="Standard">Standard</option>
-                    <option value="Urgent">Urgent</option>
-                    <option value="Time-Sensitive">Time-Sensitive</option>
-                  </select>
-                </div>
-
-                <div class="field-full">
-                  <label for="message">Project details</label>
-                  <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
-                </div>
-
-                <div class="hp-field" aria-hidden="true">
-                  <label for="website">Website</label>
-                  <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
-                </div>
-
-                <div class="submit-row">
-                  <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                  <span class="submit-note">Live site → PHP → Telegram</span>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+    <div class="submit-row">
+      <button class="btn btn-primary" type="submit">Submit enquiry</button>
+      <span class="submit-note">Live site → Formspree</span>
+    </div>
+  </div>
+</form>
 
   <footer class="sch-footer">
     <div class="sch-footer-inner">
