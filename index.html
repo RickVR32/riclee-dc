@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ric Lee | Digital Consultancy</title>
-  <meta
-    name="description"
-    content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, CAD design, 3D printing, and Volkswagen Audi Group coding."
-  />
+  <meta name="description" content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, CAD design, 3D printing, and Volkswagen Audi Group coding." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0a0a;
@@ -60,42 +60,24 @@
       --error-text: #991b1b;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Geist Mono', monospace;
+      font-weight: 300;
       background:
         radial-gradient(circle at top, var(--accent-soft), transparent 30%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
       color: var(--text);
       line-height: 1.6;
       transition: background 0.25s ease, color 0.25s ease;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    button,
-    input,
-    select,
-    textarea {
-      font: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
 
     .container {
       width: min(var(--max), calc(100% - 40px));
@@ -119,25 +101,9 @@
       gap: 20px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 26px;
-      min-width: 0;
-      width: 100%;
-    }
-
-    .brand-logo-wrap {
-      width: 156px;
-      flex-shrink: 0;
-    }
-
-    .brand-logo-wrap img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
+    .brand { display: flex; align-items: center; gap: 26px; min-width: 0; width: 100%; }
+    .brand-logo-wrap { width: 156px; flex-shrink: 0; }
+    .brand-logo-wrap img { width: 100%; height: auto; object-fit: contain; }
 
     .brand-text {
       display: flex;
@@ -153,39 +119,16 @@
       letter-spacing: 0.26em;
       text-transform: uppercase;
       white-space: nowrap;
+      font-family: 'Cormorant', serif;
+      font-weight: 400;
     }
 
-    .brand-text span {
-      font-size: 0.84rem;
-      color: var(--muted);
-      margin-top: 6px;
-      white-space: nowrap;
-    }
+    .brand-text span { font-size: 0.78rem; color: var(--muted); margin-top: 6px; white-space: nowrap; letter-spacing: 0.08em; }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 0.96rem;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+    .nav-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .nav-links a { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.06em; transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--accent); }
 
     .theme-toggle {
       border: 1px solid var(--line-strong);
@@ -196,12 +139,11 @@
       padding: 0 16px;
       cursor: pointer;
       transition: 0.2s ease;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
     }
 
-    .theme-toggle:hover {
-      transform: translateY(-1px);
-      border-color: var(--accent);
-    }
+    .theme-toggle:hover { transform: translateY(-1px); border-color: var(--accent); }
 
     .btn {
       display: inline-flex;
@@ -213,31 +155,17 @@
       border: 1px solid var(--line-strong);
       transition: 0.2s ease;
       cursor: pointer;
-      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #ffffff; border-color: var(--accent); }
+    body:not(.light-mode) .btn-primary { color: #111111; }
+    .btn-secondary { background: transparent; color: var(--text); }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    body:not(.light-mode) .btn-primary {
-      color: #111111;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text);
-    }
-
-    .hero {
-      padding: 90px 0 70px;
-    }
+    .hero { padding: 90px 0 70px; }
 
     .hero-grid {
       display: grid;
@@ -246,12 +174,7 @@
       align-items: stretch;
     }
 
-    .hero-copy,
-    .hero-visual-panel,
-    .card,
-    .foundation-card,
-    .info-box,
-    .form-card {
+    .hero-copy, .hero-visual-panel, .card, .foundation-card, .info-box, .form-card {
       background: linear-gradient(180deg, var(--panel), var(--panel-2));
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
@@ -274,62 +197,45 @@
       border: 1px solid var(--line-strong);
       color: var(--accent);
       background: var(--accent-soft);
-      font-size: 0.8rem;
-      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       margin-bottom: 22px;
     }
 
     h1 {
-      font-size: clamp(3rem, 6vw, 5.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-      max-width: 10ch;
+      font-family: 'Cormorant', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      max-width: 12ch;
       margin-bottom: 22px;
     }
 
     h2 {
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-family: 'Cormorant', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
       line-height: 1.04;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.01em;
       margin-bottom: 14px;
     }
 
-    .hero-copy p,
-    .section-head p,
-    .card p,
-    .foundation-card p,
-    .info-box p,
-    .info-box li {
-      color: var(--muted);
-    }
+    .hero-copy p, .section-head p, .card p, .foundation-card p, .info-box p, .info-box li { color: var(--muted); }
+    .hero-copy p { max-width: 680px; font-size: 0.88rem; line-height: 1.8; margin-bottom: 28px; }
 
-    .hero-copy p {
-      max-width: 680px;
-      font-size: 1.1rem;
-      margin-bottom: 28px;
-    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
 
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 26px;
-    }
-
-    .hero-points {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
+    .hero-points { display: flex; flex-wrap: wrap; gap: 12px; }
     .hero-points span {
-      padding: 10px 14px;
+      padding: 8px 14px;
       border-radius: 999px;
       background: var(--panel);
       border: 1px solid var(--line);
       color: var(--muted-2);
-      font-size: 0.92rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
     }
 
     .hero-visual-panel {
@@ -340,54 +246,16 @@
       gap: 18px;
     }
 
-    .hero-visual-panel h3 {
-      font-size: 1rem;
-      color: var(--muted);
-      font-weight: 600;
-      padding: 4px 4px 0;
-    }
+    .hero-visual-panel h3 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 4px 4px 0; }
 
-    .hero-visuals,
-    .grid-4,
-    .grid-3,
-    .grid-2,
-    .foundation-grid,
-    .form-grid,
-    .enquiry-layout,
-    .info-stack {
-      display: grid;
-      gap: 22px;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hero-visuals {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .foundation-grid {
-      grid-template-columns: 1.05fr 0.95fr;
-    }
-
-    .enquiry-layout {
-      grid-template-columns: 0.95fr 1.05fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .info-stack {
-      gap: 18px;
-    }
+    .hero-visuals, .grid-4, .grid-3, .grid-2, .foundation-grid, .form-grid, .enquiry-layout, .info-stack { display: grid; gap: 22px; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .hero-visuals { grid-template-columns: repeat(2, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .foundation-grid { grid-template-columns: 1.05fr 0.95fr; }
+    .enquiry-layout { grid-template-columns: 0.95fr 1.05fr; gap: 24px; align-items: start; }
+    .info-stack { gap: 18px; }
 
     .visual-card {
       background: var(--panel);
@@ -400,10 +268,7 @@
       transition: 0.25s ease;
     }
 
-    .visual-card:hover,
-    .card:hover,
-    .foundation-card:hover,
-    .info-box:hover {
+    .visual-card:hover, .card:hover, .foundation-card:hover, .info-box:hover {
       border-color: var(--accent);
       box-shadow: 0 0 0 1px var(--accent-soft), var(--shadow);
       transform: translateY(-2px);
@@ -417,24 +282,9 @@
       position: relative;
     }
 
-    .visual-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      transition: transform 0.35s ease;
-    }
-
-    .visual-card:hover .visual-image img {
-      transform: scale(1.03);
-    }
-
-    .visual-card span {
-      padding: 14px 16px 16px;
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 600;
-    }
+    .visual-image img { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: transform 0.35s ease; }
+    .visual-card:hover .visual-image img { transform: scale(1.03); }
+    .visual-card span { padding: 14px 16px 16px; font-size: 0.78rem; letter-spacing: 0.04em; color: var(--text); }
 
     .hero-note {
       background: var(--panel);
@@ -442,58 +292,27 @@
       border-radius: 20px;
       padding: 18px;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.78rem;
+      line-height: 1.75;
     }
 
-    section {
-      padding: 30px 0 88px;
-    }
+    section { padding: 30px 0 88px; }
 
-    .section-head {
-      max-width: 780px;
-      margin-bottom: 30px;
-    }
+    .section-head { max-width: 780px; margin-bottom: 30px; }
+    .section-head p { font-size: 0.83rem; line-height: 1.8; margin-top: 8px; }
 
-    .card,
-    .foundation-card,
-    .info-box {
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: 0.25s ease;
-    }
-
-    .card h3,
-    .foundation-card h3,
-    .info-box h3 {
+    .card, .foundation-card, .info-box { border-radius: var(--radius); padding: 28px; transition: 0.25s ease; }
+    .card h3, .foundation-card h3, .info-box h3 {
+      font-family: 'Cormorant', serif;
+      font-weight: 400;
       font-size: 1.2rem;
       margin-bottom: 10px;
     }
 
-    .card ul,
-    .foundation-card ul,
-    .info-box ul {
-      list-style: none;
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .card li,
-    .foundation-card li,
-    .info-box li {
-      position: relative;
-      color: var(--muted-2);
-      padding-left: 16px;
-    }
-
-    .card li::before,
-    .foundation-card li::before,
-    .info-box li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
+    .card ul, .foundation-card ul, .info-box ul { list-style: none; display: grid; gap: 10px; margin-top: 12px; }
+    .card li, .foundation-card li, .info-box li { position: relative; color: var(--muted-2); padding-left: 16px; font-size: 0.78rem; line-height: 1.6; }
+    .card li::before, .foundation-card li::before, .info-box li::before { content: "•"; position: absolute; left: 0; color: var(--accent); }
+    .card p, .foundation-card p { font-size: 0.78rem; line-height: 1.75; }
 
     .foundation-badge {
       display: inline-flex;
@@ -504,106 +323,58 @@
       border: 1px solid var(--line-strong);
       color: var(--accent);
       background: var(--accent-soft);
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
-    .foundation-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
+    .foundation-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .foundation-meta span {
-      padding: 8px 12px;
+      padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid var(--line);
       background: var(--panel);
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
     }
 
-    .form-card {
-      padding: 30px;
-    }
+    .form-card { padding: 30px; }
+    .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .field, .field-full { display: flex; flex-direction: column; gap: 8px; }
+    .field-full { grid-column: 1 / -1; }
 
-    .form-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+    label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 
-    .field,
-    .field-full {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .field-full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    input,
-    select,
-    textarea {
+    input, select, textarea {
       width: 100%;
-      min-height: 52px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
+      min-height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--line-strong);
       background: var(--input-bg);
       color: var(--text);
-      padding: 14px 16px;
+      padding: 12px 14px;
       outline: none;
-      transition: border-color 0.2s ease, background 0.2s ease;
+      transition: border-color 0.2s ease;
+      font-size: 0.8rem;
     }
 
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--muted);
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--accent);
-    }
+    textarea { min-height: 120px; resize: vertical; }
+    input::placeholder, textarea::placeholder { color: var(--muted); }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); }
 
     .form-status {
       grid-column: 1 / -1;
       display: none;
       padding: 14px 16px;
-      border-radius: 16px;
+      border-radius: 12px;
       border: 1px solid transparent;
-      font-size: 0.95rem;
+      font-size: 0.78rem;
     }
 
-    .form-status.is-visible {
-      display: block;
-    }
-
-    .form-status.is-success {
-      background: var(--success-bg);
-      border-color: var(--success-line);
-      color: var(--success-text);
-    }
-
-    .form-status.is-error {
-      background: var(--error-bg);
-      border-color: var(--error-line);
-      color: var(--error-text);
-    }
+    .form-status.is-visible { display: block; }
+    .form-status.is-success { background: var(--success-bg); border-color: var(--success-line); color: var(--success-text); }
+    .form-status.is-error { background: var(--error-bg); border-color: var(--error-line); color: var(--error-text); }
 
     .submit-row {
       grid-column: 1 / -1;
@@ -614,188 +385,106 @@
       margin-top: 8px;
     }
 
-    .submit-note {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
+    .submit-note { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; }
 
-    .hp-field {
-      position: absolute;
-      left: -9999px;
-      opacity: 0;
-      pointer-events: none;
-      height: 0;
-      width: 0;
-      overflow: hidden;
-    }
+    .hp-field { position: absolute; left: -9999px; opacity: 0; pointer-events: none; height: 0; width: 0; overflow: hidden; }
 
+    /* ── SCH FOOTER ── */
     .sch-footer {
-      width: 100%;
-      padding: 24px 20px 20px;
       border-top: 1px solid var(--line);
-      margin-top: 20px;
+      margin-top: 60px;
+      padding: 40px 0 28px;
     }
 
     .sch-footer-inner {
-      max-width: 760px;
+      max-width: 1220px;
       margin: 0 auto;
+      padding: 0 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 16px;
       text-align: center;
-      gap: 12px;
     }
 
-    .sch-footer-brand {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .sch-footer-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.55;
     }
 
-    .sch-footer-brand a {
+    .sch-logo-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      opacity: 0.75;
+      transition: opacity 0.2s;
     }
+
+    .sch-logo-link:hover { opacity: 1; }
 
     .sch-logo {
-      height: 34px;
+      height: 36px;
       width: auto;
       object-fit: contain;
-      flex-shrink: 0;
     }
 
-    .sch-logo-lightmode {
-      display: none;
-    }
+    .sch-logo-lightmode { display: none; }
 
     .sch-footer-copy {
-      font-size: 0.9rem;
-      letter-spacing: 0.02em;
-      text-transform: none;
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       color: var(--muted);
-      line-height: 1.4;
-      margin: 0;
+      opacity: 0.4;
     }
 
-    body.light-mode .sch-logo-darkmode {
-      display: none;
-    }
-
-    body.light-mode .sch-logo-lightmode {
-      display: block;
-    }
+    body.light-mode .sch-logo-darkmode { display: none; }
+    body.light-mode .sch-logo-lightmode { display: block; }
 
     @media (max-width: 1100px) {
-      .grid-4 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .hero-grid,
-      .foundation-grid,
-      .enquiry-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-right {
-        justify-content: center;
-      }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid, .foundation-grid, .enquiry-layout { grid-template-columns: 1fr; }
+      .nav { grid-template-columns: 1fr; }
+      .nav-right { justify-content: center; }
+      .sch-footer-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .sch-footer-left { align-items: center; }
+      .sch-footer-tagline { max-width: 100%; text-align: center; }
+      .sch-footer-right { align-items: center; }
     }
 
     @media (max-width: 820px) {
-      .grid-3,
-      .grid-2,
-      .form-grid,
-      .hero-visuals {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy,
-      .hero-visual-panel {
-        min-height: auto;
-      }
-
-      .hero-copy {
-        padding: 32px 24px;
-      }
-
-      .brand {
-        flex-direction: row;
-        justify-content: flex-start;
-        gap: 18px;
-      }
-
-      .brand-logo-wrap {
-        width: 138px;
-      }
+      .grid-3, .grid-2, .form-grid, .hero-visuals { grid-template-columns: 1fr; }
+      .hero-copy, .hero-visual-panel { min-height: auto; }
+      .hero-copy { padding: 32px 24px; }
+      .brand { flex-direction: row; justify-content: flex-start; gap: 18px; }
+      .brand-logo-wrap { width: 138px; }
     }
 
     @media (max-width: 640px) {
-      .container {
-        width: min(var(--max), calc(100% - 24px));
-      }
-
-      .nav {
-        padding: 14px 0 18px;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .nav-links {
-        gap: 16px;
-        justify-content: center;
-      }
-
-      .hero {
-        padding-top: 60px;
-      }
-
-      .hero-copy,
-      .hero-visual-panel,
-      .card,
-      .foundation-card,
-      .form-card,
-      .info-box {
-        padding: 22px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .sch-logo {
-        height: 28px;
-      }
-
-      .sch-footer-copy {
-        font-size: 0.82rem;
-      }
+      .container { width: min(var(--max), calc(100% - 24px)); }
+      .nav { padding: 14px 0 18px; }
+      .nav-right { width: 100%; justify-content: center; }
+      .nav-links { gap: 16px; justify-content: center; }
+      .hero { padding-top: 60px; }
+      .hero-copy, .hero-visual-panel, .card, .foundation-card, .form-card, .info-box { padding: 22px; }
     }
   </style>
 </head>
-<body>
+<body class="light-mode">
   <header>
     <div class="container nav">
       <a href="#" class="brand">
         <div class="brand-logo-wrap">
-          <img
-            id="headerLogo"
-            src="images/ric-lee-logo-light.png.png"
-            alt="Ric Lee logo"
-          />
+          <img id="headerLogo" src="images/ric-lee-logo-light.png.png" alt="Ric Lee logo" />
         </div>
         <div class="brand-text">
-          <strong>RIC LEE</strong>
+          <strong>Ric Lee</strong>
           <span>Digital Consultancy</span>
         </div>
       </a>
-
       <div class="nav-right">
         <nav class="nav-links">
           <a href="#services">Services</a>
@@ -820,12 +509,10 @@
             and Volkswagen Audi Group coding. Clean output, functional thinking, and real-world work
             built properly.
           </p>
-
           <div class="hero-actions">
             <a href="#enquiry" class="btn btn-primary">Start an enquiry</a>
             <a href="#foundation" class="btn btn-secondary">View foundation</a>
           </div>
-
           <div class="hero-points">
             <span>Web Development</span>
             <span>Digital Design</span>
@@ -835,59 +522,40 @@
             <span>CAD Design</span>
             <span>3D Printing</span>
             <span>VAG Coding</span>
+            <span>Vehicle Remapping</span>
           </div>
         </div>
 
         <div class="hero-visual-panel">
           <h3>Core service areas</h3>
-
           <div class="hero-visuals">
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/web_dev_hero.png" alt="Web development in progress screenshot" />
-              </div>
+              <div class="visual-image"><img src="images/web_dev_hero.png" alt="Web development" /></div>
               <span>Web Development</span>
             </div>
-
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/mug_hero.png" alt="Branded mug mockup for digital design and print-on-demand" />
-              </div>
+              <div class="visual-image"><img src="images/mug_hero.png" alt="Digital design and print-on-demand" /></div>
               <span>Digital Design &amp; Print-on-Demand</span>
             </div>
-
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/coding_hero.png" alt="Coding screenshot for software development and automation" />
-              </div>
+              <div class="visual-image"><img src="images/coding_hero.png" alt="Software development" /></div>
               <span>Software Development &amp; Automation</span>
             </div>
-
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/cad_hero.png" alt="CAD design workspace showing technical part modelling" />
-              </div>
+              <div class="visual-image"><img src="images/cad_hero.png" alt="CAD design" /></div>
               <span>CAD Design</span>
             </div>
-
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/3d_print_hero.png" alt="3D printer creating a prototype part" />
-              </div>
+              <div class="visual-image"><img src="images/3d_print_hero.png" alt="3D printing" /></div>
               <span>3D Printing</span>
             </div>
-
             <div class="visual-card">
-              <div class="visual-image">
-                <img src="images/vag_coding.png.png" alt="VCDS diagnostic screenshot for Volkswagen Audi Group coding" />
-              </div>
-              <span>Volkswagen Audi Group Coding</span>
+              <div class="visual-image"><img src="images/vag_coding.png.png" alt="VAG coding" /></div>
+              <span>Volkswagen Audi Group Coding &amp; Remapping</span>
             </div>
           </div>
-
           <div class="hero-note">
-            From digital builds to physical prototyping, the work shown here covers the main service areas:
-            design, development, automation, CAD, 3D printing, and specialist VAG coding support.
+            From digital builds to physical prototyping — design, development, automation, CAD, 3D printing, and specialist VAG coding support.
           </div>
         </div>
       </div>
@@ -898,19 +566,12 @@
         <div class="section-head">
           <span class="eyebrow">Services</span>
           <h2>Four focused services. Clearer direction.</h2>
-          <p>
-            This page is now streamlined around the core work: coding, design, automation,
-            and specialist digital vehicle services.
-          </p>
+          <p>Streamlined around the core work: coding, design, automation, and specialist digital vehicle services.</p>
         </div>
-
         <div class="grid-4">
           <article class="card">
             <h3>Web Development</h3>
-            <p>
-              Clean, modern websites and landing pages designed to present your business
-              properly and give you a stronger digital presence.
-            </p>
+            <p>Clean, modern websites and landing pages designed to present your business properly.</p>
             <ul>
               <li>Business websites</li>
               <li>Landing pages</li>
@@ -919,13 +580,9 @@
               <li>Conversion-focused builds</li>
             </ul>
           </article>
-
           <article class="card">
             <h3>Digital Design &amp; Print-on-Demand</h3>
-            <p>
-              Digital design work for branding, product visuals, and print-on-demand concepts
-              that can be launched quickly across clothing, accessories, and branded items.
-            </p>
+            <p>Design work for branding, product visuals, and POD concepts launched quickly across clothing and accessories.</p>
             <ul>
               <li>Brand boards and design concepts</li>
               <li>Print-on-demand product ideas</li>
@@ -934,13 +591,9 @@
               <li>Visual identity support</li>
             </ul>
           </article>
-
           <article class="card">
             <h3>Software Development &amp; Automation</h3>
-            <p>
-              Coding-based digital solutions built to improve workflow, reduce manual effort,
-              and create more useful systems.
-            </p>
+            <p>Coding-based solutions built to improve workflow, reduce manual effort, and create more useful systems.</p>
             <ul>
               <li>Custom tools</li>
               <li>Automation workflows</li>
@@ -949,19 +602,15 @@
               <li>Digital system builds</li>
             </ul>
           </article>
-
           <article class="card">
-            <h3>Volkswagen Audi Group Coding</h3>
-            <p>
-              Specialist software-based support for Volkswagen Audi Group vehicles,
-              focused on coding, diagnostics, and configuration.
-            </p>
+            <h3>Volkswagen Audi Group Coding &amp; Remapping</h3>
+            <p>Specialist software-based support for VAG vehicles — coding, diagnostics, configuration, and performance remapping.</p>
             <ul>
               <li>Vehicle coding</li>
               <li>Diagnostics and fault finding</li>
               <li>Module configuration</li>
               <li>Digital adjustments</li>
-              <li>Software-based support</li>
+              <li>ECU remapping and performance tuning</li>
             </ul>
           </article>
         </div>
@@ -973,20 +622,13 @@
         <div class="section-head">
           <span class="eyebrow">Foundation</span>
           <h2>Skills backed by qualification and practical work.</h2>
-          <p>
-            The site is grounded in both formal digital training and hands-on technical work.
-            Kept clean here on purpose — no clutter, no admin-heavy certificate data.
-          </p>
+          <p>Grounded in formal digital training and hands-on technical work. No clutter — no admin-heavy certificate data.</p>
         </div>
-
         <div class="foundation-grid">
           <article class="foundation-card">
             <span class="foundation-badge">Qualification</span>
             <h3>Gateway Qualifications Level 2 Diploma in Digital and IT Skills</h3>
-            <p>
-              A broad digital foundation covering core areas relevant to modern online work,
-              development, software use, and technical problem-solving.
-            </p>
+            <p>A broad digital foundation covering core areas relevant to modern online work, development, and technical problem-solving.</p>
             <ul>
               <li>Computer Programming</li>
               <li>Cybersecurity</li>
@@ -1003,14 +645,10 @@
               <span>Computer Programming Included</span>
             </div>
           </article>
-
           <article class="foundation-card">
             <span class="foundation-badge">Practical Experience</span>
             <h3>Automotive coding and diagnostics</h3>
-            <p>
-              Alongside digital qualification work, I also apply software-based skills in the
-              automotive space through Volkswagen Audi Group coding and diagnostics.
-            </p>
+            <p>Software-based skills applied in the automotive space through Volkswagen Audi Group coding and diagnostics.</p>
             <ul>
               <li>VAG coding support</li>
               <li>Diagnostics and configuration</li>
@@ -1033,28 +671,21 @@
         <div class="section-head">
           <span class="eyebrow">Process</span>
           <h2>Simple process. Proper output.</h2>
-          <p>
-            Keep it direct: define the need, capture the detail, build the right thing,
-            then refine if needed.
-          </p>
+          <p>Define the need, capture the detail, build the right thing, refine if needed.</p>
         </div>
-
         <div class="grid-2">
           <article class="card">
             <h3>Define the objective</h3>
             <p>You explain what you need, what is not working, or what you want built.</p>
           </article>
-
           <article class="card">
             <h3>Capture the detail</h3>
             <p>The enquiry form gathers the right information so the work can be assessed properly.</p>
           </article>
-
           <article class="card">
             <h3>Build the solution</h3>
-            <p>Website, design asset, print concept, automation, or coding support — built to suit the brief.</p>
+            <p>Website, design asset, automation, or coding support — built to suit the brief.</p>
           </article>
-
           <article class="card">
             <h3>Refine if needed</h3>
             <p>Once the first version is complete, it can be improved, extended, or tightened properly.</p>
@@ -1063,82 +694,74 @@
       </div>
     </section>
 
-   <form action="https://formspree.io/f/mreorpre" method="POST">
-  <div class="form-grid">
-    <div
-      id="formStatus"
-      class="form-status"
-      role="status"
-      aria-live="polite"
-    ></div>
+    <section id="enquiry">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Enquiry</span>
+          <h2>Start a project.</h2>
+          <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
+        </div>
+        <div class="form-card">
+          <form action="https://formspree.io/f/mreorpre" method="POST">
+            <div class="form-grid">
+              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="contact">Contact</label>
+                <input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required />
+              </div>
+              <div class="field">
+                <label for="service">Service</label>
+                <select id="service" name="service" required>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Design / POD">Design / POD</option>
+                  <option value="Software / Automation">Software / Automation</option>
+                  <option value="CAD Design">CAD Design</option>
+                  <option value="3D Printing">3D Printing</option>
+                  <option value="VAG Coding">VAG Coding</option>
+                  <option value="VAG Remapping">VAG Remapping</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority" required>
+                  <option value="Standard">Standard</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="Time-Sensitive">Time-Sensitive</option>
+                </select>
+              </div>
+              <div class="field-full">
+                <label for="message">Project details</label>
+                <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
+              </div>
+              <div class="hp-field" aria-hidden="true">
+                <label for="website">Website</label>
+                <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+              <div class="submit-row">
+                <button class="btn btn-primary" type="submit">Submit enquiry</button>
+                <span class="submit-note">Reviewed directly — no middlemen</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <div class="field">
-      <label for="name">Name</label>
-      <input id="name" name="name" type="text" placeholder="Your name" required />
-    </div>
-
-    <div class="field">
-      <label for="contact">Contact</label>
-      <input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required />
-    </div>
-
-    <div class="field">
-      <label for="service">Service</label>
-      <select id="service" name="service" required>
-        <option value="Web Development">Web Development</option>
-        <option value="Design / POD">Design / POD</option>
-        <option value="Software / Automation">Software / Automation</option>
-        <option value="CAD Design">CAD Design</option>
-        <option value="3D Printing">3D Printing</option>
-        <option value="VAG Coding">VAG Coding</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label for="priority">Priority</label>
-      <select id="priority" name="priority" required>
-        <option value="Standard">Standard</option>
-        <option value="Urgent">Urgent</option>
-        <option value="Time-Sensitive">Time-Sensitive</option>
-      </select>
-    </div>
-
-    <div class="field-full">
-      <label for="message">Project details</label>
-      <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
-    </div>
-
-    <div class="hp-field" aria-hidden="true">
-      <label for="website">Website</label>
-      <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
-    </div>
-
-    <div class="submit-row">
-      <button class="btn btn-primary" type="submit">Submit enquiry</button>
-      <span class="submit-note">Live site → Formspree</span>
-    </div>
-  </div>
-</form>
-
+  <!-- SCH FOOTER -->
   <footer class="sch-footer">
     <div class="sch-footer-inner">
-      <div class="sch-footer-brand">
-        <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer">
-          <img
-            class="sch-logo sch-logo-darkmode"
-            src="images/sch_logo_dark.png.png"
-            alt="Source Code Holdings logo"
-          />
-          <img
-            class="sch-logo sch-logo-lightmode"
-            src="images/sch_logo_light.png.png"
-            alt="Source Code Holdings logo"
-          />
-        </a>
-      </div>
-
-      <p class="sch-footer-copy">© 2026 Source Code Holdings™. All rights reserved.</p>
+      <span class="sch-footer-label">Branded by</span>
+      <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer" class="sch-logo-link">
+        <img class="sch-logo sch-logo-darkmode" src="images/sch_logo_dark.png.png" alt="Source Code Holdings" />
+        <img class="sch-logo sch-logo-lightmode" src="images/sch_logo_light.png.png" alt="Source Code Holdings" />
+      </a>
+      <p class="sch-footer-copy">© 2026 Source Code Holdings™ — All rights reserved</p>
     </div>
   </footer>
 
@@ -1151,9 +774,7 @@
     function updateThemeUI() {
       const isLight = body.classList.contains("light-mode");
       themeToggle.textContent = isLight ? "Dark mode" : "Light mode";
-      headerLogo.src = isLight
-        ? "images/ric-lee-logo-dark.png.png"
-        : "images/ric-lee-logo-light.png.png";
+      headerLogo.src = isLight ? "images/ric-lee-logo-dark.png.png" : "images/ric-lee-logo-light.png.png";
     }
 
     themeToggle.addEventListener("click", () => {
@@ -1162,9 +783,7 @@
       updateThemeUI();
     });
 
-    if (localStorage.getItem("riclee-theme") === "light") {
-      body.classList.add("light-mode");
-    }
+    if (localStorage.getItem("riclee-theme") !== "dark") body.classList.add("light-mode");
 
     function showFormStatus(type, message) {
       if (!formStatus) return;
@@ -1176,15 +795,10 @@
     const enquiryStatus = params.get("enquiry");
 
     if (window.location.hash === "#enquiry") {
-      if (enquiryStatus === "success") {
-        showFormStatus("success", "Enquiry sent successfully. Telegram alert delivered.");
-      } else if (enquiryStatus === "error") {
-        showFormStatus("error", "Something went wrong sending your enquiry. Please try again.");
-      } else if (enquiryStatus === "spam") {
-        showFormStatus("error", "Submission blocked.");
-      } else if (enquiryStatus === "missing") {
-        showFormStatus("error", "Please complete all required fields.");
-      }
+      if (enquiryStatus === "success") showFormStatus("success", "Enquiry sent. Will be reviewed directly.");
+      else if (enquiryStatus === "error") showFormStatus("error", "Something went wrong. Please try again.");
+      else if (enquiryStatus === "spam") showFormStatus("error", "Submission blocked.");
+      else if (enquiryStatus === "missing") showFormStatus("error", "Please complete all required fields.");
     }
 
     updateThemeUI();
