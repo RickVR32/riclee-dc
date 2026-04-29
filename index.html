@@ -99,6 +99,7 @@
       grid-template-columns: 1fr auto;
       align-items: center;
       gap: 20px;
+      position: relative;
     }
 
     .brand { display: flex; align-items: center; gap: 26px; min-width: 0; width: 100%; }
@@ -106,12 +107,16 @@
     .brand-logo-wrap img { width: 100%; height: auto; object-fit: contain; }
 
     .brand-text {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
       line-height: 1.08;
-      text-align: left;
-      padding-left: 4px;
+      text-align: center;
+      pointer-events: none;
     }
 
     .brand-text strong {
@@ -482,7 +487,7 @@
         </div>
         <div class="brand-text">
           <strong>Ric Lee</strong>
-          <span>Digital Consultancy · holla@riclee-dc.info</span>
+          <span>Digital Consultancy</span>
         </div>
       </a>
       <div class="nav-right">
@@ -699,7 +704,7 @@
         <div class="section-head">
           <span class="eyebrow">Enquiry</span>
           <h2>Start a project.</h2>
-          <p>Use the form below to outline what you need. All enquiries are reviewed directly at <a href="mailto:holla@riclee-dc.info" style="color:var(--accent);text-decoration:none">holla@riclee-dc.info</a></p>
+          <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
         </div>
         <div class="form-card">
           <form action="https://formspree.io/f/mreorpre" method="POST" data-email="holla@riclee-dc.info">
@@ -745,7 +750,7 @@
               </div>
               <div class="submit-row">
                 <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                <span class="submit-note">holla@riclee-dc.info — reviewed directly</span>
+                <span class="submit-note">Reviewed directly</span>
               </div>
             </div>
           </form>
