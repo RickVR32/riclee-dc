@@ -482,7 +482,7 @@
         </div>
         <div class="brand-text">
           <strong>Ric Lee</strong>
-          <span>Digital Consultancy</span>
+          <span>Digital Consultancy · holla@riclee-dc.info</span>
         </div>
       </a>
       <div class="nav-right">
@@ -699,10 +699,10 @@
         <div class="section-head">
           <span class="eyebrow">Enquiry</span>
           <h2>Start a project.</h2>
-          <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
+          <p>Use the form below to outline what you need. All enquiries are reviewed directly at <a href="mailto:holla@riclee-dc.info" style="color:var(--accent);text-decoration:none">holla@riclee-dc.info</a></p>
         </div>
         <div class="form-card">
-          <form action="https://formspree.io/f/mreorpre" method="POST">
+          <form action="https://formspree.io/f/mreorpre" method="POST" data-email="holla@riclee-dc.info">
             <div class="form-grid">
               <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
               <div class="field">
@@ -738,13 +738,14 @@
                 <label for="message">Project details</label>
                 <textarea id="message" name="message" placeholder="What do you need?" required></textarea>
               </div>
-              <div class="hp-field" aria-hidden="true">
+              <input type="hidden" name="_replyto" value="holla@riclee-dc.info">
+              <input type="hidden" name="_subject" value="New Riclee Enquiry">
                 <label for="website">Website</label>
                 <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
               </div>
               <div class="submit-row">
                 <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                <span class="submit-note">Reviewed directly — no middlemen</span>
+                <span class="submit-note">holla@riclee-dc.info — reviewed directly</span>
               </div>
             </div>
           </form>
