@@ -7,7 +7,7 @@
   <meta name="description" content="Ric Lee offers web development, digital design, print-on-demand design, software development, automation, CAD design, 3D printing, and Volkswagen Audi Group coding." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorhant:wght@300;400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0a0a0a;
@@ -464,15 +464,21 @@
       .grid-3, .grid-2, .form-grid, .hero-visuals { grid-template-columns: 1fr; }
       .hero-copy, .hero-visual-panel { min-height: auto; }
       .hero-copy { padding: 32px 24px; }
-      .brand { flex-direction: row; justify-content: flex-start; gap: 18px; }
-      .brand-logo-wrap { width: 138px; }
+      .brand { flex-direction: row; justify-content: flex-start; align-items: center; gap: 14px; }
+      .brand-logo-wrap { width: 110px; flex-shrink: 0; }
+      .brand-text { position: static; transform: none; text-align: left; align-items: flex-start; }
+      .brand-text strong { font-size: 0.9rem; letter-spacing: 0.18em; }
+      .brand-text span { font-size: 0.72rem; margin-top: 3px; }
     }
 
     @media (max-width: 640px) {
       .container { width: min(var(--max), calc(100% - 24px)); }
-      .nav { padding: 14px 0 18px; }
-      .nav-right { width: 100%; justify-content: center; }
-      .nav-links { gap: 16px; justify-content: center; }
+      .nav { padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: auto; }
+      .brand { justify-content: center; }
+      .brand-text { text-align: center; align-items: center; }
+      .nav-right { width: 100%; justify-content: center; flex-direction: column; gap: 10px; }
+      .nav-links { gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .nav-links a { font-size: 0.75rem; }
       .hero { padding-top: 60px; }
       .hero-copy, .hero-visual-panel, .card, .foundation-card, .form-card, .info-box { padding: 22px; }
     }
