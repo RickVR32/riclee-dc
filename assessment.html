@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -135,6 +135,11 @@ svg g[onmouseover]{pointer-events:all!important}
   --rl-accent: #84cc16;
   --rl-accent-soft: rgba(132,204,22,0.12);
   --rl-accent-border: rgba(132,204,22,0.3);
+}
+[data-theme="light"] {
+  --rl-accent: #4f46e5;
+  --rl-accent-soft: rgba(79,70,229,0.10);
+  --rl-accent-border: rgba(79,70,229,0.28);
 }
 
 /* TAB SYSTEM */
@@ -458,6 +463,12 @@ svg g[onmouseover]{pointer-events:all!important}
   .rl-nav-links { display: none; }
 }
 </style>
+<script>
+  (function(){
+    var t = localStorage.getItem("rl-theme") || "light";
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
 </head>
 <body>
 
@@ -498,6 +509,10 @@ svg g[onmouseover]{pointer-events:all!important}
   <div class="oc-field"><div class="oc-field-label">Age (optional)</div><input class="oc-input" id="obs-age" type="number" placeholder="Your age" min="1" max="120"></div>
   <div class="oc-field"><div class="oc-field-label">Previous code (optional)</div><input class="oc-input" id="prev-code-input" type="text" placeholder="Paste to compare"></div>
   <button class="intro-start-btn" onclick="startAssessment()">Begin assessment →</button>
+      <p style="margin-top:16px;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-align:center">
+        Not ready for the full assessment? &nbsp;
+        <a href="test.html" style="color:var(--text);border-bottom:1px solid var(--line-strong);padding-bottom:1px;">Take the free 16-question test →</a>
+      </p>
 </div>
 </div>
 
@@ -1308,7 +1323,16 @@ function updateObsNode(){
 }
 
 // ── NAV ────────────────────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='screen-results'||id==='screen-assessment'||id==='screen-intro'){
+    document.getElementById('tab-solo').classList.add('active');
+    document.getElementById('tab-observer').classList.remove('active');
+    document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  }
+  window.scrollTo(0,0);
+}
 function retake(){scores={};lastResult=null;showScreen('screen-intro');}
 function handleIntroCTA(){
   const name=document.getElementById('obs-name')?.value.trim();
@@ -1360,7 +1384,7 @@ function updateThemeBtn() {
 }
 
 // Init theme
-const savedTheme = localStorage.getItem('rl-theme') || 'dark';
+const savedTheme = localStorage.getItem('rl-theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeBtn();
 
