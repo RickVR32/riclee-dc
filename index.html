@@ -291,7 +291,7 @@
           <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
         </div>
         <div class="form-card">
-          <form action="https://formspree.io/f/mreorpre" method="POST">
+          <form id="rl-enquiry-form" onsubmit="submitRLEnquiry(event)">
             <div class="form-grid">
               <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
               <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
@@ -371,5 +371,62 @@
       else if (s === 'error' && formStatus) { formStatus.className = 'form-status is-visible is-error'; formStatus.textContent = 'Something went wrong. Please try again.'; }
     }
   </script>
+<script>
+  async function submitRLEnquiry(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const form = document.getElementById('rl-enquiry-form');
+    const name    = form.querySelector('#name').value.trim();
+    const contact = form.querySelector('#contact').value.trim();
+    const service = form.querySelector('#service').value;
+    const priority= form.querySelector('#priority').value;
+    const message = form.querySelector('#message').value.trim();
+
+    const text = [
+      '📋 *RICLEE DC ENQUIRY*',
+      '',
+      `*Name:* ${name}`,
+      `*Contact:* ${contact}`,
+      `*Service:* ${service}`,
+      `*Priority:* ${priority}`,
+      '',
+      `*Details:*`,
+      message,
+      '',
+      `_Received via riclee-dc.info_`
+    ].join('\n');
+
+    const BOT_TOKEN = '8630250610:AAHzw-NAJVSuzHHdStgecC2jDwLNXRmu-BM';
+    const CHAT_ID   = '8630250610';
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
+      });
+      const d = await res.json();
+      if (d.ok) {
+        const status = document.getElementById('formStatus');
+        if (status) {
+          status.className = 'form-status is-visible is-success';
+          status.textContent = 'Enquiry sent. Will be reviewed directly.';
+        }
+        form.reset();
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Submit enquiry';
+        alert('Something went wrong. Please try again or email holla@riclee-dc.info');
+      }
+    } catch(err) {
+      btn.disabled = false;
+      btn.textContent = 'Submit enquiry';
+      alert('Submission failed. Please email holla@riclee-dc.info directly.');
+    }
+  }
+</script>
 </body>
 </html>
