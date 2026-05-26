@@ -3,505 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Psychometric Assessment · Riclee Digital</title>
-  <meta name="description" content="Structured awareness profiling powered by the SCH framework. Solo profiles, observer mode, and court-ready co-parenting reports." />
+  <title>Ric Lee | Digital Consultancy</title>
+  <meta name="description" content="Riclee Digital — web development, software development, automation, digital design, and psychometric assessment. Built by Source Code Holdings." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script>
+    (function(){
+      var t = localStorage.getItem('riclee-theme') || 'light';
+      if (t === 'dark') document.documentElement.classList.add('dark');
+    })();
+  </script>
   <style>
     :root {
-      --bg: #0a0a0a;
-      --bg-soft: #111111;
-      --panel: rgba(255,255,255,0.04);
-      --panel-2: rgba(255,255,255,0.03);
-      --card: #151515;
-      --line: rgba(255,255,255,0.08);
-      --line-strong: rgba(255,255,255,0.14);
-      --text: #f5f5f5;
-      --muted: #a1a1aa;
-      --muted-2: #d4d4d8;
-      --accent: #84cc16;
-      --accent-soft: rgba(132,204,22,0.12);
-      --accent-border: rgba(132,204,22,0.3);
-      --shadow: 0 20px 60px rgba(0,0,0,0.35);
-      --radius: 24px;
-      --radius-lg: 30px;
-      --max: 1220px;
-      --input-bg: rgba(255,255,255,0.04);
-      --success-bg: rgba(34,197,94,0.12);
-      --success-line: rgba(34,197,94,0.35);
-      --success-text: #bbf7d0;
-      --error-bg: rgba(239,68,68,0.12);
-      --error-line: rgba(239,68,68,0.35);
-      --error-text: #fecaca;
-      --warning-bg: rgba(234,179,8,0.12);
-      --warning-line: rgba(234,179,8,0.3);
-      --warning-text: #fde68a;
+      --bg: #f5f5f5; --bg-soft: #ffffff; --panel: rgba(0,0,0,0.03); --panel-2: rgba(0,0,0,0.02);
+      --card: #ffffff; --line: rgba(0,0,0,0.08); --line-strong: rgba(79,70,229,0.20);
+      --text: #111111; --muted: #5f6470; --muted-2: #3d4450;
+      --accent: #4f46e5; --accent-soft: rgba(79,70,229,0.10); --accent-border: rgba(79,70,229,0.3);
+      --shadow: 0 18px 50px rgba(0,0,0,0.08); --radius: 24px; --radius-lg: 30px;
+      --max: 1220px; --input-bg: rgba(0,0,0,0.025);
+      --success-bg: rgba(34,197,94,0.10); --success-line: rgba(34,197,94,0.28); --success-text: #166534;
+      --error-bg: rgba(239,68,68,0.10); --error-line: rgba(239,68,68,0.26); --error-text: #991b1b;
+      --placeholder-bg: linear-gradient(135deg,#e9ecef 0%,#dfe4ea 100%);
     }
-
-    body.light-mode {
-      --bg: #f5f5f5;
-      --bg-soft: #ffffff;
-      --panel: rgba(0,0,0,0.03);
-      --panel-2: rgba(0,0,0,0.02);
-      --card: #ffffff;
-      --line: rgba(0,0,0,0.08);
-      --line-strong: rgba(79,70,229,0.20);
-      --text: #111111;
-      --muted: #5f6470;
-      --muted-2: #3d4450;
-      --accent: #4f46e5;
-      --accent-soft: rgba(79,70,229,0.10);
-      --accent-border: rgba(79,70,229,0.3);
-      --shadow: 0 18px 50px rgba(0,0,0,0.08);
-      --input-bg: rgba(0,0,0,0.025);
-      --success-bg: rgba(34,197,94,0.10);
-      --success-line: rgba(34,197,94,0.28);
-      --success-text: #166534;
-      --error-bg: rgba(239,68,68,0.10);
-      --error-line: rgba(239,68,68,0.26);
-      --error-text: #991b1b;
-      --warning-bg: rgba(234,179,8,0.08);
-      --warning-line: rgba(234,179,8,0.25);
-      --warning-text: #854d0e;
+    html.dark {
+      --bg: #0a0a0a; --bg-soft: #111111; --panel: rgba(255,255,255,0.04); --panel-2: rgba(255,255,255,0.03);
+      --card: #151515; --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.14);
+      --text: #f5f5f5; --muted: #a1a1aa; --muted-2: #d4d4d8;
+      --accent: #84cc16; --accent-soft: rgba(132,204,22,0.12); --accent-border: rgba(132,204,22,0.3);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35); --input-bg: rgba(255,255,255,0.03);
+      --success-bg: rgba(34,197,94,0.12); --success-line: rgba(34,197,94,0.35); --success-text: #bbf7d0;
+      --error-bg: rgba(239,68,68,0.12); --error-line: rgba(239,68,68,0.35); --error-text: #fecaca;
+      --placeholder-bg: linear-gradient(135deg,#1b1b1b 0%,#2a2a2a 100%);
     }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Geist Mono',monospace;font-weight:300;background:radial-gradient(circle at top,var(--accent-soft),transparent 30%),linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background 0.25s,color 0.25s}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    button,input,select,textarea{font:inherit}
+    .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 86%,transparent);border-bottom:1px solid var(--accent-soft)}
+    .nav{min-height:88px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;position:relative}
+    .brand{display:flex;align-items:center;gap:26px;min-width:0;width:100%}
+    .brand-logo-wrap{width:156px;flex-shrink:0}
+    .brand-logo-wrap img{width:100%;height:auto;object-fit:contain}
+    .brand-text{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.08;text-align:center;pointer-events:none}
+    .brand-text strong{font-size:1rem;letter-spacing:0.26em;text-transform:uppercase;white-space:nowrap;font-family:'Cormorant',serif;font-weight:400}
+    .brand-text span{font-size:0.78rem;color:var(--muted);margin-top:6px;white-space:nowrap;letter-spacing:0.08em}
+    .nav-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end}
+    .nav-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .nav-links a{color:var(--muted);font-size:0.8rem;letter-spacing:0.06em;transition:color 0.2s}
+    .nav-links a:hover,.nav-links a.active{color:var(--accent)}
+    .theme-toggle{border:1px solid var(--line-strong);background:var(--panel);color:var(--text);border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer;transition:0.2s;font-size:0.78rem;letter-spacing:0.06em}
+    .theme-toggle:hover{transform:translateY(-1px);border-color:var(--accent)}
 
-    body {
-      font-family: 'Geist Mono', monospace;
-      font-weight: 300;
-      background:
-        radial-gradient(circle at top, var(--accent-soft), transparent 30%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.4s ease, color 0.25s ease, border-color 0.25s ease;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
-    }
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--line-strong);transition:0.2s;cursor:pointer;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--accent);color:#ffffff;border-color:var(--accent)}
+    html:not(.dark) .btn-primary{color:#111111}
+    html.dark .btn-primary{color:#111111}
+    .btn-secondary{background:transparent;color:var(--text)}
 
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-    button, input, select, textarea { font: inherit; }
+    .hero{padding:90px 0 70px}
+    .hero-grid{display:grid;grid-template-columns:1.08fr 0.92fr;gap:26px;align-items:stretch}
+    .hero-copy,.hero-visual-panel,.card,.foundation-card,.info-box,.form-card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
+    .hero-copy{padding:52px;display:flex;flex-direction:column;justify-content:center;min-height:610px}
+    .eyebrow{display:inline-flex;width:fit-content;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);color:var(--accent);background:var(--accent-soft);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:22px}
+    h1{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2.8rem,6vw,5rem);line-height:0.98;letter-spacing:-0.02em;max-width:12ch;margin-bottom:22px}
+    h2{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.04;letter-spacing:-0.01em;margin-bottom:14px}
+    .hero-copy p,.section-head p,.card p,.foundation-card p{color:var(--muted)}
+    .hero-copy p{max-width:680px;font-size:0.88rem;line-height:1.8;margin-bottom:28px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+    .hero-points{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-points span{padding:8px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted-2);font-size:0.72rem;letter-spacing:0.06em}
+    .hero-visual-panel{padding:22px;min-height:610px;display:flex;flex-direction:column;gap:18px}
+    .hero-visual-panel h3{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);padding:4px 4px 0}
+    .hero-visuals,.grid-4,.grid-3,.grid-2,.foundation-grid,.form-grid,.enquiry-layout{display:grid;gap:22px}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .hero-visuals{grid-template-columns:repeat(2,1fr)}
+    .grid-4{grid-template-columns:repeat(4,1fr)}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .foundation-grid{grid-template-columns:1.05fr 0.95fr}
+    .enquiry-layout{grid-template-columns:0.95fr 1.05fr;gap:24px;align-items:start}
+    .visual-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;min-height:198px;display:flex;flex-direction:column;transition:0.25s}
+    .visual-card:hover,.card:hover,.foundation-card:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-soft),var(--shadow);transform:translateY(-2px)}
+    .visual-image{height:132px;background:var(--placeholder-bg);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
+    .visual-image img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.35s}
+    .visual-card:hover .visual-image img{transform:scale(1.03)}
+    .visual-card span{padding:14px 16px 16px;font-size:0.78rem;letter-spacing:0.04em;color:var(--text)}
+    .hero-note{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;color:var(--muted);font-size:0.78rem;line-height:1.75}
+    section{padding:30px 0 88px}
+    .section-head{max-width:780px;margin-bottom:30px}
+    .section-head p{font-size:0.83rem;line-height:1.8;margin-top:8px}
+    .card,.foundation-card{border-radius:var(--radius);padding:28px;transition:0.25s}
+    .card h3,.foundation-card h3{font-family:'Cormorant',serif;font-weight:400;font-size:1.2rem;margin-bottom:10px}
+    .card ul,.foundation-card ul{list-style:none;display:grid;gap:10px;margin-top:12px}
+    .card li,.foundation-card li{position:relative;color:var(--muted-2);padding-left:16px;font-size:0.78rem;line-height:1.6}
+    .card li::before,.foundation-card li::before{content:"•";position:absolute;left:0;color:var(--accent)}
+    .card p,.foundation-card p{font-size:0.78rem;line-height:1.75}
+    .foundation-badge{display:inline-flex;width:fit-content;margin-bottom:14px;padding:7px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--accent);background:var(--accent-soft);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase}
+    .foundation-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .foundation-meta span{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:0.72rem;letter-spacing:0.06em}
+    .form-card{padding:30px}
+    .form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .field,.field-full{display:flex;flex-direction:column;gap:8px}
+    .field-full{grid-column:1/-1}
+    label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
+    input,select,textarea{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--line-strong);background:var(--input-bg);color:var(--text);padding:12px 14px;outline:none;transition:border-color 0.2s;font-size:0.8rem}
+    textarea{min-height:120px;resize:vertical}
+    input::placeholder,textarea::placeholder{color:var(--muted)}
+    input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+    .form-status{grid-column:1/-1;display:none;padding:14px 16px;border-radius:12px;border:1px solid transparent;font-size:0.78rem}
+    .form-status.is-visible{display:block}
+    .form-status.is-success{background:var(--success-bg);border-color:var(--success-line);color:var(--success-text)}
+    .form-status.is-error{background:var(--error-bg);border-color:var(--error-line);color:var(--error-text)}
+    .submit-row{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:8px}
+    .submit-note{color:var(--muted);font-size:0.72rem;letter-spacing:0.08em}
+    .hp-field{position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;overflow:hidden}
 
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    /* ── HEADER (preserved from riclee-dc.info) ── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(14px);
-      background: color-mix(in srgb, var(--bg) 86%, transparent);
-      border-bottom: 1px solid var(--accent-soft);
-    }
-
-    .nav {
-      min-height: 88px;
+    /* ASSESSMENT CTA CARD */
+    .assessment-cta {
+      background: linear-gradient(180deg,var(--panel),var(--panel-2));
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-lg);
+      padding: 40px 48px;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 20px;
-      position: relative;
+      gap: 32px;
+      margin-top: 40px;
     }
+    .assessment-cta h3 {font-family:'Cormorant',serif;font-weight:300;font-size:1.8rem;margin-bottom:8px}
+    .assessment-cta p {font-size:0.82rem;color:var(--muted);line-height:1.75}
+    .assessment-tags {display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .assessment-tags span {padding:5px 12px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);font-size:0.65rem;letter-spacing:0.08em}
 
-    .brand { display: flex; align-items: center; gap: 26px; min-width: 0; width: 100%; }
-    .brand-logo-wrap { width: 156px; flex-shrink: 0; }
-    .brand-logo-wrap img { width: 100%; height: auto; object-fit: contain; }
+    .sch-footer{border-top:1px solid var(--line);margin-top:60px;padding:40px 0 28px}
+    .sch-footer-inner{max-width:1220px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+    .sch-footer-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);opacity:0.55}
+    .sch-logo-link{display:inline-flex;align-items:center;justify-content:center;opacity:0.75;transition:opacity 0.2s}
+    .sch-logo-link:hover{opacity:1}
+    .sch-logo{height:36px;width:auto;object-fit:contain}
+    .sch-logo-lightmode{display:none}
+    html.dark .sch-logo-darkmode{display:block}
+    html.dark .sch-logo-lightmode{display:none}
+    html:not(.dark) .sch-logo-darkmode{display:none}
+    html:not(.dark) .sch-logo-lightmode{display:block}
+    .sch-footer-copy{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);opacity:0.4}
 
-    .brand-text {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      line-height: 1.08;
-      text-align: center;
-      pointer-events: none;
-    }
-
-    .brand-text strong {
-      font-size: 1rem;
-      letter-spacing: 0.26em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      font-family: 'Cormorant', serif;
-      font-weight: 400;
-    }
-
-    .brand-text span { font-size: 0.78rem; color: var(--muted); margin-top: 6px; white-space: nowrap; letter-spacing: 0.08em; }
-
-    .nav-right { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
-    .nav-links { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-    .nav-links a { color: var(--muted); font-size: 0.8rem; letter-spacing: 0.06em; transition: color 0.2s ease; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-
-    .theme-toggle {
-      border: 1px solid var(--line-strong);
-      background: var(--panel);
-      color: var(--text);
-      border-radius: 999px;
-      min-height: 44px;
-      padding: 0 16px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-    }
-    .theme-toggle:hover { transform: translateY(-1px); border-color: var(--accent); }
-
-    /* ── PAGE CONTENT ── */
-    main { padding: 60px 0 80px; }
-
-    .eyebrow {
-      display: inline-flex;
-      width: fit-content;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-border);
-      color: var(--accent);
-      background: var(--accent-soft);
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .page-hero { max-width: 720px; margin-bottom: 52px; }
-    .page-hero h1 {
-      font-family: 'Cormorant', serif;
-      font-weight: 300;
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-      margin-bottom: 18px;
-    }
-    .page-hero p { color: var(--muted); font-size: 0.88rem; line-height: 1.8; max-width: 560px; }
-
-    /* ── REPORT TYPE SELECTOR ── */
-    .report-types { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 40px; }
-
-    .rtype {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px;
-      cursor: pointer;
-      transition: 0.2s ease;
-      position: relative;
-    }
-    .rtype:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-    .rtype.active {
-      border-color: var(--accent-border);
-      background: var(--accent-soft);
-    }
-    .rtype.active .rtype-badge { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-border); }
-
-    .rtype-badge {
-      display: inline-flex;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .rtype h3 {
-      font-family: 'Cormorant', serif;
-      font-weight: 400;
-      font-size: 1.25rem;
-      margin-bottom: 8px;
-    }
-    .rtype p { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
-
-    .court-tag {
-      display: inline-flex;
-      margin-top: 12px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      background: var(--warning-bg);
-      color: var(--warning-text);
-      border: 1px solid var(--warning-line);
-    }
-
-    /* ── FORM PANEL ── */
-    .form-panel {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      margin-bottom: 20px;
-      display: none;
-    }
-    .form-panel.active { display: block; }
-
-    .form-panel h2 {
-      font-family: 'Cormorant', serif;
-      font-weight: 300;
-      font-size: 1.8rem;
-      margin-bottom: 6px;
-    }
-    .form-panel .form-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
-
-    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .field.full { grid-column: 1/-1; }
-
-    label {
-      font-size: 0.68rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    input[type="text"], textarea, select {
-      width: 100%;
-      min-height: 48px;
-      border-radius: 14px;
-      border: 1px solid var(--line-strong);
-      background: var(--input-bg);
-      color: var(--text);
-      padding: 12px 16px;
-      outline: none;
-      transition: border-color 0.2s ease;
-      font-size: 0.82rem;
-      font-family: 'Geist Mono', monospace;
-      font-weight: 300;
-    }
-    textarea { min-height: 160px; resize: vertical; line-height: 1.7; }
-    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.6; }
-    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
-
-    .submit-btn {
-      width: 100%;
-      min-height: 56px;
-      background: var(--accent);
-      color: #0a0a0a;
-      border: none;
-      border-radius: 999px;
-      font-family: 'Geist Mono', monospace;
-      font-size: 0.82rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      cursor: pointer;
-      transition: 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 8px;
-    }
-    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-
-    body.light-mode .submit-btn { color: #ffffff; }
-
-    .form-disclaimer {
-      text-align: center;
-      font-size: 0.68rem;
-      color: var(--muted);
-      margin-top: 14px;
-      line-height: 1.7;
-      opacity: 0.7;
-    }
-
-    /* ── OUTPUT ── */
-    .output-panel {
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      padding: 40px;
-      margin-top: 24px;
-      display: none;
-    }
-    .output-panel.active { display: block; }
-
-    .output-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .output-top h2 {
-      font-family: 'Cormorant', serif;
-      font-weight: 300;
-      font-size: 1.6rem;
-      margin-bottom: 6px;
-    }
-
-    .output-meta { font-size: 0.7rem; color: var(--muted); line-height: 1.6; }
-
-    .output-actions { display: flex; gap: 10px; flex-shrink: 0; }
-
-    .action-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      background: var(--panel);
-      color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: 0.2s ease;
-      font-family: 'Geist Mono', monospace;
-    }
-    .action-btn:hover { color: var(--text); border-color: var(--text); }
-
-    /* Score cards */
-    .score-strip { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
-
-    .score-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 20px;
-      text-align: center;
-    }
-    .score-card .sc-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-    .score-card .sc-val { font-family: 'Cormorant', serif; font-weight: 300; font-size: 2.4rem; line-height: 1; color: var(--accent); }
-    .score-card .sc-sub { font-size: 0.65rem; color: var(--muted); margin-top: 4px; }
-
-    /* OC bars */
-    .oc-section { margin-bottom: 28px; }
-    .oc-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-    .oc-bars { display: grid; gap: 10px; }
-    .oc-row { display: grid; grid-template-columns: 44px 1fr 40px; align-items: center; gap: 10px; }
-    .oc-name { font-size: 0.72rem; color: var(--muted); font-family: 'Geist Mono', monospace; }
-    .oc-track { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
-    .oc-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 0.8s ease; }
-    .oc-pct { font-size: 0.68rem; color: var(--muted); text-align: right; }
-
-    /* Keyword */
-    .keyword-block {
-      background: var(--accent-soft);
-      border: 1px solid var(--accent-border);
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 28px;
-    }
-    .keyword-label { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
-    .keyword-text { font-family: 'Cormorant', serif; font-weight: 300; font-size: 1.8rem; color: var(--text); }
-
-    /* Report body */
-    .report-body { font-size: 0.82rem; line-height: 1.9; color: var(--text); }
-    .report-body h3 {
-      font-family: 'Cormorant', serif;
-      font-weight: 400;
-      font-size: 1.3rem;
-      color: var(--text);
-      margin: 28px 0 10px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--line);
-    }
-    .report-body p { margin-bottom: 14px; color: var(--muted-2); }
-    .report-body strong { color: var(--text); font-weight: 400; }
-
-    /* Streaming indicator */
-    .streaming-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line-strong);
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-    .dot-pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
-
-    /* Error */
-    .error-panel {
-      background: var(--error-bg);
-      border: 1px solid var(--error-line);
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-top: 16px;
-      font-size: 0.8rem;
-      color: var(--error-text);
-      display: none;
-    }
-    .error-panel.active { display: block; }
-
-    /* ── SCH FOOTER (preserved from riclee-dc.info) ── */
-    .sch-footer {
-      border-top: 1px solid var(--line);
-      margin-top: 80px;
-      padding: 40px 0 28px;
-    }
-    .sch-footer-inner {
-      max-width: 1220px;
-      margin: 0 auto;
-      padding: 0 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      text-align: center;
-    }
-    .sch-footer-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); opacity: 0.55; }
-    .sch-logo-link { display: inline-flex; align-items: center; justify-content: center; opacity: 0.75; transition: opacity 0.2s; }
-    .sch-logo-link:hover { opacity: 1; }
-    .sch-logo { height: 36px; width: auto; object-fit: contain; }
-    .sch-logo-lightmode { display: none; }
-    body.light-mode .sch-logo-darkmode { display: none; }
-    body.light-mode .sch-logo-lightmode { display: block; }
-    .sch-footer-copy { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); opacity: 0.4; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .report-types { grid-template-columns: 1fr; }
-      .score-strip { grid-template-columns: 1fr 1fr; }
-      .field-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 820px) {
-      .nav { grid-template-columns: 1fr; }
-      .nav-right { justify-content: center; }
-      .form-panel { padding: 28px 20px; }
-      .output-panel { padding: 28px 20px; }
-      .output-top { flex-direction: column; gap: 16px; }
-    }
-
-    @media (max-width: 640px) {
-      .container { width: min(var(--max), calc(100% - 24px)); }
-      .nav { padding: 14px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; min-height: auto; }
-      .brand { justify-content: center; }
-      .brand-text { display: none; }
-      .nav-right { display: none; }
-      .score-strip { grid-template-columns: 1fr; }
-      .score-card .sc-val { font-size: 2rem; }
-    }
+    @media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}.hero-grid,.foundation-grid,.enquiry-layout{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.nav-right{justify-content:center}.assessment-cta{grid-template-columns:1fr}}
+    @media(max-width:820px){.grid-3,.grid-2,.form-grid,.hero-visuals{grid-template-columns:1fr}.hero-copy,.hero-visual-panel{min-height:auto}.hero-copy{padding:32px 24px}.brand{flex-direction:row;justify-content:flex-start;align-items:center;gap:14px}.brand-logo-wrap{width:110px;flex-shrink:0}.brand-text{position:static;transform:none;text-align:left;align-items:flex-start}.brand-text strong{font-size:0.9rem;letter-spacing:0.18em}.brand-text span{font-size:0.72rem;margin-top:3px}}
+    @media(max-width:640px){.container{width:min(var(--max),calc(100% - 24px))}.nav{padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:12px;min-height:auto}.brand{justify-content:center}.brand-text{display:none}.nav-right{display:none}.hero{padding-top:60px}.hero-copy,.hero-visual-panel,.card,.foundation-card,.form-card{padding:22px}.assessment-cta{padding:24px}}
   </style>
 </head>
-<body class="light-mode">
-
-  <!-- HEADER — preserved from riclee-dc.info -->
+<body>
   <header>
     <div class="container nav">
-      <a href="index.html" class="brand">
+      <a href="#" class="brand">
         <div class="brand-logo-wrap">
-          <img id="headerLogo" src="images/ric-lee-logo-light.png.png" alt="Ric Lee logo" />
+          <img id="headerLogo" src="images/ric-lee-logo-dark.png.png" alt="Ric Lee logo" />
         </div>
         <div class="brand-text">
           <strong>Ric Lee</strong>
@@ -510,9 +172,10 @@
       </a>
       <div class="nav-right">
         <nav class="nav-links">
-          <a href="index.html#foundation">Foundation</a>
-          <a href="assessment.html" class="active">Personal Assessment</a>
-          <a href="index.html#enquiry">Enquiry</a>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="assessment.html">Assessment</a>
+          <a href="#enquiry">Enquiry</a>
         </nav>
         <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
       </div>
@@ -520,143 +183,156 @@
   </header>
 
   <main>
-    <div class="container">
-
-      <div class="page-hero">
-        <span class="eyebrow">Psychometric Assessment · Riclee Digital</span>
-        <h1>Psychometric assessment.<br>Structured. Precise.</h1>
-        <p>Structured psychometric profiling powered by a proprietary awareness framework. Three report types: personal profile, third-party observer, and court-ready co-parenting analysis.</p>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Digital Work · Design · Coding</span>
+          <h1>Simple, skilled digital services built properly.</h1>
+          <p>Web development, digital design, software and automation, CAD design, 3D printing, and Volkswagen Audi Group coding. Clean output, functional thinking, real-world work built properly.</p>
+          <div class="hero-actions">
+            <a href="#enquiry" class="btn btn-primary">Start an enquiry</a>
+            <a href="assessment.html" class="btn btn-secondary">Psychometric assessment</a>
+          </div>
+          <div class="hero-points">
+            <span>Web Development</span>
+            <span>Digital Design</span>
+            <span>Print-on-Demand</span>
+            <span>Software Development</span>
+            <span>Automation</span>
+            <span>CAD Design</span>
+            <span>3D Printing</span>
+            <span>VAG Coding</span>
+            <span>Vehicle Remapping</span>
+          </div>
+        </div>
+        <div class="hero-visual-panel">
+          <h3>Core service areas</h3>
+          <div class="hero-visuals">
+            <div class="visual-card"><div class="visual-image"><img src="images/web_dev_hero.png" alt="Web development" /></div><span>Web Development</span></div>
+            <div class="visual-card"><div class="visual-image"><img src="images/mug_hero.png" alt="Digital design" /></div><span>Digital Design &amp; Print-on-Demand</span></div>
+            <div class="visual-card"><div class="visual-image"><img src="images/coding_hero.png" alt="Software development" /></div><span>Software Development &amp; Automation</span></div>
+            <div class="visual-card"><div class="visual-image"><img src="images/cad_hero.png" alt="CAD design" /></div><span>CAD Design</span></div>
+            <div class="visual-card"><div class="visual-image"><img src="images/3d_print_hero.png" alt="3D printing" /></div><span>3D Printing</span></div>
+            <div class="visual-card"><div class="visual-image"><img src="images/vag_coding.png.png" alt="VAG coding" /></div><span>Volkswagen Audi Group Coding &amp; Remapping</span></div>
+          </div>
+          <div class="hero-note">From digital builds to physical prototyping — design, development, automation, CAD, 3D printing, and specialist VAG coding support.</div>
+        </div>
       </div>
+    </section>
 
-      <!-- REPORT TYPE SELECTOR -->
-      <div class="report-types">
-        <div class="rtype active" id="tab-solo" onclick="selectType('solo')">
-          <span class="rtype-badge">Personal</span>
-          <h3>Personal Assessment</h3>
-          <p>Full personal awareness profile. Describe your situation and the framework maps your Observer Code pattern, Balance Scale, Drift, and growth areas.</p>
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Services</span>
+          <h2>Four focused services. Clearer direction.</h2>
+          <p>Streamlined around the core work: coding, design, automation, and specialist digital vehicle services.</p>
         </div>
-        <div class="rtype" id="tab-observer" onclick="selectType('observer')">
-          <span class="rtype-badge">Observer mode</span>
-          <h3>Third Party Profile</h3>
-          <p>Profile someone from conversation data or observed behaviour. WhatsApp export, message history, or written behavioural description.</p>
+        <div class="grid-4">
+          <article class="card">
+            <h3>Web Development</h3>
+            <p>Clean, modern websites and landing pages designed to present your business properly.</p>
+            <ul><li>Business websites</li><li>Landing pages</li><li>Layout and structure</li><li>Visual polish</li><li>Conversion-focused builds</li></ul>
+          </article>
+          <article class="card">
+            <h3>Digital Design &amp; Print-on-Demand</h3>
+            <p>Design work for branding, product visuals, and POD concepts launched quickly.</p>
+            <ul><li>Brand boards and design concepts</li><li>Print-on-demand product ideas</li><li>Mockups and presentation assets</li><li>Digital graphics</li><li>Visual identity support</li></ul>
+          </article>
+          <article class="card">
+            <h3>Software Development &amp; Automation</h3>
+            <p>Coding-based solutions built to improve workflow, reduce manual effort, and create more useful systems.</p>
+            <ul><li>Custom tools</li><li>Automation workflows</li><li>Dashboards and control panels</li><li>Software structure and logic</li><li>Digital system builds</li></ul>
+          </article>
+          <article class="card">
+            <h3>Volkswagen Audi Group Coding &amp; Remapping</h3>
+            <p>Specialist software-based support for VAG vehicles — coding, diagnostics, configuration, and performance remapping.</p>
+            <ul><li>Vehicle coding</li><li>Diagnostics and fault finding</li><li>Module configuration</li><li>Digital adjustments</li><li>ECU remapping and performance tuning</li></ul>
+          </article>
         </div>
-        <div class="rtype" id="tab-coparent" onclick="selectType('coparent')">
-          <span class="rtype-badge">Co-parenting</span>
-          <h3>Co-Witness</h3>
-          <p>Court-ready co-parenting dynamic analysis. Profiles the co-parent from communication data and frames the dynamic professionally.</p>
-          <span class="court-tag">Court ready</span>
-        </div>
-      </div>
 
-      <!-- SOLO FORM -->
-      <div class="form-panel active" id="form-solo">
-        <h2>Your awareness profile</h2>
-        <p class="form-desc">Describe your situation honestly and specifically. The more real the input, the more accurate the report. This is not a quiz — write as if you're explaining it to someone who needs to understand what's actually happening.</p>
-        <div class="field-grid">
-          <div class="field"><label>Your name</label><input type="text" id="solo-name" placeholder="Full name" /></div>
-          <div class="field"><label>Date of birth or age</label><input type="text" id="solo-dob" placeholder="DD/MM/YYYY or age" /></div>
-        </div>
-        <div class="field">
-          <label>What is happening right now</label>
-          <textarea id="solo-situation" placeholder="Describe what you are going through — relationships, work, family, internal patterns, recurring thoughts, behaviour under pressure. Be specific. Name the dynamics, not just the feelings."></textarea>
-        </div>
-        <div class="field">
-          <label>What you want to understand</label>
-          <textarea id="solo-intent" placeholder="What pattern or question do you want this report to address?" style="min-height:100px"></textarea>
-        </div>
-        <button class="submit-btn" id="btn-solo" onclick="generateReport('solo')">
-          &#8594; Generate assessment report
-        </button>
-        <p class="form-disclaimer">Structured psychometric assessment · Riclee Digital · Not a clinical diagnostic instrument</p>
-      </div>
-
-      <!-- OBSERVER FORM -->
-      <div class="form-panel" id="form-observer">
-        <h2>Observer mode</h2>
-        <p class="form-desc">Profile a third party from observed data. Paste message exchanges, WhatsApp exports, or describe behavioural patterns across time. Volume and specificity produce better reports — a year of natural conversation is more reliable than a single interaction.</p>
-        <div class="field-grid">
-          <div class="field"><label>Subject name or initials</label><input type="text" id="obs-name" placeholder="Name or initials" /></div>
-          <div class="field"><label>Your relationship to them</label><input type="text" id="obs-rel" placeholder="e.g. co-parent, colleague, friend, ex-partner" /></div>
-        </div>
-        <div class="field">
-          <label>Conversation data or behavioural description</label>
-          <textarea id="obs-data" placeholder="Paste message excerpts, WhatsApp exports, or describe patterns you have observed over time. Include specific language they use, how they respond to conflict, communication style, patterns under pressure, how they handle accountability. The more data, the more accurate the profile."></textarea>
-        </div>
-        <div class="field">
-          <label>What you want the report to address</label>
-          <textarea id="obs-context" placeholder="What is the nature of this dynamic? What are you trying to understand, document, or prepare for?" style="min-height:100px"></textarea>
-        </div>
-        <button class="submit-btn" id="btn-observer" onclick="generateReport('observer')">
-          &#8594; Generate Observer Mode report
-        </button>
-        <p class="form-disclaimer">Observer Mode profiles are interpretive instruments based on observed behavioural data · Not clinical diagnosis · Riclee Digital</p>
-      </div>
-
-      <!-- CO-PARENTING FORM -->
-      <div class="form-panel" id="form-coparent">
-        <h2>Co-Witness — co-parenting report</h2>
-        <p class="form-desc">Structured for professional and legal use. This report profiles the co-parent's Observer Code pattern from communication data, identifies behavioural patterns relevant to the children's welfare, and frames the dynamic in language suitable for family court proceedings.</p>
-        <div class="field-grid">
-          <div class="field"><label>Your name</label><input type="text" id="cp-you" placeholder="Your full name" /></div>
-          <div class="field"><label>Co-parent name or initials</label><input type="text" id="cp-other" placeholder="Co-parent name or initials" /></div>
-        </div>
-        <div class="field">
-          <label>Children — names and ages</label>
-          <input type="text" id="cp-children" placeholder="e.g. Amara (4), Eli (7)" />
-        </div>
-        <div class="field">
-          <label>Communication data — messages, exchanges, incidents</label>
-          <textarea id="cp-data" placeholder="Paste message exchanges or describe specific incidents. Include examples of communication about the children — handovers, scheduling, decisions, conflicts. Include dates where possible. This forms the evidentiary basis of the report."></textarea>
-        </div>
-        <div class="field">
-          <label>Legal or practical context</label>
-          <textarea id="cp-context" placeholder="What is the current situation? Are there court proceedings, a parenting plan, specific incidents you need documented? What is the report for?" style="min-height:100px"></textarea>
-        </div>
-        <button class="submit-btn" id="btn-coparent" onclick="generateReport('coparent')">
-          &#8594; Generate Co-Witness report
-        </button>
-        <p class="form-disclaimer">Co-Witness reports are structured interpretive instruments · May be used in professional and legal contexts · Riclee Digital · Not a substitute for legal advice</p>
-      </div>
-
-      <!-- ERROR -->
-      <div class="error-panel" id="error-panel"></div>
-
-      <!-- OUTPUT -->
-      <div class="output-panel" id="output-panel">
-        <div class="output-top">
+        <!-- ASSESSMENT CTA -->
+        <div class="assessment-cta">
           <div>
-            <h2 id="output-title">Assessment Report</h2>
-            <p class="output-meta" id="output-meta"></p>
+            <h3>Psychometric Assessment</h3>
+            <p>Structured awareness profiling powered by a proprietary framework. Solo personal assessment (56 questions, full AI report) and Observer Reports for relationship, workplace, and co-parenting dynamics.</p>
+            <div class="assessment-tags">
+              <span>Personal profile</span>
+              <span>Observer report</span>
+              <span>Court-ready documentation</span>
+              <span>Co-parenting dynamics</span>
+            </div>
           </div>
-          <div class="output-actions">
-            <button class="action-btn" onclick="copyReport()">&#8227; Copy report</button>
-            <button class="action-btn" onclick="printReport()">&#8227; Print / PDF</button>
-          </div>
+          <a href="assessment.html" class="btn btn-primary">Start assessment →</a>
         </div>
-
-        <div id="streaming-pill" class="streaming-pill">
-          <span class="dot-pulse"></span> Generating report — this takes 30–60 seconds
-        </div>
-
-        <div class="score-strip" id="score-strip"></div>
-
-        <div class="oc-section" id="oc-section" style="display:none">
-          <p class="oc-label">Observer Code ratio</p>
-          <div class="oc-bars" id="oc-bars"></div>
-        </div>
-
-        <div class="keyword-block" id="keyword-block" style="display:none">
-          <p class="keyword-label">Keyword identity</p>
-          <p class="keyword-text" id="keyword-text"></p>
-        </div>
-
-        <div class="report-body" id="report-body"></div>
       </div>
+    </section>
 
-    </div>
+    <section id="process">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Process</span>
+          <h2>Simple process. Proper output.</h2>
+          <p>Define the need, capture the detail, build the right thing, refine if needed.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card"><h3>Define the objective</h3><p>You explain what you need, what is not working, or what you want built.</p></article>
+          <article class="card"><h3>Capture the detail</h3><p>The enquiry form gathers the right information so the work can be assessed properly.</p></article>
+          <article class="card"><h3>Build the solution</h3><p>Website, design asset, automation, or coding support — built to suit the brief.</p></article>
+          <article class="card"><h3>Refine if needed</h3><p>Once the first version is complete, it can be improved, extended, or tightened properly.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="enquiry">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Enquiry</span>
+          <h2>Start a project.</h2>
+          <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
+        </div>
+        <div class="form-card">
+          <form action="https://formspree.io/f/mreorpre" method="POST">
+            <div class="form-grid">
+              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+              <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
+              <div class="field"><label for="contact">Contact</label><input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required /></div>
+              <div class="field">
+                <label for="service">Service</label>
+                <select id="service" name="service" required>
+                  <option value="Web Development">Web Development</option>
+                  <option value="Design / POD">Design / POD</option>
+                  <option value="Software / Automation">Software / Automation</option>
+                  <option value="CAD Design">CAD Design</option>
+                  <option value="3D Printing">3D Printing</option>
+                  <option value="VAG Coding">VAG Coding</option>
+                  <option value="VAG Remapping">VAG Remapping</option>
+                  <option value="Psychometric Assessment">Psychometric Assessment</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority" required>
+                  <option value="Standard">Standard</option>
+                  <option value="Urgent">Urgent</option>
+                  <option value="Time-Sensitive">Time-Sensitive</option>
+                </select>
+              </div>
+              <div class="field-full"><label for="message">Project details</label><textarea id="message" name="message" placeholder="What do you need?" required></textarea></div>
+              <input type="hidden" name="_replyto" value="holla@riclee-dc.info">
+              <input type="hidden" name="_subject" value="New Riclee Enquiry">
+              <div class="hp-field"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+              <div class="submit-row">
+                <button class="btn btn-primary" type="submit">Submit enquiry</button>
+                <span class="submit-note">Reviewed directly</span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- FOOTER — preserved from riclee-dc.info -->
   <footer class="sch-footer">
     <div class="sch-footer-inner">
       <span class="sch-footer-label">Branded by</span>
@@ -669,284 +345,31 @@
   </footer>
 
   <script>
-    const FRAMEWORK_PROMPT = `You are a professional psychometric assessment engine, powered by a proprietary awareness framework developed by Riclee Digital.
-
-FRAMEWORK:
-Observer Codes — four concurrent modes, always present, always sum to 100%:
-- NARC: self-reference, survival, personal boundary protection. The code that anchors the self.
-- YARC: other-directed, empathy, genuine giving. The code that governs authentic connection.
-- CIST: regulation, integration, holding structure. Holds NARC and YARC in conscious balance simultaneously.
-- Øll: volatility, threshold, all-or-nothing intensity. Creative force and reset state.
-
-Balance Scale: -5.0 (collapse) through 0 (Zero-Point) to +5.0 (peak expression). Named bands: -5 to -4 Collapse, -3 to -2 Reactive, -1 to 0 Drift activated, 0 Zero-Point, +1 Stability emerging, +2 Integration, +3 Coherence, +4 Expression, +5 Peak.
-
-Drift: gap between conscious and subconscious layers. 0.0-1.4 Low, 1.5-3.0 Moderate, 3.0+ High. High drift = elevated loop risk.
-
-Awareness Level: 1-10. 1-3 Reactive, 4-5 Emerging, 6-7 Integration, 8-9 Mastery, 10 Full expression.
-
-20 Source Codes (score 1-5, where 1=highly activated/challenging, 5=fully integrated):
-Q1 Presence/Shutdown, Q2 Fear/Masking, Q3 Interpretation/Literal, Q4 Desire/Intensity, Q5 Intention/Identity, Q6 Communication/Drain, Q7 Attachment/Relationship, Q8 Expression/Gap, Q9 Perspective/Empathy, Q10 Memory/Relationship History, Q11 Pattern/Routine, Q12 Logic/Hyperfocus, Q13 Alignment/Masking, Q14 Protection/Sensory, Q15 Instinct/Regulation, Q16 Adaptation/Change, Q17 Core Identity/Social, Q18 Instinct/Environment, Q19 Drift/Shutdown, Q20 Integrity/Threshold.
-
-OUTPUT — use these EXACT delimiters:
-
-[SCORES]
-Balance Scale: [value e.g. +2.1]
-Drift: [value e.g. 1.8]
-Awareness Level: [value e.g. 6]
-NARC: [%] | YARC: [%] | CIST: [%] | Øll: [%]
-[/SCORES]
-
-[KEYWORD]
-[Single keyword identity phrase — e.g. The Anchor, The Strategist, The Protector, The Bridge]
-[/KEYWORD]
-
-Then write the full report using ## section headers. Be specific to the input — not generic. Write as if you know this person. Aim for 900-1200 words of interpretation.
-
-Required sections:
-## Observer Code Profile
-## Balance Scale and Awareness Level
-## Who you are right now [or: Who [name] is right now for observer/co-parent]
-## Strengths
-## Shadows
-## Under pressure
-## In relationships
-## Growth areas
-## Wellbeing note [include only if Q1, Q2, Q14, or Q19 patterns suggest shutdown or masking — otherwise omit]
-
-This is a professional interpretive instrument. Pattern recognition, not therapy. Be honest, specific, and grounded.`;
-
-    let currentType = 'solo';
-    let fullText = '';
-
-    function selectType(type) {
-      currentType = type;
-      ['solo','observer','coparent'].forEach(t => {
-        document.getElementById('tab-' + t).classList.toggle('active', t === type);
-        document.getElementById('form-' + t).classList.toggle('active', t === type);
-      });
-      document.getElementById('output-panel').classList.remove('active');
-      document.getElementById('error-panel').classList.remove('active');
-    }
-
-    function buildPrompt(type) {
-      if (type === 'solo') {
-        return `${FRAMEWORK_PROMPT}
-
-REPORT TYPE: Personal Psychometric Assessment — Full Awareness Profile
-CLIENT: ${document.getElementById('solo-name').value || 'Not provided'}
-DOB/AGE: ${document.getElementById('solo-dob').value || 'Not provided'}
-SITUATION: ${document.getElementById('solo-situation').value}
-INTENT: ${document.getElementById('solo-intent').value}
-
-Generate the full report.`;
-      }
-
-      if (type === 'observer') {
-        return `${FRAMEWORK_PROMPT}
-
-REPORT TYPE: Observer Mode — Third Party Awareness Profile
-SUBJECT: ${document.getElementById('obs-name').value || 'Subject'}
-RELATIONSHIP: ${document.getElementById('obs-rel').value || 'Not specified'}
-OBSERVED DATA: ${document.getElementById('obs-data').value}
-CONTEXT: ${document.getElementById('obs-context').value}
-
-Generate the full Observer Mode report. Third person throughout. Profile the subject from the observed data.`;
-      }
-
-      if (type === 'coparent') {
-        return `${FRAMEWORK_PROMPT}
-
-REPORT TYPE: Co-Witness — Co-Parenting Dynamic Report
-This report may be submitted in family court proceedings. Write with professional precision.
-
-REPORTING PARTY: ${document.getElementById('cp-you').value || 'Not provided'}
-CO-PARENT SUBJECT: ${document.getElementById('cp-other').value || 'Not provided'}
-CHILDREN: ${document.getElementById('cp-children').value || 'Not provided'}
-COMMUNICATION DATA: ${document.getElementById('cp-data').value}
-LEGAL/PRACTICAL CONTEXT: ${document.getElementById('cp-context').value}
-
-Generate the Co-Witness report. Profile the co-parent's Observer Code pattern from the communication data. Identify specific behavioural patterns relevant to the children's welfare. Flag NARC-dominant patterns, YARC exploitation risks, or communication strategies being deployed. Add a dedicated Co-Parenting Guidance section with specific, practical recommendations. Frame all observations professionally and specifically — with reference to the actual data provided.`;
-      }
-    }
-
-    function parseScores(text) {
-      const m = text.match(/\[SCORES\]([\s\S]*?)\[\/SCORES\]/);
-      if (!m) return null;
-      const b = m[1];
-      return {
-        bs:   (b.match(/Balance Scale:\s*([+-]?\d+\.?\d*)/) || [])[1],
-        drift:(b.match(/Drift:\s*(\d+\.?\d*)/) || [])[1],
-        al:   (b.match(/Awareness Level:\s*(\d+)/) || [])[1],
-        narc: (b.match(/NARC:\s*(\d+)/) || [])[1],
-        yarc: (b.match(/YARC:\s*(\d+)/) || [])[1],
-        cist: (b.match(/CIST:\s*(\d+)/) || [])[1],
-        oll:  (b.match(/Øll:\s*(\d+)/) || [])[1],
-      };
-    }
-
-    function parseKeyword(text) {
-      const m = text.match(/\[KEYWORD\]([\s\S]*?)\[\/KEYWORD\]/);
-      return m ? m[1].trim() : null;
-    }
-
-    function renderScores(s) {
-      if (!s) return '';
-      document.getElementById('score-strip').innerHTML = `
-        <div class="score-card"><div class="sc-label">Balance Scale</div><div class="sc-val">${s.bs || '—'}</div><div class="sc-sub">range ±5.0</div></div>
-        <div class="score-card"><div class="sc-label">Drift</div><div class="sc-val">${s.drift || '—'}</div><div class="sc-sub">range 0–6</div></div>
-        <div class="score-card"><div class="sc-label">Awareness</div><div class="sc-val">${s.al || '—'}/10</div><div class="sc-sub">level</div></div>`;
-
-      if (s.narc) {
-        const codes = [{n:'NARC',v:s.narc},{n:'YARC',v:s.yarc},{n:'CIST',v:s.cist},{n:'Øll',v:s.oll}];
-        document.getElementById('oc-bars').innerHTML = codes.map(c =>
-          `<div class="oc-row"><span class="oc-name">${c.n}</span><div class="oc-track"><div class="oc-fill" style="width:${c.v}%"></div></div><span class="oc-pct">${c.v}%</span></div>`
-        ).join('');
-        document.getElementById('oc-section').style.display = 'block';
-      }
-    }
-
-    function cleanBody(text) {
-      return text
-        .replace(/\[SCORES\][\s\S]*?\[\/SCORES\]/g, '')
-        .replace(/\[KEYWORD\][\s\S]*?\[\/KEYWORD\]/g, '')
-        .replace(/## (.*)/g, '</p><h3>$1</h3><p>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        .replace(/\n\n+/g, '</p><p>')
-        .replace(/\n/g, ' ')
-        .trim();
-    }
-
-    async function generateReport(type) {
-      const btn = document.getElementById('btn-' + type);
-      const output = document.getElementById('output-panel');
-      const body = document.getElementById('report-body');
-      const scores = document.getElementById('score-strip');
-      const errorPanel = document.getElementById('error-panel');
-      const pill = document.getElementById('streaming-pill');
-      const titles = {solo:'Personal Assessment — Awareness Profile', observer:'Observer Mode — Third Party Profile', coparent:'Co-Witness — Co-Parenting Report'};
-
-      errorPanel.classList.remove('active');
-      btn.disabled = true;
-      btn.textContent = '⟳ Generating…';
-
-      document.getElementById('output-title').textContent = titles[type];
-      document.getElementById('output-meta').innerHTML =
-        `Generated ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})} &nbsp;·&nbsp; Riclee Digital &nbsp;·&nbsp; Awareness Engine v1.0`;
-
-      output.classList.add('active');
-      scores.innerHTML = '';
-      body.innerHTML = '';
-      pill.style.display = 'flex';
-      document.getElementById('oc-section').style.display = 'none';
-      document.getElementById('keyword-block').style.display = 'none';
-      fullText = '';
-
-      output.scrollIntoView({behavior:'smooth', block:'start'});
-
-      let scoresSet = false;
-      let keywordSet = false;
-
-      try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {'Content-Type':'application/json'},
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
-            stream: true,
-            messages: [{role:'user', content: buildPrompt(type)}]
-          })
-        });
-
-        if (!res.ok) throw new Error('API ' + res.status);
-
-        const reader = res.body.getReader();
-        const dec = new TextDecoder();
-
-        while (true) {
-          const {done, value} = await reader.read();
-          if (done) break;
-          const lines = dec.decode(value).split('\n');
-          for (const line of lines) {
-            if (!line.startsWith('data: ')) continue;
-            const d = line.slice(6);
-            if (d === '[DONE]') continue;
-            try {
-              const p = JSON.parse(d);
-              if (p.type === 'content_block_delta' && p.delta?.text) {
-                fullText += p.delta.text;
-
-                if (!scoresSet && fullText.includes('[/SCORES]')) {
-                  renderScores(parseScores(fullText));
-                  scoresSet = true;
-                  pill.style.display = 'none';
-                }
-
-                if (!keywordSet && fullText.includes('[/KEYWORD]')) {
-                  const kw = parseKeyword(fullText);
-                  if (kw) {
-                    document.getElementById('keyword-text').textContent = kw;
-                    document.getElementById('keyword-block').style.display = 'block';
-                    keywordSet = true;
-                  }
-                }
-
-                body.innerHTML = '<p>' + cleanBody(fullText) + '</p>';
-              }
-            } catch(e) {}
-          }
-        }
-
-        pill.style.display = 'none';
-        btn.disabled = false;
-        btn.textContent = '→ Generate report';
-
-      } catch(err) {
-        pill.style.display = 'none';
-        output.classList.remove('active');
-        errorPanel.classList.add('active');
-        errorPanel.textContent = 'Report generation failed: ' + err.message + '. Please try again.';
-        btn.disabled = false;
-        btn.textContent = '→ Generate report';
-      }
-    }
-
-    function copyReport() {
-      if (!fullText) return;
-      navigator.clipboard.writeText(fullText).then(() => {
-        const btns = document.querySelectorAll('.action-btn');
-        btns[0].textContent = '✓ Copied';
-        setTimeout(() => btns[0].textContent = '· Copy report', 2000);
-      });
-    }
-
-    function printReport() {
-      window.print();
-    }
-
-    // Theme toggle — preserved from riclee-dc.info
     const body = document.body;
     const themeToggle = document.getElementById('themeToggle');
     const headerLogo = document.getElementById('headerLogo');
 
     function updateThemeUI() {
-      const isLight = body.classList.contains('light-mode');
-      themeToggle.textContent = isLight ? 'Dark mode' : 'Light mode';
-      headerLogo.src = isLight ? 'images/ric-lee-logo-dark.png.png' : 'images/ric-lee-logo-light.png.png';
+      const isDark = document.documentElement.classList.contains('dark');
+      themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+      headerLogo.src = isDark ? 'images/ric-lee-logo-light.png.png' : 'images/ric-lee-logo-dark.png.png';
     }
 
     themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      localStorage.setItem('riclee-theme', body.classList.contains('light-mode') ? 'light' : 'dark');
+      document.documentElement.classList.toggle('dark');
+      localStorage.setItem('riclee-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
       updateThemeUI();
     });
 
-    const saved = localStorage.getItem('riclee-theme');
-    if (saved === 'dark') body.classList.remove('light-mode');
-    else body.classList.add('light-mode');
-
     updateThemeUI();
+
+    const params = new URLSearchParams(window.location.search);
+    const formStatus = document.getElementById('formStatus');
+    if (window.location.hash === '#enquiry') {
+      const s = params.get('enquiry');
+      if (s === 'success' && formStatus) { formStatus.className = 'form-status is-visible is-success'; formStatus.textContent = 'Enquiry sent. Will be reviewed directly.'; }
+      else if (s === 'error' && formStatus) { formStatus.className = 'form-status is-visible is-error'; formStatus.textContent = 'Something went wrong. Please try again.'; }
+    }
   </script>
 </body>
 </html>
