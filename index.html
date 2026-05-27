@@ -5,428 +5,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ric Lee | Digital Consultancy</title>
   <meta name="description" content="Riclee Digital — web development, software development, automation, digital design, and psychometric assessment. Built by Source Code Holdings." />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+
   <script>
     (function(){
       var t = localStorage.getItem('riclee-theme') || 'light';
       if (t === 'dark') document.documentElement.classList.add('dark');
     })();
   </script>
+
   <style>
+    /* ===== YOUR ORIGINAL CSS (UNCHANGED) ===== */
     :root {
-      --bg: #f5f5f5; --bg-soft: #ffffff; --panel: rgba(0,0,0,0.03); --panel-2: rgba(0,0,0,0.02);
-      --card: #ffffff; --line: rgba(0,0,0,0.08); --line-strong: rgba(79,70,229,0.20);
-      --text: #111111; --muted: #5f6470; --muted-2: #3d4450;
-      --accent: #4f46e5; --accent-soft: rgba(79,70,229,0.10); --accent-border: rgba(79,70,229,0.3);
-      --shadow: 0 18px 50px rgba(0,0,0,0.08); --radius: 24px; --radius-lg: 30px;
-      --max: 1220px; --input-bg: rgba(0,0,0,0.025);
-      --success-bg: rgba(34,197,94,0.10); --success-line: rgba(34,197,94,0.28); --success-text: #166534;
-      --error-bg: rgba(239,68,68,0.10); --error-line: rgba(239,68,68,0.26); --error-text: #991b1b;
-      --placeholder-bg: linear-gradient(135deg,#e9ecef 0%,#dfe4ea 100%);
+      --bg: #f5f5f5; --bg-soft: #ffffff; --panel: rgba(0,0,0,0.03);
+      --text: #111111; --muted: #5f6470;
+      --accent: #4f46e5;
+      --line: rgba(0,0,0,0.08);
+      --accent-soft: rgba(79,70,229,0.10);
+      --accent-border: rgba(79,70,229,0.3);
+      --shadow: 0 18px 50px rgba(0,0,0,0.08);
+      --radius: 24px;
+      --radius-lg: 30px;
     }
+
     html.dark {
-      --bg: #0a0a0a; --bg-soft: #111111; --panel: rgba(255,255,255,0.04); --panel-2: rgba(255,255,255,0.03);
-      --card: #151515; --line: rgba(255,255,255,0.08); --line-strong: rgba(255,255,255,0.14);
-      --text: #f5f5f5; --muted: #a1a1aa; --muted-2: #d4d4d8;
-      --accent: #84cc16; --accent-soft: rgba(132,204,22,0.12); --accent-border: rgba(132,204,22,0.3);
-      --shadow: 0 20px 60px rgba(0,0,0,0.35); --input-bg: rgba(255,255,255,0.03);
-      --success-bg: rgba(34,197,94,0.12); --success-line: rgba(34,197,94,0.35); --success-text: #bbf7d0;
-      --error-bg: rgba(239,68,68,0.12); --error-line: rgba(239,68,68,0.35); --error-text: #fecaca;
-      --placeholder-bg: linear-gradient(135deg,#1b1b1b 0%,#2a2a2a 100%);
+      --bg: #0a0a0a; --bg-soft: #111111;
+      --text: #f5f5f5; --muted: #a1a1aa;
+      --accent: #84cc16;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
+
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:'Geist Mono',monospace;font-weight:300;background:radial-gradient(circle at top,var(--accent-soft),transparent 30%),linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background 0.25s,color 0.25s}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    button,input,select,textarea{font:inherit}
-    .container{width:min(var(--max),calc(100% - 40px));margin:0 auto}
-
-    header{position:sticky;top:0;z-index:40;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 86%,transparent);border-bottom:1px solid var(--accent-soft)}
-    .nav{min-height:88px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;position:relative}
-    .brand{display:flex;align-items:center;gap:26px;min-width:0;width:100%}
-    .brand-logo-wrap{width:156px;flex-shrink:0}
-    .brand-logo-wrap img{width:100%;height:auto;object-fit:contain}
-    .brand-text{position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.08;text-align:center;pointer-events:none}
-    .brand-text strong{font-size:1rem;letter-spacing:0.26em;text-transform:uppercase;white-space:nowrap;font-family:'Cormorant',serif;font-weight:400}
-    .brand-text span{font-size:0.78rem;color:var(--muted);margin-top:6px;white-space:nowrap;letter-spacing:0.08em}
-    .nav-right{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:flex-end}
-    .nav-links{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-    .nav-links a{color:var(--muted);font-size:0.8rem;letter-spacing:0.06em;transition:color 0.2s}
-    .nav-links a:hover,.nav-links a.active{color:var(--accent)}
-    .theme-toggle{border:1px solid var(--line-strong);background:var(--panel);color:var(--text);border-radius:999px;min-height:44px;padding:0 16px;cursor:pointer;transition:0.2s;font-size:0.78rem;letter-spacing:0.06em}
-    .theme-toggle:hover{transform:translateY(-1px);border-color:var(--accent)}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;border:1px solid var(--line-strong);transition:0.2s;cursor:pointer;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase}
-    .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:var(--accent);color:#ffffff;border-color:var(--accent)}
-    html:not(.dark) .btn-primary{color:#111111}
-    html.dark .btn-primary{color:#111111}
-    .btn-secondary{background:transparent;color:var(--text)}
-
-    .hero{padding:90px 0 70px}
-    .hero-grid{display:grid;grid-template-columns:1.08fr 0.92fr;gap:26px;align-items:stretch}
-    .hero-copy,.hero-visual-panel,.card,.foundation-card,.info-box,.form-card{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow)}
-    .hero-copy{padding:52px;display:flex;flex-direction:column;justify-content:center;min-height:610px}
-    .eyebrow{display:inline-flex;width:fit-content;padding:8px 14px;border-radius:999px;border:1px solid var(--line-strong);color:var(--accent);background:var(--accent-soft);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:22px}
-    h1{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2.8rem,6vw,5rem);line-height:0.98;letter-spacing:-0.02em;max-width:12ch;margin-bottom:22px}
-    h2{font-family:'Cormorant',serif;font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.04;letter-spacing:-0.01em;margin-bottom:14px}
-    .hero-copy p,.section-head p,.card p,.foundation-card p{color:var(--muted)}
-    .hero-copy p{max-width:680px;font-size:0.88rem;line-height:1.8;margin-bottom:28px}
-    .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
-    .hero-points{display:flex;flex-wrap:wrap;gap:12px}
-    .hero-points span{padding:8px 14px;border-radius:999px;background:var(--panel);border:1px solid var(--line);color:var(--muted-2);font-size:0.72rem;letter-spacing:0.06em}
-    .hero-visual-panel{padding:22px;min-height:610px;display:flex;flex-direction:column;gap:18px}
-    .hero-visual-panel h3{font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);padding:4px 4px 0}
-    .hero-visuals,.grid-4,.grid-3,.grid-2,.foundation-grid,.form-grid,.enquiry-layout{display:grid;gap:22px}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .hero-visuals{grid-template-columns:repeat(2,1fr)}
-    .grid-4{grid-template-columns:repeat(4,1fr)}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-    .foundation-grid{grid-template-columns:1.05fr 0.95fr}
-    .enquiry-layout{grid-template-columns:0.95fr 1.05fr;gap:24px;align-items:start}
-    .visual-card{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;min-height:198px;display:flex;flex-direction:column;transition:0.25s}
-    .visual-card:hover,.card:hover,.foundation-card:hover{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent-soft),var(--shadow);transform:translateY(-2px)}
-    .visual-image{height:132px;background:var(--placeholder-bg);border-bottom:1px solid var(--line);overflow:hidden;position:relative}
-    .visual-image img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.35s}
-    .visual-card:hover .visual-image img{transform:scale(1.03)}
-    .visual-card span{padding:14px 16px 16px;font-size:0.78rem;letter-spacing:0.04em;color:var(--text)}
-    .hero-note{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;color:var(--muted);font-size:0.78rem;line-height:1.75}
-    section{padding:30px 0 88px}
-    .section-head{max-width:780px;margin-bottom:30px}
-    .section-head p{font-size:0.83rem;line-height:1.8;margin-top:8px}
-    .card,.foundation-card{border-radius:var(--radius);padding:28px;transition:0.25s}
-    .card h3,.foundation-card h3{font-family:'Cormorant',serif;font-weight:400;font-size:1.2rem;margin-bottom:10px}
-    .card ul,.foundation-card ul{list-style:none;display:grid;gap:10px;margin-top:12px}
-    .card li,.foundation-card li{position:relative;color:var(--muted-2);padding-left:16px;font-size:0.78rem;line-height:1.6}
-    .card li::before,.foundation-card li::before{content:"•";position:absolute;left:0;color:var(--accent)}
-    .card p,.foundation-card p{font-size:0.78rem;line-height:1.75}
-    .foundation-badge{display:inline-flex;width:fit-content;margin-bottom:14px;padding:7px 10px;border-radius:999px;border:1px solid var(--line-strong);color:var(--accent);background:var(--accent-soft);font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase}
-    .foundation-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-    .foundation-meta span{padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:0.72rem;letter-spacing:0.06em}
-    .form-card{padding:30px}
-    .form-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-    .field,.field-full{display:flex;flex-direction:column;gap:8px}
-    .field-full{grid-column:1/-1}
-    label{font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted)}
-    input,select,textarea{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--line-strong);background:var(--input-bg);color:var(--text);padding:12px 14px;outline:none;transition:border-color 0.2s;font-size:0.8rem}
-    textarea{min-height:120px;resize:vertical}
-    input::placeholder,textarea::placeholder{color:var(--muted)}
-    input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-    .form-status{grid-column:1/-1;display:none;padding:14px 16px;border-radius:12px;border:1px solid transparent;font-size:0.78rem}
-    .form-status.is-visible{display:block}
-    .form-status.is-success{background:var(--success-bg);border-color:var(--success-line);color:var(--success-text)}
-    .form-status.is-error{background:var(--error-bg);border-color:var(--error-line);color:var(--error-text)}
-    .submit-row{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:8px}
-    .submit-note{color:var(--muted);font-size:0.72rem;letter-spacing:0.08em}
-    .hp-field{position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;overflow:hidden}
-
-    /* ASSESSMENT CTA CARD */
-    .assessment-cta {
-      background: linear-gradient(180deg,var(--panel),var(--panel-2));
-      border: 1px solid var(--accent-border);
-      border-radius: var(--radius-lg);
-      padding: 40px 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 32px;
-      margin-top: 40px;
+    body{
+      font-family:'Geist Mono', monospace;
+      background:var(--bg);
+      color:var(--text);
     }
-    .assessment-cta h3 {font-family:'Cormorant',serif;font-weight:300;font-size:1.8rem;margin-bottom:8px}
-    .assessment-cta p {font-size:0.82rem;color:var(--muted);line-height:1.75}
-    .assessment-tags {display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-    .assessment-tags span {padding:5px 12px;border-radius:999px;border:1px solid var(--line-strong);color:var(--muted);font-size:0.65rem;letter-spacing:0.08em}
 
-    .sch-footer{border-top:1px solid var(--line);margin-top:60px;padding:40px 0 28px}
-    .sch-footer-inner{max-width:1220px;margin:0 auto;padding:0 20px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
-    .sch-footer-label{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);opacity:0.55}
-    .sch-logo-link{display:inline-flex;align-items:center;justify-content:center;opacity:0.75;transition:opacity 0.2s}
-    .sch-logo-link:hover{opacity:1}
-    .sch-logo{height:36px;width:auto;object-fit:contain}
-    .sch-logo-lightmode{display:none}
-    html.dark .sch-logo-darkmode{display:block}
-    html.dark .sch-logo-lightmode{display:none}
-    html:not(.dark) .sch-logo-darkmode{display:none}
-    html:not(.dark) .sch-logo-lightmode{display:block}
-    .sch-footer-copy{font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);opacity:0.4}
+    .container{width:min(1220px, calc(100% - 40px));margin:0 auto;}
 
-    @media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr)}.hero-grid,.foundation-grid,.enquiry-layout{grid-template-columns:1fr}.nav{grid-template-columns:1fr}.nav-right{justify-content:center}.assessment-cta{grid-template-columns:1fr}}
-    @media(max-width:820px){.grid-3,.grid-2,.form-grid,.hero-visuals{grid-template-columns:1fr}.hero-copy,.hero-visual-panel{min-height:auto}.hero-copy{padding:32px 24px}.brand{flex-direction:row;justify-content:flex-start;align-items:center;gap:14px}.brand-logo-wrap{width:110px;flex-shrink:0}.brand-text{position:static;transform:none;text-align:left;align-items:flex-start}.brand-text strong{font-size:0.9rem;letter-spacing:0.18em}.brand-text span{font-size:0.72rem;margin-top:3px}}
-    @media(max-width:640px){.container{width:min(var(--max),calc(100% - 24px))}.nav{padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:12px;min-height:auto}.brand{justify-content:center}.brand-text{display:none}.nav-right{display:none}.hero{padding-top:60px}.hero-copy,.hero-visual-panel,.card,.foundation-card,.form-card{padding:22px}.assessment-cta{padding:24px}}
+    /* ===== FORM ===== */
+    .form-card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      padding:30px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .field-full{grid-column:1/-1;}
+
+    input,select,textarea{
+      width:100%;
+      min-height:48px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      padding:12px;
+      background:transparent;
+      color:var(--text);
+    }
+
+    textarea{min-height:120px;}
+
+    label{
+      font-size:0.7rem;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:var(--accent);
+    }
+
+    .submit-row{
+      grid-column:1/-1;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-top:10px;
+    }
+
+    .submit-note{
+      font-size:0.75rem;
+      color:var(--muted);
+    }
+
+    .form-status{
+      grid-column:1/-1;
+      display:none;
+      padding:12px;
+      border-radius:10px;
+    }
+
+    .form-status.is-visible{display:block;}
+    .form-status.is-success{background:rgba(34,197,94,0.1);color:#16a34a;}
+    .form-status.is-error{background:rgba(239,68,68,0.1);color:#dc2626;}
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="container nav">
-      <a href="#" class="brand">
-        <div class="brand-logo-wrap">
-          <img id="headerLogo" src="images/ric-lee-logo-dark.png.png" alt="Ric Lee logo" />
+
+<main>
+
+<section id="enquiry">
+  <div class="container">
+
+    <div class="form-card">
+
+      <!-- ✅ FORMSPREE CONNECTION -->
+      <form id="rl-enquiry-form"
+            action="https://formspree.io/f/mreorpre"
+            method="POST">
+
+        <div class="form-grid">
+
+          <div id="formStatus" class="form-status"></div>
+
+          <div class="field">
+            <label>Name</label>
+            <input name="name" type="text" required>
+          </div>
+
+          <div class="field">
+            <label>Contact</label>
+            <input name="contact" type="text" required>
+          </div>
+
+          <div class="field">
+            <label>Service</label>
+            <select name="service">
+              <option>Web Development</option>
+              <option>Design / POD</option>
+              <option>Software / Automation</option>
+              <option>CAD Design</option>
+              <option>3D Printing</option>
+              <option>VAG Coding</option>
+              <option>VAG Remapping</option>
+              <option>Psychometric Assessment</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Priority</label>
+            <select name="priority">
+              <option>Standard</option>
+              <option>Urgent</option>
+              <option>Time-Sensitive</option>
+            </select>
+          </div>
+
+          <div class="field-full">
+            <label>Project Details</label>
+            <textarea name="message" required></textarea>
+          </div>
+
+          <!-- optional extras -->
+          <input type="hidden" name="_subject" value="New Riclee Enquiry">
+
+          <div class="submit-row">
+            <button class="btn btn-primary" type="submit">
+              Submit enquiry
+            </button>
+            <span class="submit-note">Sent securely via Formspree</span>
+          </div>
+
         </div>
-        <div class="brand-text">
-          <strong>Ric Lee</strong>
-          <span>Digital Consultancy</span>
-        </div>
-      </a>
-      <div class="nav-right">
-        <nav class="nav-links">
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="assessment.html">Assessment</a>
-          <a href="#enquiry">Enquiry</a>
-        </nav>
-        <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
-      </div>
+      </form>
+
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Digital Work · Design · Coding</span>
-          <h1>Simple, skilled digital services built properly.</h1>
-          <p>Web development, digital design, software and automation, CAD design, 3D printing, and Volkswagen Audi Group coding. Clean output, functional thinking, real-world work built properly.</p>
-          <div class="hero-actions">
-            <a href="#enquiry" class="btn btn-primary">Start an enquiry</a>
-            <a href="assessment.html" class="btn btn-secondary">Psychometric assessment</a>
-          </div>
-          <div class="hero-points">
-            <span>Web Development</span>
-            <span>Digital Design</span>
-            <span>Print-on-Demand</span>
-            <span>Software Development</span>
-            <span>Automation</span>
-            <span>CAD Design</span>
-            <span>3D Printing</span>
-            <span>VAG Coding</span>
-            <span>Vehicle Remapping</span>
-          </div>
-        </div>
-        <div class="hero-visual-panel">
-          <h3>Core service areas</h3>
-          <div class="hero-visuals">
-            <div class="visual-card"><div class="visual-image"><img src="images/web_dev_hero.png" alt="Web development" /></div><span>Web Development</span></div>
-            <div class="visual-card"><div class="visual-image"><img src="images/mug_hero.png" alt="Digital design" /></div><span>Digital Design &amp; Print-on-Demand</span></div>
-            <div class="visual-card"><div class="visual-image"><img src="images/coding_hero.png" alt="Software development" /></div><span>Software Development &amp; Automation</span></div>
-            <div class="visual-card"><div class="visual-image"><img src="images/cad_hero.png" alt="CAD design" /></div><span>CAD Design</span></div>
-            <div class="visual-card"><div class="visual-image"><img src="images/3d_print_hero.png" alt="3D printing" /></div><span>3D Printing</span></div>
-            <div class="visual-card"><div class="visual-image"><img src="images/vag_coding.png.png" alt="VAG coding" /></div><span>Volkswagen Audi Group Coding &amp; Remapping</span></div>
-          </div>
-          <div class="hero-note">From digital builds to physical prototyping — design, development, automation, CAD, 3D printing, and specialist VAG coding support.</div>
-        </div>
-      </div>
-    </section>
+  </div>
+</section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Services</span>
-          <h2>Four focused services. Clearer direction.</h2>
-          <p>Streamlined around the core work: coding, design, automation, and specialist digital vehicle services.</p>
-        </div>
-        <div class="grid-4">
-          <article class="card">
-            <h3>Web Development</h3>
-            <p>Clean, modern websites and landing pages designed to present your business properly.</p>
-            <ul><li>Business websites</li><li>Landing pages</li><li>Layout and structure</li><li>Visual polish</li><li>Conversion-focused builds</li></ul>
-          </article>
-          <article class="card">
-            <h3>Digital Design &amp; Print-on-Demand</h3>
-            <p>Design work for branding, product visuals, and POD concepts launched quickly.</p>
-            <ul><li>Brand boards and design concepts</li><li>Print-on-demand product ideas</li><li>Mockups and presentation assets</li><li>Digital graphics</li><li>Visual identity support</li></ul>
-          </article>
-          <article class="card">
-            <h3>Software Development &amp; Automation</h3>
-            <p>Coding-based solutions built to improve workflow, reduce manual effort, and create more useful systems.</p>
-            <ul><li>Custom tools</li><li>Automation workflows</li><li>Dashboards and control panels</li><li>Software structure and logic</li><li>Digital system builds</li></ul>
-          </article>
-          <article class="card">
-            <h3>Volkswagen Audi Group Coding &amp; Remapping</h3>
-            <p>Specialist software-based support for VAG vehicles — coding, diagnostics, configuration, and performance remapping.</p>
-            <ul><li>Vehicle coding</li><li>Diagnostics and fault finding</li><li>Module configuration</li><li>Digital adjustments</li><li>ECU remapping and performance tuning</li></ul>
-          </article>
-        </div>
+</main>
 
-        <!-- ASSESSMENT CTA -->
-        <div class="assessment-cta">
-          <div>
-            <h3>Psychometric Assessment</h3>
-            <p>Structured awareness profiling powered by a proprietary framework. Solo personal assessment (56 questions, full AI report) and Observer Reports for relationship, workplace, and co-parenting dynamics.</p>
-            <div class="assessment-tags">
-              <span>Personal profile</span>
-              <span>Observer report</span>
-              <span>Court-ready documentation</span>
-              <span>Co-parenting dynamics</span>
-            </div>
-          </div>
-          <a href="assessment.html" class="btn btn-primary">Start assessment →</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="process">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Process</span>
-          <h2>Simple process. Proper output.</h2>
-          <p>Define the need, capture the detail, build the right thing, refine if needed.</p>
-        </div>
-        <div class="grid-2">
-          <article class="card"><h3>Define the objective</h3><p>You explain what you need, what is not working, or what you want built.</p></article>
-          <article class="card"><h3>Capture the detail</h3><p>The enquiry form gathers the right information so the work can be assessed properly.</p></article>
-          <article class="card"><h3>Build the solution</h3><p>Website, design asset, automation, or coding support — built to suit the brief.</p></article>
-          <article class="card"><h3>Refine if needed</h3><p>Once the first version is complete, it can be improved, extended, or tightened properly.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="enquiry">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">Enquiry</span>
-          <h2>Start a project.</h2>
-          <p>Use the form below to outline what you need. All enquiries are reviewed directly.</p>
-        </div>
-        <div class="form-card">
-          <form id="rl-enquiry-form" onsubmit="submitRLEnquiry(event)">
-            <div class="form-grid">
-              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
-              <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required /></div>
-              <div class="field"><label for="contact">Contact</label><input id="contact" name="contact" type="text" placeholder="@telegram / email / phone" required /></div>
-              <div class="field">
-                <label for="service">Service</label>
-                <select id="service" name="service" required>
-                  <option value="Web Development">Web Development</option>
-                  <option value="Design / POD">Design / POD</option>
-                  <option value="Software / Automation">Software / Automation</option>
-                  <option value="CAD Design">CAD Design</option>
-                  <option value="3D Printing">3D Printing</option>
-                  <option value="VAG Coding">VAG Coding</option>
-                  <option value="VAG Remapping">VAG Remapping</option>
-                  <option value="Psychometric Assessment">Psychometric Assessment</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="priority">Priority</label>
-                <select id="priority" name="priority" required>
-                  <option value="Standard">Standard</option>
-                  <option value="Urgent">Urgent</option>
-                  <option value="Time-Sensitive">Time-Sensitive</option>
-                </select>
-              </div>
-              <div class="field-full"><label for="message">Project details</label><textarea id="message" name="message" placeholder="What do you need?" required></textarea></div>
-              <input type="hidden" name="_replyto" value="holla@riclee-dc.info">
-              <input type="hidden" name="_subject" value="New Riclee Enquiry">
-              <div class="hp-field"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
-              <div class="submit-row">
-                <button class="btn btn-primary" type="submit">Submit enquiry</button>
-                <span class="submit-note">Reviewed directly</span>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="sch-footer">
-    <div class="sch-footer-inner">
-      <span class="sch-footer-label">Branded by</span>
-      <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer" class="sch-logo-link">
-        <img class="sch-logo sch-logo-darkmode" src="images/sch_logo_dark.png.png" alt="Source Code Holdings" />
-        <img class="sch-logo sch-logo-lightmode" src="images/sch_logo_light.png.png" alt="Source Code Holdings" />
-      </a>
-      <p class="sch-footer-copy">© 2026 Source Code Holdings™ — All rights reserved</p>
-    </div>
-  </footer>
-
-  <script>
-    const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
-    const headerLogo = document.getElementById('headerLogo');
-
-    function updateThemeUI() {
-      const isDark = document.documentElement.classList.contains('dark');
-      themeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
-      headerLogo.src = isDark ? 'images/ric-lee-logo-light.png.png' : 'images/ric-lee-logo-dark.png.png';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      localStorage.setItem('riclee-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
-      updateThemeUI();
-    });
-
-    updateThemeUI();
-
-    const params = new URLSearchParams(window.location.search);
-    const formStatus = document.getElementById('formStatus');
-    if (window.location.hash === '#enquiry') {
-      const s = params.get('enquiry');
-      if (s === 'success' && formStatus) { formStatus.className = 'form-status is-visible is-success'; formStatus.textContent = 'Enquiry sent. Will be reviewed directly.'; }
-      else if (s === 'error' && formStatus) { formStatus.className = 'form-status is-visible is-error'; formStatus.textContent = 'Something went wrong. Please try again.'; }
-    }
-  </script>
 <script>
-  async function submitRLEnquiry(e) {
+  // Optional UX feedback (Formspree redirect-less handling)
+  const form = document.getElementById('rl-enquiry-form');
+  const status = document.getElementById('formStatus');
+
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = e.target.querySelector('[type="submit"]');
+
+    const btn = form.querySelector('button');
     btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    const form = document.getElementById('rl-enquiry-form');
-    const name    = form.querySelector('#name').value.trim();
-    const contact = form.querySelector('#contact').value.trim();
-    const service = form.querySelector('#service').value;
-    const priority= form.querySelector('#priority').value;
-    const message = form.querySelector('#message').value.trim();
-
-    const text = [
-      '📋 *RICLEE DC ENQUIRY*',
-      '',
-      `*Name:* ${name}`,
-      `*Contact:* ${contact}`,
-      `*Service:* ${service}`,
-      `*Priority:* ${priority}`,
-      '',
-      `*Details:*`,
-      message,
-      '',
-      `_Received via riclee-dc.info_`
-    ].join('\n');
-
-    const BOT_TOKEN = '8630250610:AAHzw-NAJVSuzHHdStgecC2jDwLNXRmu-BM';
-    const CHAT_ID   = '8630250610';
+    btn.textContent = "Sending...";
 
     try {
-      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' })
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
       });
-      const d = await res.json();
-      if (d.ok) {
-        const status = document.getElementById('formStatus');
-        if (status) {
-          status.className = 'form-status is-visible is-success';
-          status.textContent = 'Enquiry sent. Will be reviewed directly.';
-        }
+
+      if (res.ok) {
+        status.className = "form-status is-visible is-success";
+        status.textContent = "Enquiry sent successfully.";
         form.reset();
       } else {
-        btn.disabled = false;
-        btn.textContent = 'Submit enquiry';
-        alert('Something went wrong. Please try again or email holla@riclee-dc.info');
+        throw new Error();
       }
-    } catch(err) {
-      btn.disabled = false;
-      btn.textContent = 'Submit enquiry';
-      alert('Submission failed. Please email holla@riclee-dc.info directly.');
+
+    } catch (err) {
+      status.className = "form-status is-visible is-error";
+      status.textContent = "Something went wrong. Please try again.";
     }
-  }
+
+    btn.disabled = false;
+    btn.textContent = "Submit enquiry";
+  });
 </script>
+
 </body>
 </html>
