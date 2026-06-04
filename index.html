@@ -523,7 +523,7 @@
   <div class="container nav">
     <a href="#" class="brand">
       <div class="brand-logo-wrap">
-        <img id="headerLogo" src="images/ric-lee-logo-light.png.png" alt="Ric Lee logo" />
+        <img id="headerLogo" src="images/ric-lee-logo-light.png" alt="Ric Lee logo" />
       </div>
       <div class="brand-text">
         <strong>Ric Lee</strong>
@@ -857,8 +857,8 @@
     <div class="sch-footer-inner">
       <span class="sch-footer-label">Branded by</span>
       <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer" class="sch-footer-logo-link">
-        <img class="sch-footer-logo-img sch-logo-dark" src="images/sch-logo-light.png.png" alt="Source Code Holdings" />
-        <img class="sch-footer-logo-img sch-logo-light" src="images/sch-logo-dark.png.png" alt="Source Code Holdings" />
+        <img class="sch-footer-logo-img sch-logo-dark" src="images/sch-logo-light.png" alt="Source Code Holdings" />
+        <img class="sch-footer-logo-img sch-logo-light" src="images/sch-logo-dark.png" alt="Source Code Holdings" />
       </a>
       <p class="sch-footer-copy">© 2026 Source Code Holdings™ — All rights reserved</p>
     </div>
@@ -874,8 +874,8 @@
   function updateThemeUI() {
     const isDark = html.classList.contains('dark');
     btn.textContent = isDark ? 'Light mode' : 'Dark mode';
-    if (headerLogo) headerLogo.src = isDark ? 'images/ric-lee-logo-light.png.png' : 'images/ric-lee-logo-dark.png.png';
-    if (footerLogo) footerLogo.src = isDark ? 'images/sch-logo-dark.png.png' : 'images/sch-logo-light.png.png';
+    if (headerLogo) headerLogo.src = isDark ? 'images/ric-lee-logo-light.png' : 'images/ric-lee-logo-dark.png';
+    if (footerLogo) footerLogo.src = isDark ? 'images/sch-logo-dark.png' : 'images/sch-logo-light.png';
   }
 
   btn.addEventListener('click', function() {
