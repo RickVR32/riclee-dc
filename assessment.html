@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Assessment · Riclee Digital</title>
-<meta name="description" content="Psychometric assessment and observer reports. Structured awareness profiling powered by a proprietary framework."/>
+<meta name="description" content="Submit your data. Get a structured SCH report — Observer Code, Balance Scale, and Drift analysis. Solo assessment £25. Observer Report £50. No account needed."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400&family=Geist+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -476,12 +476,13 @@ svg g[onmouseover]{pointer-events:all!important}
 <header class="rl-header">
   <div class="rl-nav">
     <a href="https://riclee-dc.info" class="rl-brand">
-      <img id="rlLogo" class="rl-logo" src="images/ric-lee-logo-dark.png.png" alt="Riclee Digital" />
+      <img id="rlLogo" class="rl-logo" src="images/ric-lee-logo-dark.png" alt="Riclee Digital" />
     </a>
     <div class="rl-nav-links">
-      <a href="https://riclee-dc.info#foundation">Foundation</a>
-      <a href="assessment.html" class="active">Assessment</a>
-      <a href="https://riclee-dc.info#enquiry">Enquiry</a>
+      <a href="https://riclee-dc.info#reports">Reports</a>
+      <a href="https://riclee-dc.info#how-it-works">How it works</a>
+      <a href="https://riclee-dc.info#services">Services</a>
+      <a href="https://riclee-dc.info#contact">Contact</a>
     </div>
     <button class="rl-theme-btn" id="rlThemeBtn" onclick="toggleTheme()">Dark mode</button>
   </div>
@@ -491,6 +492,7 @@ svg g[onmouseover]{pointer-events:all!important}
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('solo')">Solo Assessment</button>
   <button class="tab-btn" onclick="switchTab('observer')">Observer Report</button>
+  <button class="tab-btn" onclick="switchTab('business')">Business Report</button>
 </div>
 
 <!-- ══════════════════════════════════════════ -->
@@ -505,6 +507,7 @@ svg g[onmouseover]{pointer-events:all!important}
   <div class="intro-label">Personal Assessment</div>
   <h1 class="intro-title">Your complete<br>awareness profile</h1>
   <p class="intro-copy">56 questions across three layers — Source Codes, Apps, and Observer Codes — mapped across both the conscious and subconscious. Includes Drift calculation, Balance Scale, and full AI-generated interpretive report.</p>
+  <p style="font-size:0.68rem;letter-spacing:0.1em;color:var(--muted);text-align:center;margin-bottom:24px;border:1px solid var(--line-strong);border-radius:10px;padding:10px 16px;"><span style="color:var(--text)">£25</span> — one-off, no account required. Paid securely via Stripe after completion.</p>
   <div class="oc-field"><div class="oc-field-label">Name</div><input class="oc-input" id="obs-name" type="text" placeholder="Your name" oninput="updateObsNode()"></div>
   <div class="oc-field"><div class="oc-field-label">Age (optional)</div><input class="oc-input" id="obs-age" type="number" placeholder="Your age" min="1" max="120"></div>
   <div class="oc-field"><div class="oc-field-label">Previous code (optional)</div><input class="oc-input" id="prev-code-input" type="text" placeholder="Paste to compare"></div>
@@ -793,7 +796,8 @@ svg g[onmouseover]{pointer-events:all!important}
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
       </div>
 
-      <button type="submit" class="obs-submit-btn" id="obs-submit-btn">
+      <p style="font-size:0.7rem;color:var(--muted);line-height:1.7;margin-bottom:12px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:10px;"><strong style="color:var(--text)">£50</strong> — You will receive a payment link via email before we begin. No charge until your report is in preparation.</p>
+    <button type="submit" class="obs-submit-btn" id="obs-submit-btn">
         Submit for Observer Report →
       </button>
     </form>
@@ -808,6 +812,47 @@ svg g[onmouseover]{pointer-events:all!important}
 </div>
 </div><!-- /tab-observer -->
 
+<!-- TAB 3: BUSINESS REPORT -->
+<div class="tab-panel" id="tab-business">
+  <div class="obs-wrap">
+    <div class="obs-hero">
+      <p class="obs-eyebrow">Business Report · Riclee Digital</p>
+      <h1 class="obs-title">A full awareness audit<br>for your team or individual.</h1>
+      <p class="obs-desc">A structured behavioural audit drawing on the SCH framework — mapping awareness levels, Observer Code patterns, and dynamic friction points across individuals or teams. Delivered as a written report with interpretive commentary. Bespoke scope agreed before work begins.</p>
+      <div class="obs-use-cases">
+        <span class="obs-tag">Team dynamics</span>
+        <span class="obs-tag">Leadership assessment</span>
+        <span class="obs-tag">Hiring &amp; onboarding</span>
+        <span class="obs-tag">Conflict resolution</span>
+        <span class="obs-tag">Organisational culture</span>
+      </div>
+    </div>
+    <div class="obs-form-card">
+      <form id="biz-form" onsubmit="submitBizForm(event)">
+        <div class="obs-field-row">
+          <div class="obs-field"><label>Your name</label><input type="text" name="your_name" placeholder="Your full name" required /></div>
+          <div class="obs-field"><label>Your contact</label><input type="text" name="your_contact" placeholder="Email or Telegram" required /></div>
+        </div>
+        <div class="obs-field"><label>Organisation / context</label><input type="text" name="organisation" placeholder="Company name or team context" /></div>
+        <div class="obs-field"><label>Number of individuals to be assessed</label>
+          <select name="scope"><option value="1">1 individual</option><option value="2-5">2-5 people</option><option value="6-10">6-10 people</option><option value="10+">More than 10</option></select>
+        </div>
+        <hr class="obs-divider" />
+        <div class="obs-context-note">Business Reports are scoped individually. After submitting this form, you will receive a brief scope summary and price confirmation before any work begins. Starting from £100 per individual.</div>
+        <div class="obs-field"><label>What are you trying to understand or resolve?</label><textarea name="brief" placeholder="Describe the situation — team friction, leadership gap, onboarding challenge, or any context driving this audit." required></textarea></div>
+        <div class="obs-field"><label>Any relevant background or supporting materials?</label><textarea name="background" placeholder="Previous assessments, HR reports, specific incidents, or anything that would help frame the work." style="min-height:100px"></textarea></div>
+        <input type="hidden" name="_replyto" value="holla@riclee-dc.info" />
+        <input type="hidden" name="_subject" value="Business Report Enquiry — Riclee Digital" />
+        <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
+        <p style="font-size:0.7rem;color:var(--muted);line-height:1.7;margin-bottom:12px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:10px;"><strong style="color:var(--text)">From £100</strong> — Scope and price confirmed via email before work begins. No charge until you approve the brief.</p>
+        <button type="submit" class="obs-submit-btn" id="biz-submit-btn">Request a Business Report →</button>
+      </form>
+      <div class="obs-success" id="biz-success"><div class="obs-success-title">Received.</div><p class="obs-success-body">Your Business Report enquiry has been submitted. You will receive a scope summary and price confirmation within 48 hours.<br><br>For urgent requirements, reach out directly via Telegram or email.</p></div>
+      <p class="obs-disclaimer">Business Reports are structured interpretive instruments · Not a clinical diagnostic · Riclee Digital · Scope confirmed before work begins</p>
+    </div>
+  </div>
+</div><!-- /tab-business -->
+
 <!-- TOOLTIP OVERLAY -->
 <div id="tooltip-overlay" style="position:fixed;inset:0;z-index:40;display:none" onclick="hideTooltip()"></div>
 
@@ -816,8 +861,8 @@ svg g[onmouseover]{pointer-events:all!important}
   <div class="sch-footer-inner">
     <span class="sch-footer-label">Branded by</span>
     <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer" class="sch-logo-link">
-      <img class="sch-logo sch-logo-dark" src="images/sch_logo_dark.png.png" alt="Source Code Holdings" />
-      <img class="sch-logo sch-logo-light" src="images/sch_logo_light.png.png" alt="Source Code Holdings" />
+      <img class="sch-logo sch-logo-dark" src="images/sch_logo_dark.png" alt="Source Code Holdings" />
+      <img class="sch-logo sch-logo-light" src="images/sch_logo_light.png" alt="Source Code Holdings" />
     </a>
     <p class="sch-footer-copy">© 2026 Source Code Holdings™ — All rights reserved</p>
   </div>
@@ -1380,7 +1425,7 @@ function updateThemeBtn() {
   const btn = document.getElementById('rlThemeBtn');
   const logo = document.getElementById('rlLogo');
   if (btn) btn.textContent = isLight ? 'Dark mode' : 'Light mode';
-  if (logo) logo.src = isLight ? 'images/ric-lee-logo-dark.png.png' : 'images/ric-lee-logo-light.png.png';
+  if (logo) logo.src = isLight ? 'images/ric-lee-logo-dark.png' : 'images/ric-lee-logo-light.png';
 }
 
 // Init theme
@@ -1417,7 +1462,21 @@ async function submitObsForm(e) {
     btn.disabled = false;
     btn.textContent = 'Submit for Observer Report →';
     alert('Submission failed. Please try again.');
-  }
+  }h
+}
+
+
+
+async function submitBizForm(ev) {
+  ev.preventDefault();
+  const btn = document.getElementById('biz-submit-btn');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const data = new FormData(document.getElementById('biz-form'));
+  try {
+    const res = await fetch('https://formspree.io/f/mreorpre', { method: 'POST', body: data, headers: {'Accept': 'application/json'} });
+    if (res.ok) { document.getElementById('biz-form').style.display = 'none'; document.getElementById('biz-success').classList.add('visible'); }
+    else { btn.disabled = false; btn.textContent = 'Request a Business Report →'; alert('Something went wrong. Please try again or contact directly.'); }
+  } catch (err) { btn.disabled = false; btn.textContent = 'Request a Business Report →'; alert('Submission failed. Please try again.'); }
 }
 
 // Override the old dark toggle from assessment.js if it conflicts
