@@ -412,15 +412,15 @@
 
     .step p { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
 
-    /* ── ENQUIRY ── */
-    .enquiry-layout {
+    /* ── CONTACT ── */
+    .contact-layout {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
       gap: 48px; align-items: start;
     }
 
-    .enquiry-info h2 { margin-bottom: 16px; }
-    .enquiry-info p { font-size: 0.87rem; color: var(--muted); margin-bottom: 24px; line-height: 1.75; }
+    .contact-info h2 { margin-bottom: 16px; }
+    .contact-info p { font-size: 0.87rem; color: var(--muted); margin-bottom: 24px; line-height: 1.75; }
 
     .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .contact-list li { font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--muted); }
@@ -493,7 +493,7 @@
     }
 
     @media (max-width: 820px) {
-      .hero-grid, .enquiry-layout { grid-template-columns: 1fr; }
+      .hero-grid, .contact-layout { grid-template-columns: 1fr; }
       .assess-products, .services-compact { grid-template-columns: 1fr; }
       .framework-strip { grid-template-columns: 1fr 1fr; }
     }
@@ -533,7 +533,7 @@
           <li><a href="#reports">Reports</a></li>
           <li><a href="#how-it-works">How it works</a></li>
           <li><a href="#services">Services</a></li>
-          <li><a href="#enquiry">Enquiry</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
       <button class="theme-toggle" id="themeToggle" type="button">Dark mode</button>
@@ -568,7 +568,7 @@
           </div>
           <span class="hrc-price">£25</span>
         </a>
-        <a href="#enquiry" class="hero-report-card is-featured">
+        <a href="assessment.html" class="hero-report-card is-featured">
           <div class="hrc-left">
             <span class="hrc-tag">Observer · No subject participation needed</span>
             <span class="hrc-name">Observer Report</span>
@@ -576,7 +576,7 @@
           </div>
           <span class="hrc-price">£50</span>
         </a>
-        <a href="#enquiry" class="hero-report-card">
+        <a href="assessment.html" class="hero-report-card">
           <div class="hrc-left">
             <span class="hrc-tag">Business · Within 5 working days</span>
             <span class="hrc-name">Business Report</span>
@@ -674,9 +674,9 @@
             <li>Delivered within 48 hours of submission</li>
           </ul>
           <div class="product-taster">
-            Enquiry-based · Stripe payment link sent after submission review
+            Start below · Upload your data · Payment processed on review
           </div>
-          <a href="#enquiry" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;">Submit enquiry →</a>
+          <a href="assessment.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;">Start your report →</a>
         </div>
 
         <!-- BUSINESS -->
@@ -697,9 +697,9 @@
             <li>Delivered within 5 working days</li>
           </ul>
           <div class="product-taster">
-            Enquiry-based · Submit business details and digital assets · Payment link on review
+            Start below · Submit your business details · Payment processed on review
           </div>
-          <a href="#enquiry" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;">Submit enquiry →</a>
+          <a href="assessment.html" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:auto;">Start your report →</a>
         </div>
 
       </div>
@@ -734,13 +734,13 @@
     </div>
   </section>
 
-  <!-- SERVICES (demoted, compact) -->
+  <!-- SERVICES (compact) -->
   <section id="services">
     <div class="container">
       <div class="section-header">
         <div>
           <h2>Digital Services</h2>
-          <p class="section-intro" style="margin-bottom:0;">Practical technical work delivered directly. No junior handoffs, no inflated quotes. Enquire below.</p>
+          <p class="section-intro" style="margin-bottom:0;">Practical technical work delivered directly. No junior handoffs, no inflated quotes. Get in touch below.</p>
         </div>
       </div>
       <div class="services-compact">
@@ -766,38 +766,37 @@
   <!-- PROCESS -->
   <section id="process">
     <div class="container">
-      <h2>Process</h2>
-      <p class="section-intro">How a report or project moves from enquiry to delivery.</p>
+      <h2>How it works</h2>
+      <p class="section-intro">From starting your report to receiving your full analysis — here's what to expect.</p>
       <div class="process-grid">
         <div class="step">
-          <h3>Enquiry / Start</h3>
-          <p>Start a Solo Report directly via the link, or submit the enquiry form below for Observer, Business, and digital work.</p>
+          <h3>Start your report</h3>
+          <p>Select your report type — Solo, Observer, or Business — and begin the structured submission process. No account needed.</p>
         </div>
         <div class="step">
-          <h3>Review</h3>
-          <p>For Observer and Business reports: submission is reviewed and a Stripe payment link is sent. For digital work: scope and price confirmed.</p>
+          <h3>Submit your data</h3>
+          <p>For Solo: answer the structured question set. For Observer: upload chat logs, emails, or a written description. For Business: share your URL and brief.</p>
         </div>
         <div class="step">
-          <h3>Processing</h3>
-          <p>Report is generated using the SCH framework, or digital work begins. You'll receive updates at key milestones.</p>
+          <h3>We run the analysis</h3>
+          <p>Your submission is processed through the SCH framework. Observer and Business reports are reviewed before payment is requested.</p>
         </div>
         <div class="step">
-          <h3>Delivery</h3>
-          <p>Report or files delivered. Post-delivery support included for a reasonable window on all work.</p>
+          <h3>Receive your report</h3>
+          <p>Your full formatted report lands within the stated window. Post-delivery support is included for a reasonable period on all reports.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ENQUIRY -->
-  <section id="enquiry">
+  <!-- CONTACT -->
+  <section id="contact">
     <div class="container">
-      <div class="enquiry-layout">
-        <div class="enquiry-info">
+      <div class="contact-layout">
+        <div class="contact-info">
           <h2>Get in touch</h2>
           <p>
-            Use the form for Observer or Business Report enquiries, or for digital project scoping.
-            All messages read personally and responded to within 24 hours on working days.
+            For digital services, project scoping, or any questions about a report — all messages are read personally and responded to within 24 hours on working days.
           </p>
           <ul class="contact-list">
             <li>Email — <a href="mailto:mrrickielee@gmail.com">mrrickielee@gmail.com</a></li>
@@ -806,7 +805,7 @@
           </ul>
         </div>
         <div class="form-card">
-          <form id="rl-enquiry-form" action="https://formspree.io/f/mreorpre" method="POST">
+          <form id="rl-contact-form" action="https://formspree.io/f/mreorpre" method="POST">
             <div class="form-grid">
               <div id="formStatus" class="form-status"></div>
 
@@ -819,26 +818,24 @@
                 <input id="contact" name="contact" type="text" required placeholder="Email or phone">
               </div>
               <div class="field field-full">
-                <label for="service">Report / enquiry type</label>
+                <label for="service">What do you need?</label>
                 <select id="service" name="service">
-                  <option>Observer Report — £50</option>
-                  <option>Business Report — £100</option>
-                  <option>Solo Report — £25</option>
                   <option>Web Development</option>
                   <option>Software / Automation</option>
                   <option>Design / POD</option>
+                  <option>Question about a report</option>
                   <option>Other</option>
                 </select>
               </div>
               <div class="field field-full">
                 <label for="message">Details</label>
-                <textarea id="message" name="message" required placeholder="For Observer Reports: describe the subject and what you need to understand. For Business Reports: share your URL and a brief on what you're trying to map. For digital work: outline your project."></textarea>
+                <textarea id="message" name="message" required placeholder="Tell us what you're working on or what you need help with."></textarea>
               </div>
 
-              <input type="hidden" name="_subject" value="New Riclee Enquiry">
+              <input type="hidden" name="_subject" value="New Riclee Contact">
 
               <div class="submit-row">
-                <button class="btn btn-primary" type="submit">Send enquiry</button>
+                <button class="btn btn-primary" type="submit">Send message</button>
                 <span class="submit-note">Sent securely via Formspree</span>
               </div>
             </div>
@@ -890,7 +887,7 @@
   updateThemeUI();
 
   // Form
-  const form = document.getElementById('rl-enquiry-form');
+  const form = document.getElementById('rl-contact-form');
   const status = document.getElementById('formStatus');
 
   form.addEventListener('submit', async function(e) {
@@ -908,16 +905,16 @@
 
       if (res.ok) {
         status.className = 'form-status is-visible is-success';
-        status.textContent = "Enquiry sent. I'll be in touch within 24 hours.";
+        status.textContent = "Message sent. I'll be in touch within 24 hours.";
         form.reset();
       } else { throw new Error(); }
     } catch {
       status.className = 'form-status is-visible is-error';
-      status.textContent = 'Something went wrong. Email holla@riclee-dc.info directly.';
+      status.textContent = 'Something went wrong. Email mrrickielee@gmail.com directly.';
     }
 
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Send enquiry';
+    submitBtn.textContent = 'Send message';
   });
 </script>
 
