@@ -528,12 +528,11 @@ svg g[onmouseover]{pointer-events:all!important}
       <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)">Assessment complete</div>
       <div class="pg-score" id="pg-score-display" style="color:var(--cist)">–</div>
       <div class="pg-title" id="pg-level-display">–</div>
-      <p class="pg-copy">Your OC ratios, node scores, and Balance Scale are ready. Unlock the full written AI profile for £25 — no account needed, paid securely via Stripe.</p>
+      <p class="pg-copy">Your OC ratios, node scores, and Balance Scale are ready. To unlock the full written AI profile, email your assessment code to mrrickielee@gmail.com and you'll receive a payment link for £25 within 24 hours.</p>
       <div class="pg-price-box">
         <div class="pg-price">£25</div>
-        <div class="pg-price-label">Full AI interpretive report · one-off</div>
-        <!-- ↓ Replace this href with your actual Stripe Payment Link ↓ -->
-        <a href="https://buy.stripe.com/YOUR_LINK_HERE" target="_blank" class="report-locked-btn pg-cta-btn" onclick="trackReportPurchase()">Unlock my full report →</a>
+        <div class="pg-price-label">Full AI interpretive report · one-off · no account needed</div>
+        <button class="report-locked-btn pg-cta-btn" onclick="emailReportRequest()">Request my full report →</button>
       </div>
       <span class="pg-skip" onclick="showResultsWithoutReport()">Just show me my data →</span>
     </div>
@@ -617,7 +616,7 @@ svg g[onmouseover]{pointer-events:all!important}
           <option value="workplace">Workplace / Professional Context</option>
         </select>
       </div>
-      <input type="hidden" name="_replyto" value="holla@riclee-dc.info" />
+      <input type="hidden" name="_replyto" value="mrrickielee@gmail.com" />
       <input type="hidden" name="_subject" value="Observer Report Request — Riclee Digital" />
       <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
       <p style="font-size:0.7rem;color:var(--muted);line-height:1.7;margin-bottom:12px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:10px;"><strong style="color:var(--text)">£50</strong> — You will receive a Stripe payment link via email once we have reviewed your submission. No charge until your report is confirmed.</p>
@@ -666,7 +665,7 @@ svg g[onmouseover]{pointer-events:all!important}
         <div class="obs-context-note">Business Reports are scoped individually. After submitting this form, you will receive a brief scope summary and price confirmation before any work begins. Starting from £100 per individual.</div>
         <div class="obs-field"><label>What are you trying to understand or resolve?</label><textarea name="brief" placeholder="Describe the situation — team friction, leadership gap, onboarding challenge, or any context driving this audit." required></textarea></div>
         <div class="obs-field"><label>Any relevant background or supporting materials?</label><textarea name="background" placeholder="Previous assessments, HR reports, specific incidents, or anything that would help frame the work." style="min-height:100px"></textarea></div>
-        <input type="hidden" name="_replyto" value="holla@riclee-dc.info" />
+        <input type="hidden" name="_replyto" value="mrrickielee@gmail.com" />
         <input type="hidden" name="_subject" value="Business Report Enquiry — Riclee Digital" />
         <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0"><input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
         <p style="font-size:0.7rem;color:var(--muted);line-height:1.7;margin-bottom:12px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:10px;"><strong style="color:var(--text)">From £100</strong> — Scope and price confirmed via email before work begins. No charge until you approve the brief.</p>
@@ -982,7 +981,21 @@ function showResultsWithoutReport(){
   showScreen('screen-results');
 }
 
-// ── TRACK REPORT PURCHASE (called when Stripe link clicked) ──
+// ── EMAIL REPORT REQUEST (replaces Stripe link until payment link is set up) ──
+function emailReportRequest(){
+  const name = document.getElementById('obs-name')?.value.trim() || 'Unknown';
+  const code = window._assessmentCode || NODES.map(n=>scores[n.id]??3).join('');
+  const lvl = lastResult?.awareness_level || '?';
+  const bs = lastResult?.balance_scale || '?';
+  const subject = encodeURIComponent(`Solo Report Request — ${name} — Level ${lvl}`);
+  const body = encodeURIComponent(
+    `Hi,\n\nI have completed the SCH Solo Assessment and would like to unlock my full written report.\n\n` +
+    `Name: ${name}\nAwareness Level: ${lvl}\nBalance Scale: ${bs > 0 ? '+' : ''}${bs}\n\nAssessment Code:\n${code}\n\nPlease send me a payment link for £25.\n\nThank you.`
+  );
+  window.location.href = `mailto:mrrickielee@gmail.com?subject=${subject}&body=${body}`;
+}
+
+// ── TRACK REPORT PURCHASE (kept for future Stripe integration) ──
 function trackReportPurchase(){
   // Store intent in sessionStorage so if they return we can detect
   sessionStorage.setItem('report_purchase_intent', JSON.stringify({
@@ -1063,7 +1076,7 @@ function renderResults(r, withReport){
         <div class="report-locked-icon">⬡</div>
         <div class="report-locked-title">Full written report</div>
         <p class="report-locked-copy">Your OC ratios, node scores, and Balance Scale are shown above. The full AI-written interpretive profile — who you are, your primary pattern, and your next move — unlocks for £25.</p>
-        <a href="https://buy.stripe.com/YOUR_LINK_HERE" target="_blank" class="report-locked-btn" onclick="trackReportPurchase()">Unlock my full report · £25 →</a>
+        <button class="report-locked-btn" onclick="emailReportRequest()">Request my full report · £25 →</button>
       </div>`;
   }
 
