@@ -323,7 +323,7 @@ svg g[onmouseover]{pointer-events:all!important}
 <header class="rl-header">
   <div class="rl-nav">
     <a href="https://riclee-dc.info" class="rl-brand">
-      <img id="rlLogo" class="rl-logo" src="images/ric-lee-logo-dark.png.png" alt="Riclee Digital" />
+      <img id="rlLogo" class="rl-logo" src="ric-lee-logo-dark.png" alt="Riclee Digital" />
     </a>
     <div class="rl-nav-links">
       <a href="https://riclee-dc.info#reports">Reports</a>
@@ -686,8 +686,8 @@ svg g[onmouseover]{pointer-events:all!important}
   <div class="sch-footer-inner">
     <span class="sch-footer-label">Branded by</span>
     <a href="https://sourcecodeholdings.org" target="_blank" rel="noopener noreferrer" class="sch-logo-link">
-      <img class="sch-logo sch-logo-dark" src="images/sch_logo_dark.png.png" alt="Source Code Holdings" />
-      <img class="sch-logo sch-logo-light" src="images/sch_logo_light.png.png" alt="Source Code Holdings" />
+      <img class="sch-logo sch-logo-dark" src="sch_logo_dark.png" alt="Source Code Holdings" />
+      <img class="sch-logo sch-logo-light" src="sch_logo_light.png" alt="Source Code Holdings" />
     </a>
     <p class="sch-footer-copy">© 2026 Source Code Holdings™ · All rights reserved</p>
   </div>
@@ -1168,7 +1168,7 @@ function updateThemeBtn(){
   const btn=document.getElementById('rlThemeBtn');
   const logo=document.getElementById('rlLogo');
   if(btn)btn.textContent=isLight?'Dark mode':'Light mode';
-  if(logo)logo.src=isLight?'images/ric-lee-logo-dark.png.png':'images/ric-lee-logo-light.png';
+  if(logo)logo.src=isLight?'ric-lee-logo-dark.png':'ric-lee-logo-light.png';
 }
 const savedTheme=localStorage.getItem('rl-theme')||'light';
 document.documentElement.setAttribute('data-theme',savedTheme);
