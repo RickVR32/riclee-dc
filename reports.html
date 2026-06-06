@@ -597,6 +597,7 @@ svg g[onmouseover]{pointer-events:all!important}
   <div class="r-grid">
     <div class="r-card"><div class="r-card-lbl">Observer Code ratio</div><div id="r-oc-bars"></div></div>
     <div class="r-card"><div class="r-card-lbl">Node scores (effective)</div><div id="r-nodes"></div></div>
+    <div class="r-card" style="grid-column:1/-1"><div class="r-card-lbl">Hierarchical breakdown</div><div id="r-hierarchy"></div></div>
   </div>
 
   <!-- AI REPORT SECTION — shown if paid, locked if not -->
@@ -954,31 +955,162 @@ function lightNode(n,effScore){
   el.querySelectorAll('polygon,ellipse').forEach((s,i)=>{if(i===0){s.setAttribute('fill','none');s.setAttribute('stroke',n.col);s.setAttribute('stroke-width','2.5');}});
 }
 
+// ── HIERARCHICAL SCORING HELPERS ──
+// Node ID maps for the hierarchy
+// Each App is made of 2 Source Codes (conscious layer)
+// Each OC is made of 2 Apps
+// Subconscious mirrors the same structure
+
+const HIERARCHY = {
+  NARC: {
+    apps: {
+      A1: { con: ['sc1','sc2'],  sub: ['sc17','sc18'] },
+      A2: { con: ['sc3','sc4'],  sub: ['sc19','sc20'] },
+    },
+    oc_direct: { con: 'oc1', sub: 'oc5' }
+  },
+  CIST: {
+    apps: {
+      A3: { con: ['sc5','sc6'],  sub: ['sc21','sc22'] },
+      A4: { con: ['sc7','sc8'],  sub: ['sc23','sc24'] },
+    },
+    oc_direct: { con: 'oc2', sub: 'oc6' }
+  },
+  YARC: {
+    apps: {
+      A5: { con: ['sc9','sc10'], sub: ['sc25','sc26'] },
+      A6: { con: ['sc11','sc12'],sub: ['sc27','sc28'] },
+    },
+    oc_direct: { con: 'oc3', sub: 'oc7' }
+  },
+  'Øll': {
+    apps: {
+      A7: { con: ['sc13','sc14'],sub: ['sc29','sc30'] },
+      A8: { con: ['sc15','sc16'],sub: ['sc31','sc32'] },
+    },
+    oc_direct: { con: 'oc4', sub: 'oc8' }
+  }
+};
+
+// App nodes in NODES array (for live animation)
+const APP_NODES = {
+  A1:['ap1','ap9'], A2:['ap2','ap10'], A3:['ap3','ap11'], A4:['ap4','ap12'],
+  A5:['ap5','ap13'], A6:['ap6','ap14'], A7:['ap7','ap15'], A8:['ap8','ap16']
+};
+
+function nodeEff(id) {
+  const n = NODES.find(x => x.id === id);
+  if (!n) return null;
+  return eff(n);
+}
+
+function avg(...vals) {
+  const valid = vals.filter(v => v !== null && v !== undefined);
+  if (!valid.length) return null;
+  return valid.reduce((a,b) => a+b, 0) / valid.length;
+}
+
+// Calculate hierarchical scores for a given OC code
+// Returns { app scores, oc_score, oc_direct, oc_final }
+function calcOCHierarchy(codeName) {
+  const h = HIERARCHY[codeName];
+  if (!h) return null;
+
+  const appScores = {};
+  Object.entries(h.apps).forEach(([appName, nodes]) => {
+    const conVals = nodes.con.map(nodeEff).filter(v => v !== null);
+    const subVals = nodes.sub.map(nodeEff).filter(v => v !== null);
+    const conScore = conVals.length ? avg(...conVals) : null;
+    const subScore = subVals.length ? avg(...subVals) : null;
+    // App score = average of conscious and subconscious source codes
+    appScores[appName] = avg(...[conScore, subScore].filter(v => v !== null));
+  });
+
+  // OC score from apps = average of the two app scores
+  const appVals = Object.values(appScores).filter(v => v !== null);
+  const ocFromApps = appVals.length ? avg(...appVals) : null;
+
+  // Direct OC diamond questions (gut-check layer)
+  const ocDirectCon = nodeEff(h.oc_direct.con);
+  const ocDirectSub = nodeEff(h.oc_direct.sub);
+  const ocDirect = avg(...[ocDirectCon, ocDirectSub].filter(v => v !== null));
+
+  // Final OC score: 70% from hierarchy, 30% from direct OC question
+  // If direct OC not answered yet, use 100% hierarchy
+  let ocFinal;
+  if (ocDirect !== null && ocFromApps !== null) {
+    ocFinal = ocFromApps * 0.7 + ocDirect * 0.3;
+  } else {
+    ocFinal = ocFromApps !== null ? ocFromApps : ocDirect;
+  }
+
+  return { appScores, ocFromApps, ocDirect, ocFinal };
+}
+
 function updateOCBars(){
-  const byCode={NARC:[],CIST:[],YARC:[],'Øll':[]};
-  NODES.forEach(n=>{const e=eff(n);if(e!==null)byCode[n.code].push(e);});
-  const invTotals={};
-  Object.entries(byCode).forEach(([k,v])=>{invTotals[k]=v.reduce((a,b)=>a+(6-b),0)||0.001;});
-  const grand=Object.values(invTotals).reduce((a,b)=>a+b,0)||1;
-  const km={NARC:'narc',CIST:'cist',YARC:'yarc','Øll':'oll'};
-  Object.entries(invTotals).forEach(([k,t])=>{
-    const key=km[k];const pct=Math.round(t/grand*100);
-    const bar=document.getElementById('oc-'+key);const lbl=document.getElementById('ocp-'+key);
-    if(bar)bar.style.width=pct+'%';if(lbl)lbl.textContent=pct+'%';
-    const vEl=document.getElementById('v-'+key);if(vEl)vEl.textContent=pct+'%';
-    const subVEl=document.getElementById('sub-v-'+key);if(subVEl)subVEl.textContent=pct+'%';
-    const effAvg=byCode[k].length?byCode[k].reduce((a,b)=>a+b,0)/byCode[k].length:0;
+  const km = {NARC:'narc', CIST:'cist', YARC:'yarc', 'Øll':'oll'};
+  const ocFinals = {};
+
+  Object.keys(HIERARCHY).forEach(code => {
+    const h = calcOCHierarchy(code);
+    ocFinals[code] = h?.ocFinal ?? null;
+
+    // Update app node opacities on diagram
+    const appData = h?.appScores || {};
+    Object.entries(appData).forEach(([appName, score]) => {
+      if (score === null) return;
+      const appNodeIds = APP_NODES[appName] || [];
+      appNodeIds.forEach(aid => {
+        const el = document.getElementById('node-' + aid.replace('ap','a'));
+        const subEl = document.getElementById('sub-node-' + aid.replace('ap','a'));
+        const opacity = (0.15 + (score/5)*0.75).toFixed(2);
+        if(el) el.style.opacity = opacity;
+        if(subEl) subEl.style.opacity = opacity;
+      });
+    });
+
+    // Update OC diamond opacity
+    const key = km[code];
+    const effVal = h?.ocFinal ?? 0;
     ['node-'+key,'sub-node-'+key].forEach(id=>{
       const el=document.getElementById(id);
-      if(el)el.style.opacity=(0.15+(effAvg/5)*0.75).toFixed(2);
+      if(el)el.style.opacity=(0.15+(effVal/5)*0.75).toFixed(2);
     });
   });
-  const answered=NODES.filter(n=>eff(n)!==null);
+
+  // Calculate OC ratios as proportional share of total integrated score
+  // Integration model: higher score = more of that code expressed/available
+  const validOCs = Object.entries(ocFinals).filter(([,v]) => v !== null);
+  if (!validOCs.length) return;
+
+  const total = validOCs.reduce((s,[,v]) => s+v, 0) || 1;
+
+  validOCs.forEach(([code, score]) => {
+    const key = km[code];
+    const pct = Math.round((score / total) * 100);
+    const bar = document.getElementById('oc-'+key);
+    const lbl = document.getElementById('ocp-'+key);
+    if(bar) bar.style.width = pct+'%';
+    if(lbl) lbl.textContent = pct+'%';
+    const vEl = document.getElementById('v-'+key);
+    if(vEl) vEl.textContent = pct+'%';
+    const subVEl = document.getElementById('sub-v-'+key);
+    if(subVEl) subVEl.textContent = pct+'%';
+  });
+
+  // Live BS from all answered nodes
+  const answered = NODES.filter(n=>eff(n)!==null);
   if(answered.length){
-    const avgEff=answered.reduce((s,n)=>s+eff(n),0)/answered.length;
-    const bs=((avgEff-3)/2*5).toFixed(1);
-    ['v-bs','sub-v-bs'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=(parseFloat(bs)>0?'+':'')+bs;});
-    ['node-bs','sub-node-bs'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.opacity=(answered.length/NODES.length*0.85).toFixed(2);});
+    const avgEff = answered.reduce((s,n)=>s+eff(n),0)/answered.length;
+    const bs = ((avgEff-3)/2*5).toFixed(1);
+    ['v-bs','sub-v-bs'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.textContent=(parseFloat(bs)>0?'+':'')+bs;
+    });
+    ['node-bs','sub-node-bs'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.style.opacity=(answered.length/NODES.length*0.85).toFixed(2);
+    });
   }
 }
 
@@ -1060,28 +1192,71 @@ function trackReportPurchase(){
   }));
 }
 
-// ── SCORING ENGINE ──
+// ── HIERARCHICAL SCORING ENGINE ──
 function calcScores(){
-  const ans=NODES.filter(n=>eff(n)!==null);
-  if(!ans.length)return{balance_scale:0,drift:0,con_avg:3,sub_avg:3,observer_codes:{narc:25,cist:25,yarc:25,oll:25},awareness_level:5,awareness_level_name:'Choice',bs_state:'Zero-Point proximity'};
-  const avgEff=ans.reduce((s,n)=>s+eff(n),0)/ans.length;
-  const bs=parseFloat(((avgEff-3)/2*5).toFixed(1));
-  const conN=ans.filter(n=>n.layer==='Conscious');
-  const subN=ans.filter(n=>n.layer==='Subconscious');
-  const conAvg=conN.length?parseFloat((conN.reduce((s,n)=>s+eff(n),0)/conN.length).toFixed(2)):parseFloat(avgEff.toFixed(2));
-  const subAvg=subN.length?parseFloat((subN.reduce((s,n)=>s+eff(n),0)/subN.length).toFixed(2)):parseFloat(avgEff.toFixed(2));
-  const drift=parseFloat(Math.abs(conAvg-subAvg).toFixed(1));
-  const byCode={NARC:[],CIST:[],YARC:[],'Øll':[]};
-  ans.forEach(n=>{if(byCode[n.code])byCode[n.code].push(6-eff(n));});
-  const totals={};Object.entries(byCode).forEach(([k,v])=>{totals[k]=v.reduce((a,b)=>a+b,0)||0.001;});
-  const grand=Object.values(totals).reduce((a,b)=>a+b,0)||1;
-  const narc=Math.round(totals.NARC/grand*100);
-  const cist=Math.round(totals.CIST/grand*100);
-  const yarc=Math.round(totals.YARC/grand*100);
-  const oll=100-narc-cist-yarc;
-  const lvl=getLevel(bs);
-  const bsState=bs>=4.5?'Peak expression':bs>2.5?'Mastery / Expression':bs>0.5?'Stability emerging':bs>-0.5?'Zero-Point proximity':bs>-2.5?'Drift activated':bs>-4.5?'Subconscious dominant':'Collapse / Reset';
-  return{balance_scale:bs,drift,con_avg:conAvg,sub_avg:subAvg,observer_codes:{narc,cist,yarc,oll},awareness_level:lvl.level,awareness_level_name:lvl.name,bs_state:bsState};
+  const ans = NODES.filter(n=>eff(n)!==null);
+  if(!ans.length) return {
+    balance_scale:0, drift:0, con_avg:3, sub_avg:3,
+    awareness_score:50,
+    observer_codes:{narc:25,cist:25,yarc:25,oll:25},
+    oc_hierarchy:{
+      NARC:{appScores:{},ocFromApps:3,ocDirect:null,ocFinal:3},
+      CIST:{appScores:{},ocFromApps:3,ocDirect:null,ocFinal:3},
+      YARC:{appScores:{},ocFromApps:3,ocDirect:null,ocFinal:3},
+      'Øll':{appScores:{},ocFromApps:3,ocDirect:null,ocFinal:3},
+    },
+    awareness_level:5, awareness_level_name:'Choice', bs_state:'Zero-Point proximity'
+  };
+
+  // ── LAYER AVERAGES ──
+  const conN = ans.filter(n=>n.layer==='Conscious');
+  const subN = ans.filter(n=>n.layer==='Subconscious');
+  const conAvg = conN.length ? parseFloat((conN.reduce((s,n)=>s+eff(n),0)/conN.length).toFixed(2)) : 3;
+  const subAvg = subN.length ? parseFloat((subN.reduce((s,n)=>s+eff(n),0)/subN.length).toFixed(2)) : 3;
+  const drift = parseFloat(Math.abs(conAvg-subAvg).toFixed(1));
+
+  // ── BALANCE SCALE (from all nodes) ──
+  const avgEff = ans.reduce((s,n)=>s+eff(n),0) / ans.length;
+  const bs = parseFloat(((avgEff-3)/2*5).toFixed(1));
+
+  // ── AWARENESS SCORE 0-100 ──
+  // Maps 1-5 eff scale to 0-100: (avg-1)/4*100
+  const awarenessScore = Math.round(((avgEff-1)/4)*100);
+
+  // ── HIERARCHICAL OC SCORES ──
+  const ocResults = {};
+  Object.keys(HIERARCHY).forEach(code => {
+    ocResults[code] = calcOCHierarchy(code);
+  });
+
+  // OC ratio: proportional share of integrated score (higher = more expressed)
+  const ocFinals = {
+    NARC: ocResults.NARC?.ocFinal ?? 3,
+    CIST: ocResults.CIST?.ocFinal ?? 3,
+    YARC: ocResults.YARC?.ocFinal ?? 3,
+    'Øll': ocResults['Øll']?.ocFinal ?? 3,
+  };
+  const ocTotal = Object.values(ocFinals).reduce((a,b)=>a+b,0) || 1;
+  const narcPct  = Math.round(ocFinals.NARC / ocTotal * 100);
+  const cistPct  = Math.round(ocFinals.CIST / ocTotal * 100);
+  const yarcPct  = Math.round(ocFinals.YARC / ocTotal * 100);
+  const ollPct   = 100 - narcPct - cistPct - yarcPct;
+
+  const lvl = getLevel(bs);
+  const bsState = bs>=4.5?'Peak expression':bs>2.5?'Mastery / Expression':bs>0.5?'Stability emerging':bs>-0.5?'Zero-Point proximity':bs>-2.5?'Drift activated':bs>-4.5?'Subconscious dominant':'Collapse / Reset';
+
+  return {
+    balance_scale: bs,
+    awareness_score: awarenessScore,
+    drift,
+    con_avg: conAvg,
+    sub_avg: subAvg,
+    observer_codes: { narc:narcPct, cist:cistPct, yarc:yarcPct, oll:ollPct },
+    oc_hierarchy: ocResults,
+    awareness_level: lvl.level,
+    awareness_level_name: lvl.name,
+    bs_state: bsState,
+  };
 }
 
 // ── RENDER RESULTS ──
@@ -1094,11 +1269,27 @@ function renderResults(r, withReport){
   const lvlPct=((lvl.level-1)/9*100).toFixed(0);
   document.getElementById('r-level-num').textContent=lvl.level;document.getElementById('r-level-num').style.color=lvl.col;
   document.getElementById('r-level-name').textContent=lvl.name;document.getElementById('r-level-name').style.color=lvl.col;
-  document.getElementById('r-level-bs').textContent='Balance Scale '+(bs>0?'+':'')+bs+' · Level '+lvl.level+' of 10';
+  document.getElementById('r-level-bs').textContent='Balance Scale '+(bs>0?'+':'')+bs+' · Level '+lvl.level+' of 10 · Awareness '+r.awareness_score+'%';
   document.getElementById('r-level-desc').textContent=lvl.desc;
   document.getElementById('r-level-bar').style.width=lvlPct+'%';document.getElementById('r-level-bar').style.background=lvl.col;
   document.getElementById('r-bs').textContent=(bs>0?'+':'')+bs;document.getElementById('r-bs').style.color=bsCol;
   document.getElementById('r-st').textContent=r.bs_state;
+  // Hierarchy breakdown
+  const hier = r.oc_hierarchy || {};
+  const hierCols = {NARC:'#C4622D',CIST:'#534AB7',YARC:'#1D9E75','Øll':'#A0426B'};
+  document.getElementById('r-hierarchy').innerHTML = Object.entries(hier).map(([code, data]) => {
+    if(!data) return '';
+    const apps = Object.entries(data.appScores||{}).map(([app,score]) =>
+      score!==null ? `<span style="font-size:0.65rem;color:var(--muted);margin-right:10px">${app}: <span style="color:${hierCols[code]}">${score!==null?score.toFixed(2):'—'}</span></span>` : ''
+    ).join('');
+    const directStr = data.ocDirect!==null ? ` · Direct OC: <span style="color:${hierCols[code]}">${data.ocDirect.toFixed(2)}</span>` : '';
+    const finalStr = data.ocFinal!==null ? data.ocFinal.toFixed(2) : '—';
+    return `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--line)">
+      <div style="font-family:var(--mono);font-size:0.7rem;font-weight:700;color:${hierCols[code]};margin-bottom:4px">${code} <span style="font-weight:400;color:var(--muted)">→ final: ${finalStr}</span></div>
+      <div style="font-size:0.72rem">${apps}${directStr}</div>
+    </div>`;
+  }).join('');
+
   document.getElementById('r-drift-row').textContent='Drift: '+r.drift+' — Conscious avg '+r.con_avg+' / Subconscious avg '+r.sub_avg;
   const oc=r.observer_codes;
   const cols={narc:'var(--narc)',yarc:'var(--yarc)',cist:'var(--cist)',oll:'var(--oll)'};
@@ -1149,6 +1340,8 @@ function renderResults(r, withReport){
   document.getElementById('r-code-display').textContent=encodedCode;
   window._assessmentCode=rawCode;
   window._encodedCode=encodedCode;
+  // Log to admin
+  logToAdmin(r, rawCode, encodedCode);
   // Pre-fill chat link with raw decoded code
   const chatBtn=document.getElementById('chatLinkBtn');
   if(chatBtn)chatBtn.href=`chat.html?code=${encodeURIComponent(rawCode)}`;
@@ -1167,6 +1360,13 @@ async function callClaude(r){
 
   // Low and high nodes for specificity
   const lowNodes=NODES.filter(n=>eff(n)!==null&&eff(n)<=2).map(n=>`${n.name}(${n.code}/${n.layer.slice(0,3)}):${eff(n)}`).join(', ')||'none';
+
+  // Hierarchical app scores for richer prompt context
+  const appSummary = Object.entries(r.oc_hierarchy||{}).map(([code,data]) => {
+    if(!data) return '';
+    const apps = Object.entries(data.appScores||{}).map(([a,s])=>`${a}:${s!==null?s.toFixed(1):'?'}`).join(' ');
+    return `${code}[${apps} → OC:${data.ocFinal!==null?data.ocFinal.toFixed(1):'?'}${data.ocDirect!==null?' direct:'+data.ocDirect.toFixed(1):''}]`;
+  }).join(' | ');
   const highNodes=NODES.filter(n=>eff(n)!==null&&eff(n)>=4).map(n=>`${n.name}(${n.code}/${n.layer.slice(0,3)}):${eff(n)}`).join(', ')||'none';
 
   const sys=`You are generating a deeply personal SCH awareness profile report. Your job is to be so specific that the person reads it and thinks "how do they know that." Generic output is a failure.
@@ -1181,6 +1381,7 @@ OC ratios: NARC ${r.observer_codes.narc}% | CIST ${r.observer_codes.cist}% | YAR
 Balance Scale: ${r.balance_scale>0?'+':''}${r.balance_scale} = Level ${r.awareness_level} (${r.awareness_level_name})
 Drift: ${r.drift} — Conscious avg ${r.con_avg} / Subconscious avg ${r.sub_avg}${r.drift>=2.5?' — SIGNIFICANT GAP: subconscious patterns are substantially diverging from conscious presentation':r.drift>=1.5?' — MODERATE GAP: some divergence between layers':''}
 Activated nodes (score 1-2, HIGH LOAD): ${lowNodes}
+Hierarchical App→OC breakdown: ${appSummary}
 Regulated nodes (score 4-5, RESOURCES): ${highNodes}
 Conscious layer detail: ${conS}
 Subconscious layer detail: ${subS}
@@ -1204,7 +1405,7 @@ Return ONLY valid JSON (no markdown, no backticks):
 
   const msg=`${name?'Name: '+name+'\n':''}${ageBand?'Age band: '+ageBand+'\n':''}${lifeCtx?'Context: '+lifeCtx+'\n':''}${ctxBest?'Most like themselves: '+ctxBest+'\n':''}${ctxWorst?'Least like themselves: '+ctxWorst+'\n':''}
 OC: NARC ${r.observer_codes.narc}% CIST ${r.observer_codes.cist}% YARC ${r.observer_codes.yarc}% Øll ${r.observer_codes.oll}%
-BS: ${r.balance_scale>0?'+':''}${r.balance_scale} | Drift: ${r.drift} | Level ${r.awareness_level} ${r.awareness_level_name}
+BS: ${r.balance_scale>0?'+':''}${r.balance_scale} | Awareness: ${r.awareness_score}% | Drift: ${r.drift} | Level ${r.awareness_level} ${r.awareness_level_name}
 Activated (1-2): ${lowNodes}
 Regulated (4-5): ${highNodes}
 Conscious: ${conS}
