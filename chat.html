@@ -552,6 +552,35 @@ function updateThemeBtn() {
 }
 updateThemeBtn();
 
+// ── LETTER CODE DECODER (matches reports.html encoder) ──
+const DECODE_MAP_CHAT = {'K':'1','M':'2','R':'3','T':'4','W':'5'};
+
+function decodeLetterCode(input) {
+  // Strip dashes and spaces
+  const clean = input.replace(/[-\s]/g, '').toUpperCase();
+  // If all digits already, return as-is
+  if (/^[1-5]{56}$/.test(clean)) return clean;
+  // If letter code, decode
+  if (/^[KMRTW]{56}$/.test(clean)) {
+    return clean.split('').map(l => DECODE_MAP_CHAT[l] || l).join('');
+  }
+  return null; // invalid
+}
+
+// ── AUTO-LOAD CODE FROM URL PARAM ──
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
+    const input = document.getElementById('codeInput');
+    input.value = code;
+    onCodeInput();
+    setTimeout(() => {
+      document.querySelector('.mode-cards').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+})();
+
 // ── MODE ──
 function selectMode(mode) {
   selectedMode = mode;
@@ -566,7 +595,15 @@ function eff(node, raw) {
   return node.reversed ? (6 - raw) : raw;
 }
 
-function decodeCode(code) {
+function decodeCode(rawInput) {
+  // Accept both raw digit codes and letter codes (with or without dashes)
+  const decoded = decodeLetterCode(rawInput.replace(/[-\s]/g, ''));
+  if (!decoded) {
+    // Try raw digit fallback
+    if (rawInput.length !== 56) return null;
+    if (!/^[1-5]{56}$/.test(rawInput)) return null;
+  }
+  const code = decoded || rawInput;
   if (code.length !== 56) return null;
   const digits = code.split('').map(Number);
   if (digits.some(d => isNaN(d) || d < 1 || d > 5)) return null;
@@ -621,9 +658,19 @@ function onCodeInput() {
   const mini = document.getElementById('profileMini');
 
   if (val.length === 0) { status.className = 'code-status'; mini.classList.remove('visible'); profile = null; checkReady(); return; }
-  if (val.length < 56) { status.className = 'code-status invalid'; status.textContent = `${val.length}/56 digits — keep going`; mini.classList.remove('visible'); profile = null; checkReady(); return; }
+  // Handle letter codes: 56 letters + up to 13 dashes = 69 chars max
+  const stripped = val.replace(/[-\s]/g, '').toUpperCase();
+  const isLetterCode = /^[KMRTW]+$/.test(stripped);
+  const isDigitCode = /^[1-5]+$/.test(stripped);
+  const targetLen = 56;
+  if (stripped.length < targetLen) {
+    const label = isLetterCode ? 'letter code' : 'digit code';
+    status.className = 'code-status invalid';
+    status.textContent = `${stripped.length}/${targetLen} — keep going`;
+    mini.classList.remove('visible'); profile = null; checkReady(); return;
+  }
 
-  const decoded = decodeCode(val);
+  const decoded = decodeCode(stripped);
   if (!decoded) { status.className = 'code-status invalid'; status.textContent = 'Invalid code — digits must be 1–5 only'; mini.classList.remove('visible'); profile = null; checkReady(); return; }
 
   profile = decoded;
