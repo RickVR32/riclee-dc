@@ -29,6 +29,13 @@ body{background:var(--bg);background-image:linear-gradient(180deg,rgba(255,255,2
 .oc-input::placeholder{color:var(--muted);opacity:0.6}
 .intro-start-btn{font-family:var(--mono);font-weight:300;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;background:var(--text);color:var(--bg);padding:13px 40px;border:none;border-radius:999px;cursor:pointer;transition:opacity 0.2s;margin-top:8px}
 .intro-start-btn:hover{opacity:0.75}
+.age-band-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.age-band-btn{font-family:var(--mono);font-size:0.65rem;letter-spacing:0.08em;padding:8px 16px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s}
+.age-band-btn:hover{border-color:var(--text);color:var(--text)}
+.age-band-btn.selected{background:var(--text);color:var(--bg);border-color:var(--text)}
+.context-textarea{font-family:var(--mono);font-weight:300;font-size:0.82rem;padding:12px 14px;border-radius:10px;border:1px solid var(--line-strong);background:var(--input-bg);color:var(--text);outline:none;transition:border-color 0.2s;width:100%;resize:vertical;min-height:72px;line-height:1.6}
+.context-textarea:focus{border-color:var(--text)}
+.context-textarea::placeholder{color:var(--muted);opacity:0.6}
 
 /* ASSESS */
 .assess-layout{display:grid;grid-template-columns:1fr 440px;min-height:calc(100vh - 63px)}
@@ -359,10 +366,38 @@ svg g[onmouseover]{pointer-events:all!important}
     <div class="oc-field-label">Name</div>
     <input class="oc-input" id="obs-name" type="text" placeholder="Your name" oninput="updateObsNode()">
   </div>
+
   <div class="oc-field">
-    <div class="oc-field-label">Age (optional)</div>
-    <input class="oc-input" id="obs-age" type="number" placeholder="Your age" min="1" max="120">
+    <div class="oc-field-label">Age band (optional)</div>
+    <div class="age-band-row" id="ageBandRow">
+      <button class="age-band-btn" onclick="selectAgeBand(this,'Under 25')">Under 25</button>
+      <button class="age-band-btn" onclick="selectAgeBand(this,'25–35')">25–35</button>
+      <button class="age-band-btn" onclick="selectAgeBand(this,'35–45')">35–45</button>
+      <button class="age-band-btn" onclick="selectAgeBand(this,'45–55')">45–55</button>
+      <button class="age-band-btn" onclick="selectAgeBand(this,'55+')">55+</button>
+    </div>
   </div>
+
+  <div class="oc-field">
+    <div class="oc-field-label">When did you last feel most like yourself? <span style="opacity:0.5">(optional — 1-2 sentences)</span></div>
+    <textarea class="context-textarea" id="ctx-best" placeholder="A moment, situation, or period where you felt most aligned with who you actually are."></textarea>
+  </div>
+
+  <div class="oc-field">
+    <div class="oc-field-label">When did you last feel least like yourself? <span style="opacity:0.5">(optional — 1-2 sentences)</span></div>
+    <textarea class="context-textarea" id="ctx-worst" placeholder="A situation where you felt most out of character, disconnected, or not yourself."></textarea>
+  </div>
+
+  <div class="oc-field">
+    <div class="oc-field-label">Current context <span style="opacity:0.5">(optional)</span></div>
+    <div class="age-band-row" id="contextRow">
+      <button class="age-band-btn" onclick="selectContext(this,'In a relationship')">In a relationship</button>
+      <button class="age-band-btn" onclick="selectContext(this,'Co-parenting')">Co-parenting</button>
+      <button class="age-band-btn" onclick="selectContext(this,'Single')">Single</button>
+      <button class="age-band-btn" onclick="selectContext(this,'Major transition')">Major transition</button>
+    </div>
+  </div>
+
   <button class="intro-start-btn" onclick="startAssessment()">Begin assessment →</button>
 </div>
 </div>
@@ -528,7 +563,7 @@ svg g[onmouseover]{pointer-events:all!important}
       <div style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)">Assessment complete</div>
       <div class="pg-score" id="pg-score-display" style="color:var(--cist)">–</div>
       <div class="pg-title" id="pg-level-display">–</div>
-      <p class="pg-copy">Your OC ratios, node scores, and Balance Scale are ready. To unlock the full written AI profile, email your assessment code to mrrickielee@gmail.com and you'll receive a payment link for £25 within 24 hours.</p>
+      <p class="pg-copy">Your OC ratios, node scores, and Balance Scale are ready. To unlock the full written AI profile, email your code and you'll receive a payment link for £25 within 24 hours.</p>
       <div class="pg-price-box">
         <div class="pg-price">£25</div>
         <div class="pg-price-label">Full AI interpretive report · one-off · no account needed</div>
@@ -575,9 +610,7 @@ svg g[onmouseover]{pointer-events:all!important}
     <div id="r-code-display" style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px;font-family:monospace;font-size:0.75rem;letter-spacing:0.1em;word-break:break-all;margin-bottom:12px"></div>
   </div>
   <div class="retake-row" style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:32px 0;">
-    <a href="chat.html" id="chatLinkBtn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:999px;background:var(--text);color:var(--bg);font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-      Talk to your profile →
-    </a>
+    <a href="chat.html" id="chatLinkBtn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:999px;background:var(--text);color:var(--bg);font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">Talk to your profile →</a>
     <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:0.06em;">Mirror or Subject mode · 5 free messages</span>
     <span class="retake-lnk" onclick="retake()">Retake assessment</span>
   </div>
@@ -790,6 +823,22 @@ function getLevel(bs){
 }
 
 // ── START ──
+// ── AGE BAND + CONTEXT ──
+let selectedAgeBand = '';
+let selectedContext = '';
+
+function selectAgeBand(btn, band) {
+  document.querySelectorAll('#ageBandRow .age-band-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedAgeBand = band;
+}
+
+function selectContext(btn, ctx) {
+  document.querySelectorAll('#contextRow .age-band-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedContext = ctx;
+}
+
 function startAssessment(){
   scores={};currentStep=1;reportUnlocked=false;lastResult=null;
   NODES.forEach(n=>{scores[n.id]=undefined;});
@@ -987,21 +1036,20 @@ function showResultsWithoutReport(){
   showScreen('screen-results');
 }
 
-// ── EMAIL REPORT REQUEST ──
+// ── TRACK REPORT PURCHASE (called when Stripe link clicked) ──
 function emailReportRequest(){
-  const name = document.getElementById('obs-name')?.value.trim() || 'Unknown';
-  const code = window._assessmentCode || NODES.map(n=>scores[n.id]??3).join('');
-  const lvl = lastResult?.awareness_level || '?';
-  const bs = lastResult?.balance_scale || '?';
-  const subject = encodeURIComponent(`Solo Report Request — ${name} — Level ${lvl}`);
-  const body = encodeURIComponent(
-    `Hi,\n\nI have completed the SCH Solo Assessment and would like to unlock my full written report.\n\n` +
-    `Name: ${name}\nAwareness Level: ${lvl}\nBalance Scale: ${bs > 0 ? '+' : ''}${bs}\n\nAssessment Code:\n${code}\n\nPlease send me a payment link for £25.\n\nThank you.`
+  const name=document.getElementById('obs-name')?.value.trim()||'Unknown';
+  const code=window._encodedCode||window._assessmentCode||'—';
+  const lvl=lastResult?.awareness_level||'?';
+  const bs=lastResult?.balance_scale||'?';
+  const subject=encodeURIComponent(`Solo Report Request — ${name} — Level ${lvl}`);
+  const body=encodeURIComponent(
+    `Hi,\n\nI've completed the SCH Solo Assessment and would like to unlock my full written report.\n\n`+
+    `Name: ${name}\nAwareness Level: ${lvl}\nBalance Scale: ${bs>0?'+':''}${bs}\n\nAssessment Code:\n${code}\n\nPlease send me a payment link for £25.\n\nThank you.`
   );
-  window.location.href = `mailto:mrrickielee@gmail.com?subject=${subject}&body=${body}`;
+  window.location.href=`mailto:mrrickielee@gmail.com?subject=${subject}&body=${body}`;
 }
 
-// ── TRACK REPORT PURCHASE (kept for future Stripe integration) ──
 function trackReportPurchase(){
   // Store intent in sessionStorage so if they return we can detect
   sessionStorage.setItem('report_purchase_intent', JSON.stringify({
@@ -1068,7 +1116,7 @@ function renderResults(r, withReport){
     const rs=r.report_sections||{};const kwId=r.keyword_identity||'';const kwDesc=r.keyword_description||'';const mhNote=r.mental_health_note||'';
     let html='<div class="r-interp"><div class="r-interp-lbl">Your profile</div><div style="font-size:0.65rem;color:var(--muted);margin-bottom:16px;line-height:1.6">Structured interpretive tool — not a clinical diagnostic instrument.</div>';
     if(kwId)html+=`<div style="margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--line)"><div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Your awareness keyword</div><div style="font-family:var(--serif);font-size:2rem;font-weight:400;margin-bottom:6px">${kwId}</div><div style="font-size:0.78rem;color:var(--muted);line-height:1.7">${kwDesc}</div></div>`;
-    [['who_you_are','Who you are right now'],['primary_pattern','The primary pattern'],['next_move','Your next move']].forEach(([key,title])=>{
+    [['who_you_are','Who you are right now'],['primary_pattern','The primary pattern'],['under_pressure','Under pressure'],['in_relationships','In relationships'],['next_move','Your next move']].forEach(([key,title])=>{
       const txt=rs[key]||'';if(!txt)return;
       html+=`<div style="margin-bottom:24px"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">${title}</div><div style="font-size:0.82rem;line-height:1.85">${txt.split('\n\n').map(p=>`<p style="margin:0 0 12px">${p}</p>`).join('')}</div></div>`;
     });
@@ -1096,26 +1144,73 @@ function renderResults(r, withReport){
     if(el){el.style.opacity=e!==null?(0.2+(e/5)*0.75).toFixed(2):'0.05';el.classList.remove('node-active-pulse');}
   });
 
-  const code=NODES.map(n=>scores[n.id]??3).join('');
-  document.getElementById('r-code-display').textContent=code;
-  window._assessmentCode=code;
-  // Pre-fill chat link with decoded code
-  const chatBtn = document.getElementById('chatLinkBtn');
-  if (chatBtn) chatBtn.href = `chat.html?code=${encodeURIComponent(code)}`;
+  const rawCode=NODES.map(n=>scores[n.id]??3).join('');
+  const encodedCode=encodeAssessmentCode(rawCode);
+  document.getElementById('r-code-display').textContent=encodedCode;
+  window._assessmentCode=rawCode;
+  window._encodedCode=encodedCode;
+  // Pre-fill chat link with raw decoded code
+  const chatBtn=document.getElementById('chatLinkBtn');
+  if(chatBtn)chatBtn.href=`chat.html?code=${encodeURIComponent(rawCode)}`;
 }
 
 // ── CLAUDE API (called only after payment confirmed) ──
 async function callClaude(r){
   const name=document.getElementById('obs-name')?.value.trim()||'';
+  const ctxBest=document.getElementById('ctx-best')?.value.trim()||'';
+  const ctxWorst=document.getElementById('ctx-worst')?.value.trim()||'';
+  const ageBand=selectedAgeBand||'';
+  const lifeCtx=selectedContext||'';
+
   const conS=NODES.filter(n=>n.layer==='Conscious'&&eff(n)!==null).map(n=>`${n.name}(${n.code}):${eff(n)}`).join(', ');
   const subS=NODES.filter(n=>n.layer==='Subconscious'&&eff(n)!==null).map(n=>`${n.name}(${n.code}):${eff(n)}`).join(', ');
-  const sys=`Generate a personalised awareness profile.
-NARC=self/survival(polar:YARC), YARC=other/empathy(polar:NARC), CIST=regulation(polar:Øll), Øll=volatility/threshold(polar:CIST).
-Drift=${r.drift} (conscious avg ${r.con_avg} vs subconscious ${r.sub_avg}). BS ${r.balance_scale} = Level ${r.awareness_level} ${r.awareness_level_name}.
-Second person. Direct, honest, non-generic. Never therapy-speak.
-Return ONLY valid JSON: {"keyword_identity":"<1-3 words>","keyword_description":"<1 sentence>","report_sections":{"who_you_are":"<2 paragraphs>","primary_pattern":"<2 paragraphs>","next_move":"<1 paragraph>"},"mental_health_note":"<1-2 sentences, gentle>"}`;
-  const msg=`${name?'Name: '+name+'\n':''}OC: NARC ${r.observer_codes.narc}% CIST ${r.observer_codes.cist}% YARC ${r.observer_codes.yarc}% Øll ${r.observer_codes.oll}%\nConscious: ${conS}\nSubconscious: ${subS}`;
-  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:msg}]})});
+
+  // Low and high nodes for specificity
+  const lowNodes=NODES.filter(n=>eff(n)!==null&&eff(n)<=2).map(n=>`${n.name}(${n.code}/${n.layer.slice(0,3)}):${eff(n)}`).join(', ')||'none';
+  const highNodes=NODES.filter(n=>eff(n)!==null&&eff(n)>=4).map(n=>`${n.name}(${n.code}/${n.layer.slice(0,3)}):${eff(n)}`).join(', ')||'none';
+
+  const sys=`You are generating a deeply personal SCH awareness profile report. Your job is to be so specific that the person reads it and thinks "how do they know that." Generic output is a failure.
+
+FRAMEWORK:
+NARC=self/survival/protection (polar: YARC). YARC=other/empathy/giving (polar: NARC). CIST=regulation/structure/holding (polar: Øll). Øll=volatility/threshold/intensity (polar: CIST).
+Score 1-2 = Activated (high load, cost, blind spot). Score 3 = Moderate. Score 4-5 = Regulated (resource).
+Balance Scale: -5 (collapse) to +5 (peak). Zero-Point = 0. Drift = gap between conscious and subconscious layers.
+
+THIS PERSON'S PROFILE:
+OC ratios: NARC ${r.observer_codes.narc}% | CIST ${r.observer_codes.cist}% | YARC ${r.observer_codes.yarc}% | Øll ${r.observer_codes.oll}%
+Balance Scale: ${r.balance_scale>0?'+':''}${r.balance_scale} = Level ${r.awareness_level} (${r.awareness_level_name})
+Drift: ${r.drift} — Conscious avg ${r.con_avg} / Subconscious avg ${r.sub_avg}${r.drift>=2.5?' — SIGNIFICANT GAP: subconscious patterns are substantially diverging from conscious presentation':r.drift>=1.5?' — MODERATE GAP: some divergence between layers':''}
+Activated nodes (score 1-2, HIGH LOAD): ${lowNodes}
+Regulated nodes (score 4-5, RESOURCES): ${highNodes}
+Conscious layer detail: ${conS}
+Subconscious layer detail: ${subS}
+${ageBand?`Age band: ${ageBand}. Use this to contextualise what activated nodes look like at this life stage.`:''}
+${lifeCtx?`Current context: ${lifeCtx}. Frame relational and pressure sections accordingly.`:''}
+${ctxBest?`When they felt most like themselves: "${ctxBest}" — anchor the strengths and regulated nodes to this.`:''}
+${ctxWorst?`When they felt least like themselves: "${ctxWorst}" — anchor the shadows and activated nodes to this.`:''}
+
+RULES:
+- Write in second person throughout
+- Reference actual code names and scores where relevant (e.g. "your Integrity node scored 2 — that means...")
+- If drift is high, explicitly name the gap between how they present and how they actually operate
+- Use the context fields to make the report unmistakably about this specific person
+- Never write a sentence that could apply to more than 30% of people
+- No therapy-speak. No motivational filler. No generic wellness advice.
+- If context fields are blank, derive specificity purely from the scores
+- The mental_health_note should only flag if drift >= 3.0 or any node scored 1
+
+Return ONLY valid JSON (no markdown, no backticks):
+{"keyword_identity":"<1-3 words>","keyword_description":"<1 punchy sentence>","report_sections":{"who_you_are":"<3 paragraphs — open with keyword, describe dominant code combination in daily life, close with big picture pattern>","primary_pattern":"<2 paragraphs — the main loop this person runs, what triggers it, what it costs>","under_pressure":"<2 paragraphs — what happens subconsciously when stress hits, which nodes activate, what behaviour emerges>","in_relationships":"<2 paragraphs — their natural role, what they give, what they need but don't ask for, where friction appears>","next_move":"<1-2 paragraphs — one or two concrete things based on actual scores, not generic advice>"},"mental_health_note":"<1-2 sentences, gentle, only if warranted>"}`;
+
+  const msg=`${name?'Name: '+name+'\n':''}${ageBand?'Age band: '+ageBand+'\n':''}${lifeCtx?'Context: '+lifeCtx+'\n':''}${ctxBest?'Most like themselves: '+ctxBest+'\n':''}${ctxWorst?'Least like themselves: '+ctxWorst+'\n':''}
+OC: NARC ${r.observer_codes.narc}% CIST ${r.observer_codes.cist}% YARC ${r.observer_codes.yarc}% Øll ${r.observer_codes.oll}%
+BS: ${r.balance_scale>0?'+':''}${r.balance_scale} | Drift: ${r.drift} | Level ${r.awareness_level} ${r.awareness_level_name}
+Activated (1-2): ${lowNodes}
+Regulated (4-5): ${highNodes}
+Conscious: ${conS}
+Subconscious: ${subS}`;
+
+  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys,messages:[{role:'user',content:msg}]})});
   const d=await res.json();
   return JSON.parse((d.content?.[0]?.text||'').replace(/```json|```/g,'').trim());
 }
