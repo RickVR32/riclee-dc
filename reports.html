@@ -574,7 +574,13 @@ svg g[onmouseover]{pointer-events:all!important}
     <div style="font-size:0.72rem;opacity:0.6;line-height:1.7;margin-bottom:16px">Save this code to compare your profile at your next assessment.</div>
     <div id="r-code-display" style="padding:14px;background:rgba(255,255,255,0.08);border-radius:10px;font-family:monospace;font-size:0.75rem;letter-spacing:0.1em;word-break:break-all;margin-bottom:12px"></div>
   </div>
-  <div class="retake-row"><span class="retake-lnk" onclick="retake()">Retake assessment</span></div>
+  <div class="retake-row" style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:32px 0;">
+    <a href="chat.html" id="chatLinkBtn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 32px;border-radius:999px;background:var(--text);color:var(--bg);font-family:var(--mono);font-size:0.76rem;letter-spacing:0.06em;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+      Talk to your profile →
+    </a>
+    <span style="font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:0.06em;">Mirror or Subject mode · 5 free messages</span>
+    <span class="retake-lnk" onclick="retake()">Retake assessment</span>
+  </div>
 </div>
 </div>
 
@@ -981,7 +987,7 @@ function showResultsWithoutReport(){
   showScreen('screen-results');
 }
 
-// ── EMAIL REPORT REQUEST (replaces Stripe link until payment link is set up) ──
+// ── EMAIL REPORT REQUEST ──
 function emailReportRequest(){
   const name = document.getElementById('obs-name')?.value.trim() || 'Unknown';
   const code = window._assessmentCode || NODES.map(n=>scores[n.id]??3).join('');
@@ -1093,6 +1099,9 @@ function renderResults(r, withReport){
   const code=NODES.map(n=>scores[n.id]??3).join('');
   document.getElementById('r-code-display').textContent=code;
   window._assessmentCode=code;
+  // Pre-fill chat link with decoded code
+  const chatBtn = document.getElementById('chatLinkBtn');
+  if (chatBtn) chatBtn.href = `chat.html?code=${encodeURIComponent(code)}`;
 }
 
 // ── CLAUDE API (called only after payment confirmed) ──
