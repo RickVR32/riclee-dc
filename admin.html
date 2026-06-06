@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SCH Admin · Assessment Log</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f4f3f0;--bg-soft:#fff;--panel:rgba(0,0,0,0.03);--text:#111;--muted:#5f6470;--accent:#4f46e5;--accent-soft:rgba(79,70,229,0.07);--accent-border:rgba(79,70,229,0.22);--line:rgba(0,0,0,0.08);--line-strong:rgba(0,0,0,0.14);--shadow:0 4px 24px rgba(0,0,0,0.07)}
+[data-theme="dark"]{--bg:#0a0a0a;--bg-soft:#111;--panel:rgba(255,255,255,0.04);--text:#f0efeb;--muted:#888e9a;--accent:#84cc16;--accent-soft:rgba(132,204,22,0.07);--accent-border:rgba(132,204,22,0.22);--line:rgba(255,255,255,0.07);--line-strong:rgba(255,255,255,0.14);--shadow:0 4px 24px rgba(0,0,0,0.4)}
+:root{--narc:#C4622D;--yarc:#1D9E75;--cist:#534AB7;--oll:#A0426B}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--line);background:var(--bg);position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.06em;color:var(--text);text-decoration:none}
+.nav-right{display:flex;gap:10px;align-items:center}
+.btn{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;text-decoration:none}
+.btn:hover{color:var(--text);border-color:var(--accent)}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-primary:hover{opacity:0.85}
+.btn-danger{border-color:rgba(220,38,38,0.3);color:#dc2626}
+.btn-danger:hover{background:rgba(220,38,38,0.08);border-color:#dc2626}
+
+/* AUTH */
+.auth-screen{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 57px);padding:24px}
+.auth-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;padding:40px;max-width:380px;width:100%;text-align:center}
+.auth-title{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700;margin-bottom:8px}
+.auth-desc{font-size:0.82rem;color:var(--muted);margin-bottom:24px;line-height:1.65}
+.auth-input{width:100%;font-family:'Space Mono',monospace;font-size:0.82rem;padding:12px 16px;border-radius:10px;border:1px solid var(--line-strong);background:var(--panel);color:var(--text);outline:none;transition:border-color 0.2s;letter-spacing:0.08em;text-align:center}
+.auth-input:focus{border-color:var(--accent-border)}
+.auth-btn{width:100%;margin-top:12px;padding:12px;border-radius:999px;background:var(--accent);color:#fff;border:none;font-family:'Space Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;cursor:pointer;transition:opacity 0.2s}
+.auth-btn:hover{opacity:0.85}
+.auth-error{font-family:'Space Mono',monospace;font-size:0.65rem;color:#dc2626;margin-top:8px;display:none}
+
+/* MAIN */
+.main{display:none;padding:28px 24px;max-width:1200px;margin:0 auto}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:28px}
+.stat-card{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.stat-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.stat-val{font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;color:var(--text)}
+.stat-sub{font-size:0.72rem;color:var(--muted);margin-top:2px}
+
+/* FILTERS */
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filter-label{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.06em}
+.filter-input{font-family:'Space Mono',monospace;font-size:0.72rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line-strong);background:var(--panel);color:var(--text);outline:none;transition:border-color 0.2s;width:180px}
+.filter-input:focus{border-color:var(--accent-border)}
+.filter-select{font-family:'Space Mono',monospace;font-size:0.72rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line-strong);background:var(--panel);color:var(--text);outline:none;cursor:pointer}
+
+/* TABLE */
+.table-wrap{background:var(--bg-soft);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:20px}
+.table-head{display:grid;grid-template-columns:140px 80px 60px 60px 60px 1fr 100px 80px;gap:0;border-bottom:1px solid var(--line);background:var(--panel)}
+.th{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:10px 14px}
+.table-body{max-height:60vh;overflow-y:auto}
+.table-body::-webkit-scrollbar{width:3px}
+.table-body::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:2px}
+.tr{display:grid;grid-template-columns:140px 80px 60px 60px 60px 1fr 100px 80px;gap:0;border-bottom:1px solid var(--line);transition:background 0.15s;cursor:pointer}
+.tr:hover{background:var(--accent-soft)}
+.tr:last-child{border-bottom:none}
+.td{font-family:'Space Mono',monospace;font-size:0.72rem;padding:10px 14px;display:flex;align-items:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.td-name{color:var(--text);font-weight:700}
+.td-muted{color:var(--muted)}
+.td-accent{color:var(--accent)}
+.oc-dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:3px;flex-shrink:0}
+.level-badge{font-family:'Space Mono',monospace;font-size:0.58rem;padding:2px 8px;border-radius:999px;border:1px solid var(--accent-border);color:var(--accent)}
+.empty-state{padding:48px;text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:0.75rem;letter-spacing:0.06em}
+
+/* DETAIL PANEL */
+.detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:flex-start;justify-content:flex-end;padding:20px}
+.detail-overlay.open{display:flex}
+.detail-panel{background:var(--bg-soft);border:1px solid var(--line);border-radius:20px;width:min(520px,90vw);max-height:90vh;overflow-y:auto;padding:28px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--shadow)}
+.detail-panel::-webkit-scrollbar{width:3px}
+.detail-panel::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:2px}
+.dp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.dp-name{font-family:'Space Mono',monospace;font-size:1rem;font-weight:700}
+.dp-date{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted)}
+.dp-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1;padding:2px}
+.dp-close:hover{color:var(--text)}
+.dp-section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.dp-section-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dp-item-label{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted)}
+.dp-item-val{font-family:'Space Mono',monospace;font-size:0.78rem;color:var(--text)}
+.oc-bars{display:flex;flex-direction:column;gap:6px}
+.oc-row{display:flex;align-items:center;gap:8px}
+.oc-name{font-family:'Space Mono',monospace;font-size:0.65rem;min-width:36px}
+.oc-track{flex:1;height:2px;background:var(--line);border-radius:1px;overflow:hidden}
+.oc-fill{height:100%;border-radius:1px}
+.oc-pct{font-family:'Space Mono',monospace;font-size:0.65rem;min-width:32px;text-align:right}
+.dp-code{font-family:'Space Mono',monospace;font-size:0.65rem;word-break:break-all;color:var(--muted);line-height:1.6;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.dp-ctx{font-size:0.78rem;color:var(--text);line-height:1.65;font-style:italic}
+.dp-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* CSV export line */
+.export-note{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);text-align:right;margin-bottom:8px}
+
+@media(max-width:900px){
+  .stats-bar{grid-template-columns:repeat(3,1fr)}
+  .table-head,.tr{grid-template-columns:120px 70px 54px 54px 54px 1fr 90px 70px}
+  .main{padding:16px}
+}
+@media(max-width:640px){
+  .stats-bar{grid-template-columns:1fr 1fr}
+  .table-head{display:none}
+  .tr{grid-template-columns:1fr;padding:12px 14px;gap:4px}
+  .td{padding:0;font-size:0.68rem;white-space:normal}
+}
+</style>
+<script>
+(function(){
+  var t=localStorage.getItem('riclee-theme')||'light';
+  document.documentElement.setAttribute('data-theme',t);
+})();
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="https://riclee-dc.info" class="nav-brand">Riclee Digital · Admin</a>
+  <div class="nav-right">
+    <button class="btn" onclick="toggleTheme()">Dark mode</button>
+    <button class="btn btn-danger" onclick="confirmClear()" id="clearBtn" style="display:none">Clear all logs</button>
+    <button class="btn btn-primary" onclick="exportCSV()" id="exportBtn" style="display:none">Export CSV</button>
+    <button class="btn" onclick="logout()" id="logoutBtn" style="display:none">Log out</button>
+  </div>
+</nav>
+
+<!-- AUTH -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-card">
+    <div class="auth-title">Admin Access</div>
+    <p class="auth-desc">Assessment log and profile data. Enter the admin password to continue.</p>
+    <input class="auth-input" id="passInput" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')checkPass()"/>
+    <button class="auth-btn" onclick="checkPass()">Continue →</button>
+    <div class="auth-error" id="authError">Incorrect password</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="mainContent">
+
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <input class="filter-input" id="searchInput" placeholder="Search name…" oninput="renderTable()"/>
+    <select class="filter-select" id="levelFilter" onchange="renderTable()">
+      <option value="">All levels</option>
+      <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+      <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+    </select>
+    <select class="filter-select" id="dominantFilter" onchange="renderTable()">
+      <option value="">All codes</option>
+      <option>NARC</option><option>CIST</option><option>YARC</option><option>Øll</option>
+    </select>
+    <select class="filter-select" id="sortFilter" onchange="renderTable()">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+      <option value="level_desc">Level (high→low)</option>
+      <option value="level_asc">Level (low→high)</option>
+      <option value="drift_desc">Drift (high→low)</option>
+    </select>
+  </div>
+  <div class="export-note" id="exportNote"></div>
+
+  <div class="table-wrap">
+    <div class="table-head">
+      <div class="th">Name / Date</div>
+      <div class="th">Age band</div>
+      <div class="th">Level</div>
+      <div class="th">BS</div>
+      <div class="th">Drift</div>
+      <div class="th">Observer Codes</div>
+      <div class="th">Context</div>
+      <div class="th">Context fields</div>
+    </div>
+    <div class="table-body" id="tableBody"></div>
+  </div>
+
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-overlay" id="detailOverlay" onclick="closeDetail(event)">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<script>
+// ── CONFIG ──
+// Change this password before deploying
+const ADMIN_PASSWORD = 'sch-admin-2026';
+const STORAGE_KEY = 'sch_assessment_log';
+
+// ── AUTH ──
+let authed = false;
+
+function checkPass() {
+  const val = document.getElementById('passInput').value;
+  if (val === ADMIN_PASSWORD) {
+    authed = true;
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('mainContent').style.display = 'block';
+    document.getElementById('clearBtn').style.display = '';
+    document.getElementById('exportBtn').style.display = '';
+    document.getElementById('logoutBtn').style.display = '';
+    renderStats();
+    renderTable();
+  } else {
+    document.getElementById('authError').style.display = 'block';
+    document.getElementById('passInput').value = '';
+    document.getElementById('passInput').focus();
+  }
+}
+
+function logout() {
+  authed = false;
+  document.getElementById('authScreen').style.display = 'flex';
+  document.getElementById('mainContent').style.display = 'none';
+  document.getElementById('clearBtn').style.display = 'none';
+  document.getElementById('exportBtn').style.display = 'none';
+  document.getElementById('logoutBtn').style.display = 'none';
+  document.getElementById('passInput').value = '';
+}
+
+// ── DATA ──
+function getLogs() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  } catch { return []; }
+}
+
+function saveLogs(logs) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(logs));
+}
+
+// ── STATS ──
+const LEVELS = ['','Non-Conscious','Sub-Conscious','Conscious','Aware','Choice','Integration','Expression','Connection','Mastery','Creator/Source'];
+
+function renderStats() {
+  const logs = getLogs();
+  if (!logs.length) {
+    document.getElementById('statsBar').innerHTML = '<div class="stat-card"><div class="stat-label">Total assessments</div><div class="stat-val">0</div><div class="stat-sub">No data yet</div></div>';
+    return;
+  }
+
+  const avgLevel = (logs.reduce((s,l) => s + (l.level||0), 0) / logs.length).toFixed(1);
+  const avgDrift = (logs.reduce((s,l) => s + (l.drift||0), 0) / logs.length).toFixed(1);
+  const avgBS = (logs.reduce((s,l) => s + (l.bs||0), 0) / logs.length).toFixed(1);
+
+  // Dominant code distribution
+  const codeCounts = {NARC:0, CIST:0, YARC:0, 'Øll':0};
+  logs.forEach(l => { if(l.dominant && codeCounts[l.dominant]!==undefined) codeCounts[l.dominant]++; });
+  const topCode = Object.entries(codeCounts).sort((a,b)=>b[1]-a[1])[0];
+
+  // Latest
+  const latest = logs[logs.length-1];
+  const latestDate = latest ? new Date(latest.timestamp).toLocaleDateString('en-GB') : '—';
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total assessments</div><div class="stat-val">${logs.length}</div><div class="stat-sub">Latest: ${latestDate}</div></div>
+    <div class="stat-card"><div class="stat-label">Avg awareness level</div><div class="stat-val">${avgLevel}</div><div class="stat-sub">${LEVELS[Math.round(parseFloat(avgLevel))]||'—'}</div></div>
+    <div class="stat-card"><div class="stat-label">Avg balance scale</div><div class="stat-val">${parseFloat(avgBS)>0?'+':''}${avgBS}</div><div class="stat-sub">Across all profiles</div></div>
+    <div class="stat-card"><div class="stat-label">Avg drift</div><div class="stat-val">${avgDrift}</div><div class="stat-sub">Conscious/sub gap</div></div>
+    <div class="stat-card"><div class="stat-label">Most common code</div><div class="stat-val" style="color:var(--accent)">${topCode[0]}</div><div class="stat-sub">${topCode[1]} of ${logs.length}</div></div>
+  `;
+  document.getElementById('exportNote').textContent = `${logs.length} record${logs.length!==1?'s':''} · Click any row to expand`;
+}
+
+// ── TABLE ──
+const OC_COLS = {NARC:'#C4622D', CIST:'#534AB7', YARC:'#1D9E75', 'Øll':'#A0426B'};
+
+function getFiltered() {
+  let logs = getLogs();
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const levelF = document.getElementById('levelFilter').value;
+  const domF = document.getElementById('dominantFilter').value;
+  const sort = document.getElementById('sortFilter').value;
+
+  if (search) logs = logs.filter(l => (l.name||'').toLowerCase().includes(search));
+  if (levelF) logs = logs.filter(l => String(l.level) === levelF);
+  if (domF) logs = logs.filter(l => l.dominant === domF);
+
+  if (sort === 'oldest') logs = [...logs];
+  else if (sort === 'newest') logs = [...logs].reverse();
+  else if (sort === 'level_desc') logs = [...logs].sort((a,b) => (b.level||0)-(a.level||0));
+  else if (sort === 'level_asc') logs = [...logs].sort((a,b) => (a.level||0)-(b.level||0));
+  else if (sort === 'drift_desc') logs = [...logs].sort((a,b) => (b.drift||0)-(a.drift||0));
+  else logs = [...logs].reverse();
+
+  return logs;
+}
+
+function renderTable() {
+  const logs = getFiltered();
+  const body = document.getElementById('tableBody');
+  if (!logs.length) {
+    body.innerHTML = '<div class="empty-state">No assessments match the current filter</div>';
+    return;
+  }
+
+  body.innerHTML = logs.map((l, i) => {
+    const date = l.timestamp ? new Date(l.timestamp).toLocaleDateString('en-GB',{day:'2-digit',month:'short'}) : '—';
+    const bs = l.bs !== undefined ? (l.bs > 0 ? '+' : '') + l.bs : '—';
+    const oc = l.oc || {};
+    const ocStr = Object.entries(oc).map(([k,v]) =>
+      `<span class="oc-dot" style="background:${OC_COLS[k]||'#888'}"></span>${v}%`
+    ).join(' ');
+    const hasCtx = l.ctxBest || l.ctxWorst;
+    return `<div class="tr" onclick="showDetail('${l.id||i}')">
+      <div class="td td-name" style="flex-direction:column;align-items:flex-start;gap:2px">
+        <span>${l.name||'Anonymous'}</span>
+        <span style="font-size:0.58rem;color:var(--muted);font-weight:400">${date}</span>
+      </div>
+      <div class="td td-muted">${l.ageBand||'—'}</div>
+      <div class="td"><span class="level-badge">L${l.level||'?'}</span></div>
+      <div class="td td-accent">${bs}</div>
+      <div class="td td-muted">${l.drift||'—'}</div>
+      <div class="td" style="gap:4px">${ocStr}</div>
+      <div class="td td-muted" style="font-size:0.65rem">${l.lifeCtx||'—'}</div>
+      <div class="td td-muted" style="font-size:0.65rem">${hasCtx?'✓ filled':'—'}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── DETAIL ──
+function showDetail(id) {
+  const logs = getLogs();
+  const l = logs.find(x => x.id === id) || logs[parseInt(id)];
+  if (!l) return;
+
+  const oc = l.oc || {};
+  const bs = l.bs !== undefined ? (l.bs > 0 ? '+' : '') + l.bs : '—';
+  const date = l.timestamp ? new Date(l.timestamp).toLocaleString('en-GB') : '—';
+
+  const ocBars = Object.entries(oc).map(([k,v]) => `
+    <div class="oc-row">
+      <div class="oc-name" style="color:${OC_COLS[k]||'#888'}">${k}</div>
+      <div class="oc-track"><div class="oc-fill" style="width:${v}%;background:${OC_COLS[k]||'#888'}"></div></div>
+      <div class="oc-pct" style="color:${OC_COLS[k]||'#888'}">${v}%</div>
+    </div>`).join('');
+
+  document.getElementById('detailPanel').innerHTML = `
+    <div class="dp-header">
+      <div>
+        <div class="dp-name">${l.name||'Anonymous'}</div>
+        <div class="dp-date">${date}${l.ageBand?' · '+l.ageBand:''}${l.lifeCtx?' · '+l.lifeCtx:''}</div>
+      </div>
+      <button class="dp-close" onclick="document.getElementById('detailOverlay').classList.remove('open')">✕</button>
+    </div>
+
+    <div class="dp-section">
+      <div class="dp-section-label">Core metrics</div>
+      <div class="dp-grid">
+        <div><div class="dp-item-label">Awareness level</div><div class="dp-item-val">Level ${l.level||'?'} — ${LEVELS[l.level]||'—'}</div></div>
+        <div><div class="dp-item-label">Balance Scale</div><div class="dp-item-val" style="color:var(--accent)">${bs}</div></div>
+        <div><div class="dp-item-label">Drift</div><div class="dp-item-val">${l.drift||'—'} ${l.drift>=3?'⚠ HIGH':l.drift>=1.5?'↑ MOD':''}</div></div>
+        <div><div class="dp-item-label">Dominant code</div><div class="dp-item-val" style="color:${OC_COLS[l.dominant]||'var(--accent)'}">${l.dominant||'—'}</div></div>
+        <div><div class="dp-item-label">Conscious avg</div><div class="dp-item-val">${l.conAvg||'—'}</div></div>
+        <div><div class="dp-item-label">Subconscious avg</div><div class="dp-item-val">${l.subAvg||'—'}</div></div>
+      </div>
+    </div>
+
+    <div class="dp-section">
+      <div class="dp-section-label">Observer Code ratio</div>
+      <div class="oc-bars">${ocBars}</div>
+    </div>
+
+    ${l.ctxBest||l.ctxWorst||l.ageBand||l.lifeCtx ? `
+    <div class="dp-section">
+      <div class="dp-section-label">Context provided</div>
+      ${l.ageBand?`<div style="margin-bottom:8px"><div class="dp-item-label">Age band</div><div class="dp-item-val">${l.ageBand}</div></div>`:''}
+      ${l.lifeCtx?`<div style="margin-bottom:8px"><div class="dp-item-label">Life context</div><div class="dp-item-val">${l.lifeCtx}</div></div>`:''}
+      ${l.ctxBest?`<div style="margin-bottom:8px"><div class="dp-item-label">Most like themselves</div><div class="dp-ctx">"${l.ctxBest}"</div></div>`:''}
+      ${l.ctxWorst?`<div><div class="dp-item-label">Least like themselves</div><div class="dp-ctx">"${l.ctxWorst}"</div></div>`:''}
+    </div>` : ''}
+
+    <div class="dp-section">
+      <div class="dp-section-label">Assessment code</div>
+      <div class="dp-code">${l.encodedCode||l.code||'—'}</div>
+    </div>
+
+    <div class="dp-actions">
+      <a href="chat.html?code=${encodeURIComponent(l.code||'')}" target="_blank" class="btn btn-primary">Open in chat →</a>
+      <button class="btn" onclick="copyCode('${l.code||''}')">Copy raw code</button>
+      <button class="btn btn-danger" onclick="deleteEntry('${l.id}')">Delete entry</button>
+    </div>
+  `;
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+function closeDetail(e) {
+  if (e.target === document.getElementById('detailOverlay')) {
+    document.getElementById('detailOverlay').classList.remove('open');
+  }
+}
+
+function copyCode(code) {
+  navigator.clipboard.writeText(code).then(() => alert('Code copied to clipboard'));
+}
+
+function deleteEntry(id) {
+  if (!confirm('Delete this assessment entry?')) return;
+  const logs = getLogs().filter(l => l.id !== id);
+  saveLogs(logs);
+  document.getElementById('detailOverlay').classList.remove('open');
+  renderStats();
+  renderTable();
+}
+
+// ── EXPORT ──
+function exportCSV() {
+  const logs = getLogs();
+  if (!logs.length) { alert('No data to export'); return; }
+
+  const headers = ['Name','Date','Age Band','Life Context','Level','Level Name','Balance Scale','Drift','Conscious Avg','Subconscious Avg','NARC%','CIST%','YARC%','Øll%','Dominant Code','Most Like Self','Least Like Self','Encoded Code','Raw Code'];
+  const rows = logs.map(l => [
+    l.name||'',
+    l.timestamp ? new Date(l.timestamp).toLocaleDateString('en-GB') : '',
+    l.ageBand||'',
+    l.lifeCtx||'',
+    l.level||'',
+    LEVELS[l.level]||'',
+    l.bs||'',
+    l.drift||'',
+    l.conAvg||'',
+    l.subAvg||'',
+    l.oc?.NARC||'',
+    l.oc?.CIST||'',
+    l.oc?.YARC||'',
+    l.oc?.['Øll']||'',
+    l.dominant||'',
+    l.ctxBest||'',
+    l.ctxWorst||'',
+    l.encodedCode||'',
+    l.code||'',
+  ].map(v => `"${String(v).replace(/"/g,'""')}"`));
+
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `sch-assessments-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── CLEAR ──
+function confirmClear() {
+  if (!confirm('Delete ALL assessment logs? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  renderStats();
+  renderTable();
+}
+
+// ── THEME ──
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const t = isLight ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', t);
+  localStorage.setItem('riclee-theme', t);
+  document.querySelector('.nav-right .btn').textContent = isLight ? 'Light mode' : 'Dark mode';
+}
+</script>
+</body>
+</html>
