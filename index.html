@@ -95,6 +95,26 @@
   @media (max-width:900px){ .scale-grid{grid-template-columns:1fr 1fr;} .scale-item:nth-child(3){border-left:none;} }
   @media (max-width:640px){ .scale-grid{grid-template-columns:1fr 1fr;} }
 
+  /* PACKAGES */
+  .pkg-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .pkg-card{background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; padding:32px 28px; display:flex; flex-direction:column; position:relative;}
+  .pkg-card.featured{border-color:var(--accent-line); box-shadow:0 18px 44px rgba(0,0,0,0.06);}
+  .pkg-featured-tag{position:absolute; top:-12px; left:28px; background:var(--accent); color:var(--bg-soft); font-family:'IBM Plex Mono',monospace; font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; padding:5px 12px; border-radius:999px;}
+  .pkg-name{font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem; margin-bottom:6px;}
+  .pkg-for{font-size:0.8rem; color:var(--muted); margin-bottom:18px; min-height:40px;}
+  .pkg-price{font-family:'IBM Plex Mono',monospace; font-size:1.5rem; color:var(--accent); margin-bottom:6px;}
+  .pkg-price-note{font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:22px;}
+  .pkg-list{list-style:none; display:flex; flex-direction:column; gap:11px; margin-bottom:26px; flex:1;}
+  .pkg-list li{font-size:0.85rem; color:var(--text); display:flex; gap:10px; align-items:flex-start;}
+  .pkg-list li::before{content:'—'; color:var(--accent); flex-shrink:0;}
+  .pkg-btn{align-self:flex-start;}
+  .care-strip{margin-top:22px; background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:26px 30px; display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;}
+  .care-strip-text h4{font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; margin-bottom:6px;}
+  .care-strip-text p{font-size:0.82rem; color:var(--muted); max-width:460px;}
+  .care-price{font-family:'IBM Plex Mono',monospace; font-size:1.1rem; color:var(--accent); white-space:nowrap;}
+  .care-price span{display:block; font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-top:4px;}
+  @media (max-width:900px){ .pkg-grid{grid-template-columns:1fr;} }
+
   /* SECTION SHELL */
   section{padding:76px 0; border-bottom:1px solid var(--line);}
   .sec-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:44px; flex-wrap:wrap;}
@@ -133,7 +153,8 @@
 
   /* ABOUT */
   .about-layout{display:grid; grid-template-columns:1fr 1.3fr; gap:56px; align-items:start;}
-  .about-mark{font-family:'Fraunces',serif; font-weight:600; font-style:italic; font-size:4.2rem; color:var(--accent-soft); line-height:1; -webkit-text-stroke:1px var(--accent-line);}
+  .about-mark{width:100%; max-width:280px; opacity:0.12; display:block;}
+  html.dark .about-mark{opacity:0.15;}
   .about-body p{font-size:0.94rem; color:var(--text); margin-bottom:16px; max-width:520px;}
   .about-body p.muted{color:var(--muted);}
   .about-facts{list-style:none; margin-top:24px; display:flex; flex-direction:column; gap:8px;}
@@ -197,6 +218,7 @@
     </a>
     <nav>
       <ul class="nav-links">
+        <li><a href="#packages">Packages</a></li>
         <li><a href="#capabilities">Capabilities</a></li>
         <li><a href="#log">Build log</a></li>
         <li><a href="#work">Work</a></li>
@@ -249,6 +271,73 @@
     </div>
   </section>
 
+  <!-- PACKAGES -->
+  <section id="packages">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="sec-tag">Packages</div>
+          <h2>Not sure what you need? Start here.</h2>
+        </div>
+        <p class="sec-note">Most new businesses need more than a landing page — a mark, a working site, and the basic paperwork to launch properly. Picked by outcome, not by service name.</p>
+      </div>
+
+      <div class="pkg-grid">
+        <div class="pkg-card">
+          <div class="pkg-name">Launch</div>
+          <div class="pkg-for">Getting a new business online, properly, for the first time.</div>
+          <div class="pkg-price mono">From £750</div>
+          <div class="pkg-price-note">One-off · RL-01</div>
+          <ul class="pkg-list">
+            <li>Logo / brand mark</li>
+            <li>Single-page site, built from scratch</li>
+            <li>Domain &amp; hosting set up</li>
+            <li>Standard policy docs — privacy policy, T&amp;Cs, cookie notice</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost pkg-btn">Enquire →</a>
+        </div>
+
+        <div class="pkg-card featured">
+          <span class="pkg-featured-tag">Most requested</span>
+          <div class="pkg-name">Brand</div>
+          <div class="pkg-for">A full identity, not just a site — for a business that wants to look established from day one.</div>
+          <div class="pkg-price mono">From £1,500</div>
+          <div class="pkg-price-note">One-off · RL-01 · RL-06</div>
+          <ul class="pkg-list">
+            <li>Everything in Launch</li>
+            <li>Multi-page site (home, services, work, contact)</li>
+            <li>Full brand asset kit — logo variants, colours, type</li>
+            <li>Merch mockups — mugs, apparel, business cards</li>
+            <li>Standard policy docs, tailored to the business</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary pkg-btn">Enquire →</a>
+        </div>
+
+        <div class="pkg-card">
+          <div class="pkg-name">Build</div>
+          <div class="pkg-for">Businesses that need software behind the site, not just in front of it.</div>
+          <div class="pkg-price mono">From £2,500</div>
+          <div class="pkg-price-note">One-off · RL-01 · RL-02</div>
+          <ul class="pkg-list">
+            <li>Everything in Brand</li>
+            <li>Custom functionality — bookings, dashboards, integrations</li>
+            <li>Automation &amp; workflow tooling behind the scenes</li>
+            <li>Scoped per-project — priced after a build call</li>
+          </ul>
+          <a href="#contact" class="btn btn-ghost pkg-btn">Enquire →</a>
+        </div>
+      </div>
+
+      <div class="care-strip">
+        <div class="care-strip-text">
+          <h4>Care Plan — ongoing hosting &amp; maintenance</h4>
+          <p>Hosting, security updates, backups, and a small pool of minor edits each month. Runs alongside any package above.</p>
+        </div>
+        <div class="care-price mono">From £25<span>/ month</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- BUILD LOG -->
   <section id="log">
     <div class="container">
@@ -290,9 +379,9 @@
       <div class="sec-head">
         <div>
           <div class="sec-tag">Capability index</div>
-          <h2>What I build</h2>
+          <h2>The full menu</h2>
         </div>
-        <p class="sec-note">Six disciplines, one point of contact. Reference codes for scoping — quote which ones apply when you get in touch.</p>
+        <p class="sec-note">Every package above is built from these six. Already know what you need? Quote a reference code directly.</p>
       </div>
       <div class="cap-grid">
         <div class="cap-card">
@@ -374,14 +463,6 @@
           <p class="work-desc">Trading infrastructure — signal routing, execution agents, and a published catalogue of MT4/MT5 products.</p>
           <a class="work-link" href="https://umni-systems.com" target="_blank" rel="noopener">umni-systems.com ↗</a>
         </div>
-        <div class="work-row">
-          <div>
-            <div class="work-name">Source Code Holdings</div>
-            <span class="work-role">RL-01</span>
-          </div>
-          <p class="work-desc">Investor-facing holding structure site — minimal, structured presentation of a multi-brand group.</p>
-          <a class="work-link" href="https://sourcecodeholdings.org" target="_blank" rel="noopener">sourcecodeholdings.org ↗</a>
-        </div>
       </div>
     </div>
   </section>
@@ -389,7 +470,10 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="container about-layout">
-      <div class="about-mark">RL</div>
+      <div>
+        <img class="about-mark logo-dark" src="ric_lee_logo.png" alt="" />
+        <img class="about-mark logo-light" src="ric-lee-logo-light.png" alt="" />
+      </div>
       <div class="about-body">
         <div class="sec-tag">About</div>
         <h2 style="margin-bottom:18px;">Direct, hands-on, and built to last past the handover.</h2>
