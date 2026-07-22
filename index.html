@@ -58,10 +58,10 @@
   .wordmark{display:flex; align-items:center; gap:14px; text-decoration:none;}
   .wordmark img{height:46px; width:auto; display:block;}
   .wordmark-sub{font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); border-left:1px solid var(--line); padding-left:14px; line-height:1.4; max-width:100px;}
-  .logo-dark{display:block;}
-  .logo-light{display:none;}
-  html.dark .logo-dark{display:none;}
-  html.dark .logo-light{display:block;}
+  .logo-dark{display:block !important;}
+  .logo-light{display:none !important;}
+  html.dark .logo-dark{display:none !important;}
+  html.dark .logo-light{display:block !important;}
   .nav-links{display:flex; gap:28px; list-style:none;}
   .nav-links a{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:color 0.2s;}
   .nav-links a:hover{color:var(--accent);}
@@ -239,7 +239,7 @@
     <div class="container">
       <div class="hero-eyebrow">London, UK — Available for direct work</div>
       <h1>One person. <em>Every discipline.</em> Nothing outsourced.</h1>
-      <p class="hero-desc">Web development, software &amp; automation, VAG coding &amp; diagnostics, CAD design, 3D printing, and design &amp; print-on-demand — planned, built, and delivered directly by me. No account managers, no junior handoffs, no markup on someone else's work.</p>
+      <p class="hero-desc">Web development, software &amp; automation, and brand &amp; design work for businesses that need to be set up properly online — planned, built, and delivered directly by me. No account managers, no junior handoffs, no markup on someone else's work.</p>
       <div class="hero-cta">
         <a href="#contact" class="btn btn-primary">Start a build →</a>
         <a href="#capabilities" class="btn btn-ghost">See capabilities</a>
@@ -252,8 +252,8 @@
     <div class="container" style="width:100%; max-width:none; padding:0;">
       <div class="scale-grid">
         <div class="scale-item">
-          <div class="scale-num mono">6</div>
-          <div class="scale-label">Disciplines covered</div>
+          <div class="scale-num mono">3</div>
+          <div class="scale-label">Core disciplines</div>
         </div>
         <div class="scale-item">
           <div class="scale-num mono">3</div>
@@ -302,7 +302,7 @@
           <div class="pkg-name">Brand</div>
           <div class="pkg-for">A full identity, not just a site — for a business that wants to look established from day one.</div>
           <div class="pkg-price mono">From £1,500</div>
-          <div class="pkg-price-note">One-off · RL-01 · RL-06</div>
+          <div class="pkg-price-note">One-off · RL-01 · RL-03</div>
           <ul class="pkg-list">
             <li>Everything in Launch</li>
             <li>Multi-page site (home, services, work, contact)</li>
@@ -359,17 +359,6 @@
           <span class="log-tag">WEB</span>
           <span class="log-desc">Full platform build for a behavioural-assessment product — scoring engine, payment flow, and report generation, end to end.</span>
         </div>
-        <div class="log-row">
-          <span class="log-date mono">2026</span>
-          <span class="log-tag">AUTOMOTIVE</span>
-          <span class="log-desc">VCDS coding and hidden-feature activation across VAG group vehicles — remote and in-person diagnostics.</span>
-        </div>
-        <div class="log-row">
-          <span class="log-date mono">2026</span>
-          <span class="log-tag">SOFTWARE</span>
-          <span class="log-desc">A catalogue of MT4/MT5 trading utilities designed, built, and published under an independent seller profile.</span>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -381,57 +370,33 @@
           <div class="sec-tag">Capability index</div>
           <h2>The full menu</h2>
         </div>
-        <p class="sec-note">Every package above is built from these six. Already know what you need? Quote a reference code directly.</p>
+        <p class="sec-note">Every package above is built from these three. Already know what you need? Quote a reference code directly.</p>
       </div>
       <div class="cap-grid">
-        <div class="cap-card">
+        <a href="web-development.html" style="text-decoration:none;color:inherit;display:block;"><div class="cap-card">
           <div class="cap-img-wrap"><img class="cap-img" src="img_webdev.jpg" alt="Web development" /></div>
           <div class="cap-body">
             <span class="cap-code mono">RL-01 · WEB</span>
             <h3>Web Development</h3>
             <p>Sites and web apps built from scratch — no page builders. HTML/CSS/JS, custom domains, API integrations, hosting setup.</p>
           </div>
-        </div>
-        <div class="cap-card">
+        </div></a>
+        <a href="software-automation.html" style="text-decoration:none;color:inherit;display:block;"><div class="cap-card">
           <div class="cap-img-wrap"><img class="cap-img" src="img_coding.jpg" alt="Software and automation" /></div>
           <div class="cap-body">
             <span class="cap-code mono">RL-02 · SOFTWARE</span>
             <h3>Software &amp; Automation</h3>
-            <p>Custom scripts, trading EAs, n8n workflows, Telegram bots, and AI-API integrations. Systems built to run unattended.</p>
+            <p>Python scripts, trading EAs, n8n workflows, Telegram bots, and Claude API integrations. Systems that run unattended.</p>
           </div>
-        </div>
-        <div class="cap-card">
-          <div class="cap-img-wrap"><img class="cap-img" src="img_automotive.jpg" alt="VAG coding and diagnostics" /></div>
-          <div class="cap-body">
-            <span class="cap-code mono">RL-03 · AUTOMOTIVE</span>
-            <h3>VAG Coding &amp; Diagnostics</h3>
-            <p>VCDS coding and hidden-feature activation for Audi, VW, SEAT, and Skoda. Remote and in-person appointments.</p>
-          </div>
-        </div>
-        <div class="cap-card">
-          <div class="cap-img-wrap"><img class="cap-img" src="img_cad.jpg" alt="CAD design" /></div>
-          <div class="cap-body">
-            <span class="cap-code mono">RL-04 · CAD</span>
-            <h3>CAD Design</h3>
-            <p>3D modelling for enclosures, hardware prototypes, and mechanical builds — concept through to print-ready file.</p>
-          </div>
-        </div>
-        <div class="cap-card">
-          <div class="cap-img-wrap"><img class="cap-img" src="img_3dprint.jpg" alt="3D printing" /></div>
-          <div class="cap-body">
-            <span class="cap-code mono">RL-05 · PRINT</span>
-            <h3>3D Printing</h3>
-            <p>FDM printing for prototypes, enclosures, and one-off parts. Fast turnaround, direct from the machine.</p>
-          </div>
-        </div>
-        <div class="cap-card">
+        </div></a>
+        <a href="design-print-on-demand.html" style="text-decoration:none;color:inherit;display:block;"><div class="cap-card">
           <div class="cap-img-wrap"><img class="cap-img" src="img_mug.jpg" alt="Design and print on demand" /></div>
           <div class="cap-body">
-            <span class="cap-code mono">RL-06 · DESIGN</span>
+            <span class="cap-code mono">RL-03 · DESIGN</span>
             <h3>Design &amp; Print-on-Demand</h3>
             <p>Brand assets, digital design, and POD product concepts — apparel, merchandise, and packaging.</p>
           </div>
-        </div>
+        </div></a>
       </div>
     </div>
   </section>
@@ -478,7 +443,7 @@
         <div class="sec-tag">About</div>
         <h2 style="margin-bottom:18px;">Direct, hands-on, and built to last past the handover.</h2>
         <p>I'm a solo builder working across web, software, automation, and mechanical work — the kind of range that's usually split across an agency's departments, run instead by one person who actually does the work.</p>
-        <p class="muted">That range isn't a gimmick — it comes from working across genuinely different domains at once: production trading infrastructure, a live consumer web platform, MQL5 software distribution, and hands-on automotive work. The same problem-solving carries across all of it.</p>
+        <p class="muted">That range isn't a gimmick — it comes from working across genuinely different domains at once: production trading infrastructure, a live consumer web platform, and MQL5 software distribution. The same problem-solving carries across all of it.</p>
         <ul class="about-facts">
           <li><strong>Based:</strong> London, UK</li>
           <li><strong>Response time:</strong> within 24 hours, working days</li>
@@ -498,7 +463,7 @@
           <p>Tell me what you're working on and which capabilities apply. All enquiries read and answered personally.</p>
           <ul class="contact-list">
             <li>Based in — London, UK</li>
-            <li>Reference codes — RL-01 to RL-06</li>
+            <li>Reference codes — RL-01 to RL-03</li>
           </ul>
         </div>
         <div class="form-card">
@@ -518,10 +483,7 @@
                 <select id="service" name="service">
                   <option>RL-01 — Web Development</option>
                   <option>RL-02 — Software &amp; Automation</option>
-                  <option>RL-03 — VAG Coding &amp; Diagnostics</option>
-                  <option>RL-04 — CAD Design</option>
-                  <option>RL-05 — 3D Printing</option>
-                  <option>RL-06 — Design &amp; Print-on-Demand</option>
+                  <option>RL-03 — Design &amp; Print-on-Demand</option>
                   <option>Not sure — describe below</option>
                 </select>
               </div>
@@ -545,7 +507,7 @@
 
 <footer>
   <div class="container foot-inner">
-    <span class="foot-copy">© 2026 Rick Lee — All rights reserved</span>
+    <span class="foot-copy">© 2026 Rick Lee — All rights reserved · VAG coding &amp; diagnostics handled separately under VG Codeworks</span>
     <ul class="foot-links">
       <li><a href="#capabilities">Capabilities</a></li>
       <li><a href="#work">Work</a></li>
